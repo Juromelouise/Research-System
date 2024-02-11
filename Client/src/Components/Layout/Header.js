@@ -10,10 +10,22 @@ import { MenuButton as BaseMenuButton } from "@mui/base/MenuButton";
 import { MenuItem as BaseMenuItem, menuItemClasses } from "@mui/base/MenuItem";
 import { styled } from "@mui/system";
 import { Avatar, Button } from "@mui/material";
+import IconButton from "@mui/material/IconButton";
+import MenuIcon from "@mui/icons-material/Menu";
 
 const Header = () => {
   const [user, setUser] = useState("");
   const [isDropdownOpen, setDropdownOpen] = useState(false);
+  const [open, setOpen] = React.useState(false);
+
+  const handleDrawerOpen = () => {
+    setOpen(true);
+  };
+
+  const handleDrawerClose = () => {
+    setOpen(false);
+  };
+
   const navigate = useNavigate();
 
   const logoutUser = async () => {
@@ -108,89 +120,6 @@ const Header = () => {
     900: "#1C2025",
   };
 
-  const Listbox = styled("ul")(
-    ({ theme }) => `
-    font-family: 'IBM Plex Sans', sans-serif;
-    font-size: 0.875rem;
-    box-sizing: border-box;
-    padding: 6px;
-    margin: 12px 0;
-    min-width: 200px;
-    border-radius: 12px;
-    overflow: auto;
-    outline: 0px;
-    background: ${theme.palette.mode === "dark" ? grey[900] : "#fff"};
-    border: 1px solid ${theme.palette.mode === "dark" ? grey[700] : grey[200]};
-    color: ${theme.palette.mode === "dark" ? grey[300] : grey[900]};
-    box-shadow: 0px 4px 6px ${
-      theme.palette.mode === "dark" ? "rgba(0,0,0, 0.50)" : "rgba(0,0,0, 0.05)"
-    };
-    z-index: 1;
-    `
-  );
-
-  const MenuItem = styled(BaseMenuItem)(
-    ({ theme }) => `
-    list-style: none;
-    padding: 8px;
-    border-radius: 8px;
-    cursor: default;
-    user-select: none;
-  
-    &:last-of-type {
-      border-bottom: none;
-    }
-  
-    &:focus {
-      outline: 3px solid ${
-        theme.palette.mode === "dark" ? blue[600] : blue[200]
-      };
-      background-color: ${
-        theme.palette.mode === "dark" ? grey[800] : grey[100]
-      };
-      color: ${theme.palette.mode === "dark" ? grey[300] : grey[900]};
-    }
-  
-    &.${menuItemClasses.disabled} {
-      color: ${theme.palette.mode === "dark" ? grey[700] : grey[400]};
-    }
-    `
-  );
-
-  const MenuButton = styled(BaseMenuButton)(
-    ({ theme }) => `
-    font-family: 'IBM Plex Sans', sans-serif;
-    font-weight: 600;
-    font-size: 0.875rem;
-    line-height: 1.5;
-    padding: 8px 16px;
-    border-radius: 8px;
-    color: white;
-    transition: all 150ms ease;
-    cursor: pointer;
-    background: ${theme.palette.mode === "dark" ? grey[900] : "#fff"};
-    border: 1px solid ${theme.palette.mode === "dark" ? grey[700] : grey[200]};
-    color: ${theme.palette.mode === "dark" ? grey[200] : grey[900]};
-    box-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
-  
-    &:hover {
-      background: ${theme.palette.mode === "dark" ? grey[800] : grey[50]};
-      border-color: ${theme.palette.mode === "dark" ? grey[600] : grey[300]};
-    }
-  
-    &:active {
-      background: ${theme.palette.mode === "dark" ? grey[700] : grey[100]};
-    }
-  
-    &:focus-visible {
-      box-shadow: 0 0 0 4px ${
-        theme.palette.mode === "dark" ? blue[300] : blue[200]
-      };
-      outline: none;
-    }
-    `
-  );
-
   return (
     <header style={headerStyle}>
       <h3>What the Hell is onion?</h3>
@@ -218,16 +147,17 @@ const Header = () => {
       </nav>
       <nav>
         {user ? (
-          <div>
-            <Avatar
-              alt="Remy Sharp"
-              src={user.avatar && user.avatar.url}
-              style={{ marginRight: "8px" }}
-            />
-            <button style={loginButtonStyle} onClick={logoutUser}>
-              Logout
-            </button>
-          </div>
+          <>
+            <IconButton
+              color="inherit"
+              aria-label="open drawer"
+              edge="end"
+              onClick={handleDrawerOpen}
+              sx={{ ...(open && { display: "none" }) }}
+            >
+              <MenuIcon />
+            </IconButton>
+          </>
         ) : (
           <nav style={{ position: "relative" }}>
             {isDropdownOpen && (

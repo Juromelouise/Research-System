@@ -25,7 +25,11 @@ const productSchema = new mongoose.Schema({
     required: true,
     trim: true,
     default: 0.0
-  }
+  },
+  createdAt: {
+    type: Date,
+    default: Date.now
+},
 });
 
 module.exports = mongoose.model("Product", productSchema)
