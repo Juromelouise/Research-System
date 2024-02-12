@@ -122,7 +122,7 @@ const Header = () => {
 
   return (
     <header style={headerStyle}>
-      <h3>What the Hell is onion?</h3>
+      <h3>Onion Supply Chain</h3>
       <nav>
         <ul style={navStyle}>
           <li style={navItemStyle}>
