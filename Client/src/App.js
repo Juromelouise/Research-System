@@ -5,6 +5,7 @@ import Login from "./Components/User/Login";
 import Home from "./Components/Home";
 import Register from "./Components/User/Register";
 import NewProduct from "./Components/Admin/NewProduct";
+import Dashboard from "./Components/Admin/Dashboard";
 
 function App() {
   return (
@@ -16,6 +17,11 @@ function App() {
           <Route path="/homepage" element={<Home />} exact="true" />
           <Route path="/signup" element={<Register />} exact="true" />
           <Route path="/product/create" element={<NewProduct />} exact="true" />
+        </Routes>
+      </Router>
+      <Router>
+        <Routes>
+          <Route path="/dashboard" element={<Dashboard/>} exact="true"/>
         </Routes>
       </Router>
     </div>

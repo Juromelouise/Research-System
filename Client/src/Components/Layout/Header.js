@@ -148,15 +148,12 @@ const Header = () => {
       <nav>
         {user ? (
           <>
-            <IconButton
-              color="inherit"
-              aria-label="open drawer"
-              edge="end"
-              onClick={handleDrawerOpen}
-              sx={{ ...(open && { display: "none" }) }}
-            >
-              <MenuIcon />
-            </IconButton>
+          <Avatar src={user.avatar && user.avatar.url}  alt={user && user.name}></Avatar>
+          <div style={{ position: "relative", display: "inline-block" }}>
+              <button onClick={logoutUser} style={loginButtonStyle}>
+                Logout
+              </button>
+              </div>
           </>
         ) : (
           <nav style={{ position: "relative" }}>
