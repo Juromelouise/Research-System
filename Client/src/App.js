@@ -6,6 +6,8 @@ import Home from "./Components/Home";
 import Register from "./Components/User/Register";
 import NewProduct from "./Components/Admin/NewProduct";
 import Dashboard from "./Components/Admin/Dashboard";
+import ProductTable from "./Components/Admin/ProductTable";
+import UpdateProduct from "./Components/Admin/UpdateProduct";
 
 function App() {
   return (
@@ -16,12 +18,10 @@ function App() {
           <Route path="/signin" element={<Login></Login>} exact="true" />
           <Route path="/homepage" element={<Home />} exact="true" />
           <Route path="/signup" element={<Register />} exact="true" />
+          <Route path="/dashboard" element={<Dashboard />} exact="true" />
           <Route path="/product/create" element={<NewProduct />} exact="true" />
-        </Routes>
-      </Router>
-      <Router>
-        <Routes>
-          <Route path="/dashboard" element={<Dashboard/>} exact="true"/>
+          <Route path="/product/update" element={<UpdateProduct />} exact="true" />
+          <Route path="/product" element={<ProductTable />} exact="true" />
         </Routes>
       </Router>
     </div>

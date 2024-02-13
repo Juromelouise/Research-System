@@ -1,31 +1,13 @@
-import { borderRight } from "@mui/system";
 import React from "react";
 import { getUser, logout } from "../../utils/helpers";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
-import { Dropdown } from "@mui/base/Dropdown";
-import { Menu } from "@mui/base/Menu";
-import { MenuButton as BaseMenuButton } from "@mui/base/MenuButton";
-import { MenuItem as BaseMenuItem, menuItemClasses } from "@mui/base/MenuItem";
-import { styled } from "@mui/system";
-import { Avatar, Button } from "@mui/material";
-import IconButton from "@mui/material/IconButton";
-import MenuIcon from "@mui/icons-material/Menu";
+import { Avatar } from "@mui/material";
 
 const Header = () => {
   const [user, setUser] = useState("");
   const [isDropdownOpen, setDropdownOpen] = useState(false);
-  const [open, setOpen] = React.useState(false);
-
-  const handleDrawerOpen = () => {
-    setOpen(true);
-  };
-
-  const handleDrawerClose = () => {
-    setOpen(false);
-  };
-
   const navigate = useNavigate();
 
   const logoutUser = async () => {
@@ -148,12 +130,23 @@ const Header = () => {
       <nav>
         {user ? (
           <>
-          <Avatar src={user.avatar && user.avatar.url}  alt={user && user.name}></Avatar>
-          <div style={{ position: "relative", display: "inline-block" }}>
-              <button onClick={logoutUser} style={loginButtonStyle}>
-                Logout
-              </button>
+            <div class="dropdown">
+              <Avatar
+                src={user.avatar && user.avatar.url}
+                alt={user && user.name}
+                class="dropdown-trigger"
+              />
+              <div class="dropdown-content">
+                <button class="dropdown-item" onClick={logoutUser}>
+                  Logout
+                </button>
+                <button>
+                  <Link to="/dashboard" class="dropdown-item">
+                    Dashboard
+                  </Link>
+                </button>
               </div>
+            </div>
           </>
         ) : (
           <nav style={{ position: "relative" }}>
