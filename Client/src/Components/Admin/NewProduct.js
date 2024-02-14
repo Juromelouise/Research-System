@@ -28,8 +28,8 @@ const NewProduct = () => {
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${getToken()}`,
-        }
-        // withCredentials: true, correct
+        },
+        // withCredentials: true, 
       };
 
       const { data } = await axios.post(
@@ -50,7 +50,7 @@ const NewProduct = () => {
     }
 
     if (success) {
-      navigate("/homepage");
+      navigate("/");
     }
   }, [error, success, navigate]);
 

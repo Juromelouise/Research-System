@@ -73,7 +73,7 @@ export default function Register() {
 
   useEffect(() => {
     if (isAuthenticated) {
-      navigate("/homepage");
+      navigate("/");
     }
     if (error) {
       console.log(error);

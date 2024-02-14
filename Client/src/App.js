@@ -16,7 +16,7 @@ function App() {
         <Header />
         <Routes>
           <Route path="/signin" element={<Login></Login>} exact="true" />
-          <Route path="/homepage" element={<Home />} exact="true" />
+          <Route path="/" element={<Home />} caseSensitive={true} />
           <Route path="/signup" element={<Register />} exact="true" />
           <Route path="/dashboard" element={<Dashboard />} exact="true" />
           <Route path="/product/create" element={<NewProduct />} exact="true" />

@@ -63,6 +63,15 @@ exports.updateProduct = async (req, res, next) => {
   });
 };
 
+exports.getProduct = async (req, res) => {
+  const product = await Product.find()
+
+  res.status(200).json({
+    success: true,
+    product
+  })
+}
+
 // exports.newProduct = async (req, res, next) => {
 //     let images = [];
 //     if (typeof req.body.images === "string") {

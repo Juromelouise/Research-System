@@ -20,7 +20,7 @@ const ProductTable = () => {
       };
 
       const { data } = await axios.get(
-        `${process.env.REACT_APP_API}/api/v1//products`,
+        `${process.env.REACT_APP_API}/api/v1/products`,
         config
       );
       console.log(data);

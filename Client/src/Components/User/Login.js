@@ -38,7 +38,7 @@ export default function Login() {
         config
       );
       console.log(data);
-      authenticate(data, () => navigate("/homepage"));
+      authenticate(data, () => navigate("/"));
     } catch (error) {
       console.log(error);
     }

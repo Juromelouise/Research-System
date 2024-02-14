@@ -6,23 +6,18 @@ import { Link, useNavigate } from "react-router-dom";
 import { Avatar } from "@mui/material";
 
 const Header = () => {
-  const [user, setUser] = useState("");
+  const user = getUser()
   const [isDropdownOpen, setDropdownOpen] = useState(false);
   const navigate = useNavigate();
 
   const logoutUser = async () => {
     try {
       await axios.get(`${process.env.REACT_APP_API}/api/v1/logout`);
-      setUser("");
       logout(() => navigate("/homepage"));
     } catch (error) {
       console.log(error);
     }
   };
-
-  useEffect(() => {
-    setUser(getUser());
-  }, []);
 
   const toggleDropdown = () => {
     setDropdownOpen(!isDropdownOpen);
