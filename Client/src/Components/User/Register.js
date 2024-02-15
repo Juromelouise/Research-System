@@ -20,7 +20,6 @@ const defaultTheme = createTheme();
 export default function Register() {
   let navigate = useNavigate();
   const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const [error, setError] = useState("");
   const [user, setUser] = useState({
     name: "",
     email: "",

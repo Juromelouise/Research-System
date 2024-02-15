@@ -1,11 +1,9 @@
-import React from "react";
+import React, { useState, useEffect, Fragment } from "react";
 import { MDBDataTable } from "mdbreact";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { getToken } from "../../utils/helpers";
 import axios from "axios";
-import List from "@mui/material/List";
-import Divider from "@mui/material/Divider";
-import Button from "@mui/material/Button";
+import { Button } from "@mui/material";
 
 const ProductTable = () => {
   const [products, setProducts] = useState([]);
@@ -23,15 +21,21 @@ const ProductTable = () => {
         `${process.env.REACT_APP_API}/api/v1/products`,
         config
       );
-      console.log(data);
+      console.log(data.products);
       setProducts(data.products);
     } catch (error) {
       console.log(error);
     }
   };
+
   useEffect(() => {
     getAdminProducts();
-  });
+  }, []);
+
+  const deleteProductHandler = (productId) => {
+    // Implement your delete logic here
+    console.log(`Deleting product with ID: ${productId}`);
+  };
 
   const productsList = () => {
     const data = {
@@ -66,19 +70,60 @@ const ProductTable = () => {
         price: `$${product.price}`,
         actions: (
           <Fragment>
-            <Link to={`/admin/product/${product._id}`}>
+            <Link to={`/product/update/${product._id}`}>
               <button className="edit-btn">Edit</button>
             </Link>
-            {/* <Link onClick={() => deleteProductHandler(product._id)}>
-              <button className="delete-btn">Delete</button>
-            </Link> */}
+            <button
+              className="delete-btn"
+              onClick={() => deleteProductHandler(product._id)}
+            >
+              Delete
+            </button>
           </Fragment>
         ),
       });
     });
+
+    return data;
   };
 
-  return <div>ProductTable</div>;
+  return (
+    <Fragment>
+      <div style={{ display: "flex" }}>
+        <div className="col-12 col-md-10">
+          <Fragment>
+            <p className="star">ALL PRODUCTS</p>
+            <div className="custom-mdb-table">
+              <MDBDataTable
+                data={productsList()}
+                className="custom-mdb-table"
+                bordered
+                striped
+                hover
+              />
+            </div>
+            <Button
+              component={Link}
+              to="/admin/product/new"
+              className="AddProduct-btn"
+              sx={{
+                mt: 3,
+                color: "white",
+                backgroundColor: isHovered ? "gray" : "black",
+                transition: "color 0.3s, background-color 0.3s",
+                margin: "20px 30px",
+                padding: "15px",
+              }}
+              onMouseEnter={() => setIsHovered(true)}
+              onMouseLeave={() => setIsHovered(false)}
+            >
+              Add Product
+            </Button>
+          </Fragment>
+        </div>
+      </div>
+    </Fragment>
+  );
 };
 
 export default ProductTable;

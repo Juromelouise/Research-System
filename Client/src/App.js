@@ -20,8 +20,9 @@ function App() {
           <Route path="/signup" element={<Register />} exact="true" />
           <Route path="/dashboard" element={<Dashboard />} exact="true" />
           <Route path="/product/create" element={<NewProduct />} exact="true" />
-          <Route path="/product/update" element={<UpdateProduct />} exact="true" />
-          <Route path="/product" element={<ProductTable />} exact="true" />
+          <Route path="/product/update/:id" element={<UpdateProduct />} exact="true" />
+          <Route path="/product/list" element={<ProductTable />} exact="true" />
+          {/* <Route path="/product/list" element={<ProductTable />} exact="true" /> */}
         </Routes>
       </Router>
     </div>

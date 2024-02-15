@@ -5,7 +5,7 @@ exports.newProduct = async (req, res) => {
   const product = await Product.create({ price, name, user: req.user._id });
   if (!product)
     return res.status(400).json({
-      success: false,   
+      success: false,
       message: "Product not created",
     });
 
@@ -14,7 +14,6 @@ exports.newProduct = async (req, res) => {
     product,
   });
 };
-
 
 exports.updateProduct = async (req, res, next) => {
   // let product = await Product.findById(req.params.id);
@@ -51,7 +50,7 @@ exports.updateProduct = async (req, res, next) => {
   //   });
   // }
   // req.body.images = imagesLinks;
- const product = await Product.findByIdAndUpdate(req.params.id, req.body, {
+  const product = await Product.findByIdAndUpdate(req.params.id, req.body, {
     new: true,
     // runValidators: true,
     // useFindandModify: false,
@@ -64,15 +63,22 @@ exports.updateProduct = async (req, res, next) => {
 };
 
 exports.getProduct = async (req, res) => {
-  const product = await Product.find()
+  const products = await Product.find();
 
+  res.status(200).json({
+    success: true,
+    products,
+  });
+};
+
+exports.product = async (req, res) => {
+  const product = await Product.findOne({ _id: req.params.id });
   res.status(200).json({
     success: true,
     product
   })
-}
-
-// exports.newProduct = async (req, res, next) => {
+};
+// exports.newProduct =F async (req, res, next) => {
 //     let images = [];
 //     if (typeof req.body.images === "string") {
 //       images.push(req.body.images);
