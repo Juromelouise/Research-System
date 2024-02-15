@@ -4,14 +4,14 @@ import { useNavigate, useParams } from "react-router-dom";
 import { getToken } from "../../utils/helpers";
 
 const UpdateProduct = () => {
+  const [product, setProduct] = useState("");
   const [name, setName] = useState("");
   const [price, setPrice] = useState("");
   const [success, setSuccess] = useState("");
-  const [error, setError] = useState("");
   let navigate = useNavigate();
 
   let { id } = useParams();
-  
+
   const handleSubmit = (e) => {
     e.preventDefault();
     const formData = new FormData();
@@ -20,35 +20,39 @@ const UpdateProduct = () => {
     newProduct(formData);
   };
 
-  const getProduct = async (formData) => {
+  const getProduct = async (id) => {
     try {
       const config = {
         headers: {
           "Content-Type": "application/json",
         },
       };
-
-      const { data } = await axios.post(
-        `${process.env.REACT_APP_API}/api/v1/new/product`,
-        formData,
+      const { data } = await axios.get(
+        `${process.env.REACT_APP_API}/api/v1/product/${id}`,
         config
       );
+      console.log(data.product);
+      setProduct(data.product);
       setSuccess(data.success);
     } catch (error) {
-      setError(error);
       console.log(error);
     }
   };
 
   useEffect(() => {
-    if (error) {
-      console.log(error);
-    }
+    getProduct(id);
+  }, []);
 
-    if (success) {
-      navigate("/");
+  useEffect(() => {
+    // getProduct(id);
+    if (product && product._id !== id) {
+      getProduct(id);
+    } else {
+      setName(product.name);
+      setPrice(product.price);
+      console.log();
     }
-  }, [error, success, navigate]);
+  }, []);
   return (
     <div
       style={{
