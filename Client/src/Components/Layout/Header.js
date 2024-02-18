@@ -6,7 +6,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { Avatar } from "@mui/material";
 
 const Header = () => {
-  const user = getUser()
+  const user = getUser();
   const [isDropdownOpen, setDropdownOpen] = useState(false);
   const navigate = useNavigate();
 
@@ -29,8 +29,13 @@ const Header = () => {
     alignItems: "center",
     backgroundColor: "#333",
     color: "#fff",
-    padding: "0rem",
+    padding: "1rem", // Increased padding for better spacing
     textAlign: "center",
+  };
+
+  const logoStyle = {
+    width: "50px", // Adjust the width as needed
+    marginRight: "10px", // Add some margin for spacing
   };
 
   const navStyle = {
@@ -99,6 +104,8 @@ const Header = () => {
 
   return (
     <header style={headerStyle}>
+      <img src="../logo.png" alt="Logo" style={logoStyle} />{" "}
+      {/* Added alt attribute */}
       <h3>Onion Supply Chain</h3>
       <nav>
         <ul style={navStyle}>
@@ -125,18 +132,24 @@ const Header = () => {
       <nav>
         {user ? (
           <>
-            <div class="dropdown">
+            <div className="dropdown">
+              {" "}
+              {/* Changed 'class' to 'className' */}
               <Avatar
                 src={user.avatar && user.avatar.url}
                 alt={user && user.name}
-                class="dropdown-trigger"
+                className="dropdown-trigger"
               />
-              <div class="dropdown-content">
-                <button class="dropdown-item" onClick={logoutUser}>
+              <div className="dropdown-content">
+                {" "}
+                {/* Changed 'class' to 'className' */}
+                <button className="dropdown-item" onClick={logoutUser}>
                   Logout
                 </button>
                 <button>
-                  <Link to="/dashboard" class="dropdown-item">
+                  <Link to="/dashboard" className="dropdown-item">
+                    {" "}
+                    {/* Changed 'class' to 'className' */}
                     Dashboard
                   </Link>
                 </button>
@@ -146,7 +159,9 @@ const Header = () => {
         ) : (
           <nav style={{ position: "relative" }}>
             {isDropdownOpen && (
-              <div style={dropdownStyle}>
+              <div style={{ ...dropdownStyle, ...{ display: "block" } }}>
+                {" "}
+                {/* Adjusted style object */}
                 <Link to="/signin" style={dropdownItemStyle}>
                   Sign In
                 </Link>

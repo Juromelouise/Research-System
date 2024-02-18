@@ -32,8 +32,13 @@ const ProductTable = () => {
     getAdminProducts();
   }, []);
 
-  const deleteProductHandler = (productId) => {
-    // Implement your delete logic here
+  const deleteProductHandler = async (productId) => {
+    const config = {
+      headers: {
+        Authorization: `Bearer ${getToken()}`,
+      },
+    };
+    await axios.delete(`${process.env.REACT_APP_API}/api/v1/delete/product/${productId}`, config)
     console.log(`Deleting product with ID: ${productId}`);
   };
 
@@ -104,7 +109,7 @@ const ProductTable = () => {
             </div>
             <Button
               component={Link}
-              to="/admin/product/new"
+              to="/product/create"
               className="AddProduct-btn"
               sx={{
                 mt: 3,

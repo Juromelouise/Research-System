@@ -9,10 +9,6 @@ const NewProduct = () => {
   const [success, setSuccess] = useState("");
   const [error, setError] = useState("");
   let navigate = useNavigate();
-  // const handleChange = (e) => {
-  //   const { name, value } = e.target;
-  //   setFormData((prevData) => ({ ...prevData, [name]: value }));
-  // };
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -29,7 +25,6 @@ const NewProduct = () => {
           "Content-Type": "application/json",
           Authorization: `Bearer ${getToken()}`,
         },
-        // withCredentials: true, 
       };
 
       const { data } = await axios.post(
@@ -50,7 +45,7 @@ const NewProduct = () => {
     }
 
     if (success) {
-      navigate("/");
+      navigate("/dashboard");
     }
   }, [error, success, navigate]);
 

@@ -17,7 +17,7 @@ const UpdateProduct = () => {
     const formData = new FormData();
     formData.set("name", name);
     formData.set("price", price);
-    newProduct(formData);
+    updateProduct(product._id, formData);
   };
 
   const getProduct = async (id) => {
@@ -34,6 +34,27 @@ const UpdateProduct = () => {
       console.log(data.product);
       setProduct(data.product);
       setSuccess(data.success);
+      setName(data.product.name);
+      setPrice(data.product.price);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const updateProduct = async (id, productData) => {
+    try {
+      const config = {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${getToken()}`,
+        },
+      };
+      await axios.put(
+        `${process.env.REACT_APP_API}/api/v1/update/product/${id}`,
+        productData,
+        config
+      );
+      navigate("/dashboard")
     } catch (error) {
       console.log(error);
     }
@@ -41,17 +62,6 @@ const UpdateProduct = () => {
 
   useEffect(() => {
     getProduct(id);
-  }, []);
-
-  useEffect(() => {
-    // getProduct(id);
-    if (product && product._id !== id) {
-      getProduct(id);
-    } else {
-      setName(product.name);
-      setPrice(product.price);
-      console.log();
-    }
   }, []);
   return (
     <div
