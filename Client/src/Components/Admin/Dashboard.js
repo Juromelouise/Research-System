@@ -19,6 +19,7 @@ import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import { mainListItems, secondaryListItems } from "./ListItems";
 import ProductTable from "./ProductTable";
+import UserTable from "./UserTable";
 // import Chart from './Chart';
 // import Deposits from './Deposits';
 // import Orders from './Orders';
@@ -169,7 +170,6 @@ export default function Dashboard() {
           <Toolbar />
           <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
             <Grid container spacing={3}>
-              {/* Chart */}
               <Grid item xs={12} md={8} lg={9}>
                 <Paper
                   sx={{
@@ -182,7 +182,6 @@ export default function Dashboard() {
                   {/* <Chart /> */}
                 </Paper>
               </Grid>
-              {/* Recent Deposits */}
               <Grid item xs={12} md={4} lg={3}>
                 <Paper
                   sx={{
@@ -195,11 +194,14 @@ export default function Dashboard() {
                   {/* <Deposits /> */}
                 </Paper>
               </Grid>
-              {/* Recent Orders */}
               <Grid item xs={12}>
                 <Paper sx={{ p: 2, display: "flex", flexDirection: "column" }}>
-                  {/* <Orders /> */}
                   <ProductTable/>
+                </Paper>
+              </Grid>
+              <Grid item xs={12}>
+                <Paper sx={{ p: 2, display: "flex", flexDirection: "column" }}>
+                  <UserTable/>
                 </Paper>
               </Grid>
             </Grid>

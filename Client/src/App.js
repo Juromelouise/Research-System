@@ -10,6 +10,8 @@ import ProductTable from "./Components/Admin/ProductTable";
 import UpdateProduct from "./Components/Admin/UpdateProduct";
 import Profile from "./Components/User/Profile";
 import UserTable from "./Components/Admin/UserTable";
+import FarmerInfo from "./Components/User/FarmerInfo";
+import SellerInfo from "./Components/User/SellerInfo"
 
 function App() {
   return (
@@ -26,7 +28,8 @@ function App() {
           <Route path="/product/list" element={<ProductTable />} exact="true" />
           <Route path="/user/list" element={<UserTable />} exact="true" />
           <Route path="/profile" element={<Profile/>} exact="true" />
-          
+          <Route path="/farmer/info" element={<FarmerInfo/>} exact="true" />
+          <Route path="/seller/info" element={<SellerInfo/>} exact="true" />
         </Routes>
       </Router>
     </div>

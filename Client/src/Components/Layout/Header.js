@@ -121,10 +121,18 @@ const Header = () => {
           </li>
           <li style={navItemStyle}>
             <a
-              href="/contact"
+              href="/farmer/info"
               style={{ color: "#fff", textDecoration: "none" }}
             >
-              Contact
+              Farmers
+            </a>
+          </li>
+          <li style={navItemStyle}>
+            <a
+              href="/seller/info"
+              style={{ color: "#fff", textDecoration: "none" }}
+            >
+              Sellers
             </a>
           </li>
         </ul>

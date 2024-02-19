@@ -17,7 +17,7 @@ exports.registerUser = async (req, res, next) => {
     }
   );
 
-  const { name, phone, location, email, password  } = req.body;
+  const { name, phone, location, email, password } = req.body;
 
   const user = await User.create({
     name,
@@ -79,3 +79,44 @@ exports.getUserProfile = async (req, res, next) => {
     user,
   });
 };
+
+exports.getAllUsers = async (req, res) => {
+  const user = await User.find();
+
+  res.status(200).json({
+    user,
+  });
+};
+
+exports.updateRoleSeller = async (req, res) => {
+  await User.findByIdAndUpdate(req.params.id, { role: "seller" });
+  const users = await User.find();
+  console.log("seller");
+  res.status(200).json({
+    users,
+  });
+};
+
+exports.updateRoleFarmer = async (req, res) => {
+  await User.findByIdAndUpdate(req.params.id, { role: "farmer" });
+  console.log("farmer");
+  const users = await User.find();
+  res.status(200).json({
+    users,
+  });
+};
+
+exports.allFarmers = async (req, res) => {
+  const users = await User.find({ role: "farmer" });
+  res.status(200).json({
+    users,
+  });
+};
+
+exports.allSellers = async (req, res) => {
+  const users = await User.find({ role: "seller" });
+  res.status(200).json({
+    users,
+  });
+};
+
