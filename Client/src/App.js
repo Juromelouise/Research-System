@@ -9,6 +9,7 @@ import Dashboard from "./Components/Admin/Dashboard";
 import ProductTable from "./Components/Admin/ProductTable";
 import UpdateProduct from "./Components/Admin/UpdateProduct";
 import Profile from "./Components/User/Profile";
+import UserTable from "./Components/Admin/UserTable";
 
 function App() {
   return (
@@ -23,7 +24,9 @@ function App() {
           <Route path="/product/create" element={<NewProduct />} exact="true" />
           <Route path="/product/update/:id" element={<UpdateProduct />} exact="true" />
           <Route path="/product/list" element={<ProductTable />} exact="true" />
+          <Route path="/user/list" element={<UserTable />} exact="true" />
           <Route path="/profile" element={<Profile/>} exact="true" />
+          
         </Routes>
       </Router>
     </div>

@@ -17,6 +17,8 @@ const defaultTheme = createTheme();
 
 export default function Register() {
   let navigate = useNavigate();
+  const [avatar, setAvatar] = useState("");
+  const [avatarPreview, setAvatarPreview] = useState("");
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [user, setUser] = useState({
     name: "",
@@ -36,23 +38,37 @@ export default function Register() {
     formData.set("location", location);
     formData.set("phone", phone);
     formData.set("password", password);
+    formData.set("avatar", avatar);
 
     register(formData);
   };
 
   const onChange = (e) => {
-    setUser({ ...user, [e.target.name]: e.target.value });
+    if (e.target.name === "avatar") {
+      const reader = new FileReader();
+
+      reader.onload = () => {
+        if (reader.readyState === 2) {
+          setAvatarPreview(reader.result);
+          setAvatar(reader.result);
+        }
+      };
+
+      reader.readAsDataURL(e.target.files[0]);
+    } else {
+      setUser({ ...user, [e.target.name]: e.target.value });
+    }
   };
 
   const register = async (userData) => {
     for (const pair of userData.entries()) {
-        console.log(pair[0], pair[1]);
-      }
+      console.log(pair[0], pair[1]);
+    }
     try {
       const config = {
         headers: {
-        //   "Content-Type": "multipart/form-data",
-          "Content-Type": "application/json",
+            "Content-Type": "multipart/form-data",
+          // "Content-Type": "application/json",
         },
       };
 
@@ -62,7 +78,7 @@ export default function Register() {
         config
       );
       setIsAuthenticated(true);
-      navigate("/signin")
+      navigate("/signin");
     } catch (error) {
       console.log(error);
     }
@@ -86,9 +102,17 @@ export default function Register() {
             alignItems: "center",
           }}
         >
-          <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
-            <LockOutlinedIcon />
-          </Avatar>
+          {avatarPreview ? (
+            <Avatar
+              sx={{ m: 1, bgcolor: "secondary.main" }}
+              src={avatarPreview}
+            ></Avatar>
+          ) : (
+            <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
+              <LockOutlinedIcon />
+            </Avatar>
+          )}
+
           <Typography component="h1" variant="h5">
             Sign up
           </Typography>
@@ -156,6 +180,16 @@ export default function Register() {
                   id="password"
                   autoComplete="new-password"
                   value={password}
+                  onChange={onChange}
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  required
+                  fullWidth
+                  name="avatar"
+                  type="file"
+                  id="avatar"
                   onChange={onChange}
                 />
               </Grid>

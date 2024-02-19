@@ -10,26 +10,28 @@ const productSchema = new mongoose.Schema({
     type: String,
     required: [true, "Enter the type of Onion"],
   },
-  // image: {
-  //   public_id : {
-  //     type: String,
-  //     required: true
-  //   },
-  //   url: {
-  //     type: String,
-  //     required: true
-  //   }
-  // },
+  images: [
+    {
+      public_id: {
+        type: String,
+        required: true,
+      },
+      url: {
+        type: String,
+        required: true,
+      },
+    },
+  ],
   price: {
     type: Number,
     required: true,
     trim: true,
-    default: 0.0
+    default: 0.0,
   },
   createdAt: {
     type: Date,
-    default: Date.now
-},
+    default: Date.now,
+  },
 });
 
-module.exports = mongoose.model("Product", productSchema)
+module.exports = mongoose.model("Product", productSchema);

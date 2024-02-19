@@ -134,22 +134,20 @@ const Header = () => {
           <>
             <div className="dropdown">
               {" "}
-              {/* Changed 'class' to 'className' */}
               <Avatar
+                sx={{ bgcolor: "secondary.main" }}
                 src={user.avatar && user.avatar.url}
                 alt={user && user.name}
                 className="dropdown-trigger"
               />
               <div className="dropdown-content">
                 {" "}
-                {/* Changed 'class' to 'className' */}
                 <button className="dropdown-item" onClick={logoutUser}>
                   Logout
                 </button>
                 <button>
                   <Link to="/dashboard" className="dropdown-item">
                     {" "}
-                    {/* Changed 'class' to 'className' */}
                     Dashboard
                   </Link>
                 </button>
