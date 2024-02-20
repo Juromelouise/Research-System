@@ -4,6 +4,7 @@ const cookieParser = require('cookie-parser')
 const cors = require('cors')
 
 const user = require ('./routes/user')
+const forum = require('./routes/forum')
 const products = require('./routes/product')
 
 app.use(cors({
@@ -15,5 +16,6 @@ app.use(cookieParser());
 
 app.use('/api/v1', user);
 app.use('/api/v1', products);
+app.use('/forum', forum)
 
 module.exports = app
