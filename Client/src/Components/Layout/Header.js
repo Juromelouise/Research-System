@@ -50,7 +50,7 @@ const Header = () => {
     display: "flex",
     justifyContent: "space-between",
     alignItems: "center",
-    backgroundColor: "#333",
+    backgroundColor: "#072D60",
     color: "#fff",
     padding: "0rem",
     textAlign: "center",
