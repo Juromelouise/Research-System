@@ -12,6 +12,7 @@ import Profile from "./Components/User/Profile";
 import UserTable from "./Components/Admin/UserTable";
 import FarmerInfo from "./Components/User/FarmerInfo";
 import SellerInfo from "./Components/User/SellerInfo"
+import Forum from "./Components/Forums/Forum";
 
 function App() {
   return (
@@ -30,6 +31,7 @@ function App() {
           <Route path="/profile" element={<Profile/>} exact="true" />
           <Route path="/farmer/info" element={<FarmerInfo/>} exact="true" />
           <Route path="/seller/info" element={<SellerInfo/>} exact="true" />
+          <Route path="/forum" element={<Forum/>} exact="true" />
         </Routes>
       </Router>
     </div>
