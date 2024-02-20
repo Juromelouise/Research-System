@@ -1,46 +1,23 @@
-import { borderRight } from "@mui/system";
 import React from "react";
 import { getUser, logout } from "../../utils/helpers";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
-import { Dropdown } from "@mui/base/Dropdown";
-import { Menu } from "@mui/base/Menu";
-import { MenuButton as BaseMenuButton } from "@mui/base/MenuButton";
-import { MenuItem as BaseMenuItem, menuItemClasses } from "@mui/base/MenuItem";
-import { styled } from "@mui/system";
-import { Avatar, Button } from "@mui/material";
-import IconButton from "@mui/material/IconButton";
-import MenuIcon from "@mui/icons-material/Menu";
+import { Avatar } from "@mui/material";
 
 const Header = () => {
-  const [user, setUser] = useState("");
+  const user = getUser();
   const [isDropdownOpen, setDropdownOpen] = useState(false);
-  const [open, setOpen] = React.useState(false);
-
-  const handleDrawerOpen = () => {
-    setOpen(true);
-  };
-
-  const handleDrawerClose = () => {
-    setOpen(false);
-  };
-
   const navigate = useNavigate();
 
   const logoutUser = async () => {
     try {
       await axios.get(`${process.env.REACT_APP_API}/api/v1/logout`);
-      setUser("");
       logout(() => navigate("/homepage"));
     } catch (error) {
       console.log(error);
     }
   };
-
-  useEffect(() => {
-    setUser(getUser());
-  }, []);
 
   const toggleDropdown = () => {
     setDropdownOpen(!isDropdownOpen);
@@ -52,8 +29,13 @@ const Header = () => {
     alignItems: "center",
     backgroundColor: "#072D60",
     color: "#fff",
-    padding: "0rem",
+    padding: "1rem", // Increased padding for better spacing
     textAlign: "center",
+  };
+
+  const logoStyle = {
+    width: "50px", // Adjust the width as needed
+    marginRight: "10px", // Add some margin for spacing
   };
 
   const navStyle = {
@@ -122,6 +104,8 @@ const Header = () => {
 
   return (
     <header style={headerStyle}>
+      <img src="../logo.png" alt="Logo" style={logoStyle} />{" "}
+      {/* Added alt attribute */}
       <h3>Onion Supply Chain</h3>
       <nav>
         <ul style={navStyle}>
@@ -137,10 +121,18 @@ const Header = () => {
           </li>
           <li style={navItemStyle}>
             <a
-              href="/contact"
+              href="/farmer/info"
               style={{ color: "#fff", textDecoration: "none" }}
             >
-              Contact
+              Farmers
+            </a>
+          </li>
+          <li style={navItemStyle}>
+            <a
+              href="/seller/info"
+              style={{ color: "#fff", textDecoration: "none" }}
+            >
+              Sellers
             </a>
           </li>
         </ul>
@@ -148,17 +140,34 @@ const Header = () => {
       <nav>
         {user ? (
           <>
-          <Avatar src={user.avatar && user.avatar.url}  alt={user && user.name}></Avatar>
-          <div style={{ position: "relative", display: "inline-block" }}>
-              <button onClick={logoutUser} style={loginButtonStyle}>
-                Logout
-              </button>
+            <div className="dropdown">
+              {" "}
+              <Avatar
+                sx={{ bgcolor: "secondary.main" }}
+                src={user.avatar && user.avatar.url}
+                alt={user && user.name}
+                className="dropdown-trigger"
+              />
+              <div className="dropdown-content">
+                {" "}
+                <button className="dropdown-item" onClick={logoutUser}>
+                  Logout
+                </button>
+                <button>
+                  <Link to="/dashboard" className="dropdown-item">
+                    {" "}
+                    Dashboard
+                  </Link>
+                </button>
               </div>
+            </div>
           </>
         ) : (
           <nav style={{ position: "relative" }}>
             {isDropdownOpen && (
-              <div style={dropdownStyle}>
+              <div style={{ ...dropdownStyle, ...{ display: "block" } }}>
+                {" "}
+                {/* Adjusted style object */}
                 <Link to="/signin" style={dropdownItemStyle}>
                   Sign In
                 </Link>

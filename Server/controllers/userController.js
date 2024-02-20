@@ -1,35 +1,45 @@
 const User = require("../models/user");
-// const cloudinary = require("cloudinary");
+const cloudinary = require("cloudinary");
 const sendToken = require("../utils/jwtToken");
 // const crypto = require("crypto");
 
-exports.registerUser = async (req, res) => {
-  console.log(req.body);
-  try {
-    const { name, phone, location, email, password } = req.body;
-
-    const user = await User.create({
-      name,
-      email,
-      password,
-      phone,
-      location,
-      avatar: {
-        public_id: "avatars/hsdfl66pg2mpvp5irfqy",
-        url: "https://res.cloudinary.com/dgneiaky7/image/upload/v1680144230/avatars/hsdfl66pg2mpvp5irfqy.jpg",
-      },
-    });
-
-    if (!user) {
-      throw new Error("User not created");
+exports.registerUser = async (req, res, next) => {
+  console.log(req.file);
+  const cloudinaryResult = await cloudinary.v2.uploader.upload(
+    req.body.avatar,
+    {
+      folder: "avatars",
+      width: 150,
+      crop: "scale",
+    },
+    (err, result) => {
+      console.log(err, result);
     }
+  );
 
-    sendToken(user, 200, res);
-  } catch (error) {
-    res.status(500).json({ message: error.message });
+  const { name, phone, location, email, password } = req.body;
+
+  const user = await User.create({
+    name,
+    email,
+    password,
+    phone,
+    location,
+    avatar: {
+      public_id: cloudinaryResult.public_id,
+      url: cloudinaryResult.secure_url,
+    },
+  });
+
+  if (!user) {
+    return res.status(500).json({
+      success: false,
+      message: "user not created",
+    });
   }
-};
 
+  sendToken(user, 200, res);
+};
 exports.loginUser = async (req, res, next) => {
   const { email, password } = req.body;
 
@@ -61,3 +71,52 @@ exports.logout = async (req, res, next) => {
     message: "Logged out",
   });
 };
+
+exports.getUserProfile = async (req, res, next) => {
+  const user = await User.findById(req.user.id);
+  res.status(200).json({
+    success: true,
+    user,
+  });
+};
+
+exports.getAllUsers = async (req, res) => {
+  const user = await User.find();
+
+  res.status(200).json({
+    user,
+  });
+};
+
+exports.updateRoleSeller = async (req, res) => {
+  await User.findByIdAndUpdate(req.params.id, { role: "seller" });
+  const users = await User.find();
+  console.log("seller");
+  res.status(200).json({
+    users,
+  });
+};
+
+exports.updateRoleFarmer = async (req, res) => {
+  await User.findByIdAndUpdate(req.params.id, { role: "farmer" });
+  console.log("farmer");
+  const users = await User.find();
+  res.status(200).json({
+    users,
+  });
+};
+
+exports.allFarmers = async (req, res) => {
+  const users = await User.find({ role: "farmer" });
+  res.status(200).json({
+    users,
+  });
+};
+
+exports.allSellers = async (req, res) => {
+  const users = await User.find({ role: "seller" });
+  res.status(200).json({
+    users,
+  });
+};
+

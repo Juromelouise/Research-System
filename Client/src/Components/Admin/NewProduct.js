@@ -6,19 +6,23 @@ import { getToken } from "../../utils/helpers";
 const NewProduct = () => {
   const [name, setName] = useState("");
   const [price, setPrice] = useState("");
+  const [images, setImages] = useState([]);
   const [success, setSuccess] = useState("");
+  const [imagesPreview, setImagesPreview] = useState([])
   const [error, setError] = useState("");
   let navigate = useNavigate();
-  // const handleChange = (e) => {
-  //   const { name, value } = e.target;
-  //   setFormData((prevData) => ({ ...prevData, [name]: value }));
-  // };
 
   const handleSubmit = (e) => {
     e.preventDefault();
     const formData = new FormData();
     formData.set("name", name);
     formData.set("price", price);
+    images.forEach((image) => {
+      formData.append("images", image);
+    });
+    // for (const pair of formData.entries()) {
+    //   console.log(pair[0], pair[1]);
+    // }
     newProduct(formData);
   };
 
@@ -28,8 +32,7 @@ const NewProduct = () => {
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${getToken()}`,
-        }
-        // withCredentials: true, correct
+        },
       };
 
       const { data } = await axios.post(
@@ -50,9 +53,26 @@ const NewProduct = () => {
     }
 
     if (success) {
-      navigate("/homepage");
+      navigate("/dashboard");
     }
   }, [error, success, navigate]);
+
+  const onChange = (e) => {
+    const files = Array.from(e.target.files);
+    setImagesPreview([]);
+    setImages([]);
+    files.forEach((file) => {
+      const reader = new FileReader();
+      reader.onload = () => {
+        if (reader.readyState === 2) {
+          setImagesPreview((oldArray) => [...oldArray, reader.result]);
+          setImages((oldArray) => [...oldArray, reader.result]);
+        }
+      };
+
+      reader.readAsDataURL(file);
+    });
+  };
 
   return (
     <div
@@ -106,15 +126,32 @@ const NewProduct = () => {
           required
         ></input>
 
-        {/* <label style={{ marginBottom: "8px", fontSize: "14px", color: "#555" }}>Image URL:</label>
+        <label style={{ marginBottom: "8px", fontSize: "14px", color: "#555" }}>
+          Image URL:
+        </label>
         <input
-          type="text"
-          name="imageUrl"
-          value={formData.imageUrl}
-          onChange={handleChange}
-          style={{ padding: "12px", marginBottom: "24px", borderRadius: "4px", border: "1px solid #ddd" }}
+          type="file"
+          name="images"
+          onChange={onChange}
+          style={{
+            padding: "12px",
+            marginBottom: "24px",
+            borderRadius: "4px",
+            border: "1px solid #ddd",
+          }}
           required
-        /> */}
+          multiple
+        />
+        {imagesPreview.map((img) => (
+          <img
+            src={img}
+            key={img}
+            alt="Images Preview"
+            className="mt-3 mr-2"
+            width="55"
+            height="52"
+          />
+        ))}
 
         <button
           type="submit"

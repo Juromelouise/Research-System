@@ -6,6 +6,12 @@ import Home from "./Components/Home";
 import Register from "./Components/User/Register";
 import NewProduct from "./Components/Admin/NewProduct";
 import Dashboard from "./Components/Admin/Dashboard";
+import ProductTable from "./Components/Admin/ProductTable";
+import UpdateProduct from "./Components/Admin/UpdateProduct";
+import Profile from "./Components/User/Profile";
+import UserTable from "./Components/Admin/UserTable";
+import FarmerInfo from "./Components/User/FarmerInfo";
+import SellerInfo from "./Components/User/SellerInfo"
 
 function App() {
   return (
@@ -14,14 +20,16 @@ function App() {
         <Header />
         <Routes>
           <Route path="/signin" element={<Login></Login>} exact="true" />
-          <Route path="/homepage" element={<Home />} exact="true" />
+          <Route path="/" element={<Home />} caseSensitive={true} />
           <Route path="/signup" element={<Register />} exact="true" />
+          <Route path="/dashboard" element={<Dashboard />} exact="true" />
           <Route path="/product/create" element={<NewProduct />} exact="true" />
-        </Routes>
-      </Router>
-      <Router>
-        <Routes>
-          <Route path="/dashboard" element={<Dashboard/>} exact="true"/>
+          <Route path="/product/update/:id" element={<UpdateProduct />} exact="true" />
+          <Route path="/product/list" element={<ProductTable />} exact="true" />
+          <Route path="/user/list" element={<UserTable />} exact="true" />
+          <Route path="/profile" element={<Profile/>} exact="true" />
+          <Route path="/farmer/info" element={<FarmerInfo/>} exact="true" />
+          <Route path="/seller/info" element={<SellerInfo/>} exact="true" />
         </Routes>
       </Router>
     </div>
