@@ -1,4 +1,5 @@
 import "./App.css";
+import "./App.scss";
 import Header from "./Components/Layout/Header";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Login from "./Components/User/Login";
@@ -13,6 +14,7 @@ import UserTable from "./Components/Admin/UserTable";
 import FarmerInfo from "./Components/User/FarmerInfo";
 import SellerInfo from "./Components/User/SellerInfo"
 import Forum from "./Components/Forums/Forum";
+import SingleForum from "./Components/Forums/SingleForum";
 
 function App() {
   return (
@@ -32,6 +34,7 @@ function App() {
           <Route path="/farmer/info" element={<FarmerInfo/>} exact="true" />
           <Route path="/seller/info" element={<SellerInfo/>} exact="true" />
           <Route path="/forum" element={<Forum/>} exact="true" />
+          <Route path="/forum/open/:id" element={<SingleForum/>} exact="true" />
         </Routes>
       </Router>
     </div>
