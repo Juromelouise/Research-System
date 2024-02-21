@@ -38,12 +38,12 @@ const Forum = () => {
         },
       };
 
-      await axios.post(
+      const { data } = await axios.post(
         `${process.env.REACT_APP_API}/forum/new/post`,
         Data,
         config
       );
-      console.log(data.forum);
+      setForum(data.forum);
       setTitle("");
       setPost("");
     } catch (error) {
@@ -99,13 +99,13 @@ const Forum = () => {
           }}
         >
           <Avatar
-            sx={{ width: 60, height: 60, marginRight: 2, marginLeft: 2 }}
+            sx={{ width: 70, height: 70, marginRight: 2, marginLeft: 15 }}
             alt={`Avatar ${forums.post}`}
           >
             {1}
           </Avatar>
           <React.Fragment>
-            <CardContent>
+            <CardContent sx={{marginLeft: 15}}>
               <Typography variant="h3" component="div">
                 {forums.title}
               </Typography>
