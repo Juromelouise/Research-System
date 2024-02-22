@@ -1,10 +1,12 @@
 const mongoose = require("mongoose");
+const Populate = require("mongoose-autopopulate");
 
 const productSchema = new mongoose.Schema({
   user: {
     type: mongoose.Schema.Types.ObjectId,
     required: true,
     ref: "User",
+    autopopulate: true,
   },
   name: {
     type: String,
@@ -33,5 +35,6 @@ const productSchema = new mongoose.Schema({
     default: Date.now,
   },
 });
+productSchema.plugin(Populate);
 
 module.exports = mongoose.model("Product", productSchema);

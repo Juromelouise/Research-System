@@ -1,8 +1,7 @@
-// import { toast } from 'react-toastify';
-// import 'react-toastify/dist/ReactToastify.css';
+
 export const authenticate = (data, next) => {
     if (window !== 'undefined') {
-        // console.log('authenticate', response)
+
         sessionStorage.setItem('token', JSON.stringify(data.token));
         sessionStorage.setItem('user', JSON.stringify(data.user));
     }
@@ -19,7 +18,7 @@ export const getToken = () => {
     }
 };
 
-// access user name from session storage
+
 export const getUser = () => {
     if (window !== 'undefined') {
         if (sessionStorage.getItem('user')) {
@@ -30,7 +29,7 @@ export const getUser = () => {
     }
 };
 
-// remove token from session storage
+
 export const logout = next => {
     if (window !== 'undefined') {
         sessionStorage.removeItem('token');
@@ -39,9 +38,3 @@ export const logout = next => {
     next();
 };
 
-// export const errMsg = (message = '') => toast.error(message, {
-//     position: toast.POSITION.BOTTOM_CENTER
-// });
-// export const successMsg = (message = '') => toast.success(message, {
-//     position: toast.POSITION.BOTTOM_CENTER
-// });

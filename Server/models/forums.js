@@ -1,10 +1,12 @@
 const mongoose = require("mongoose");
+const Populate = require("mongoose-autopopulate");
 
 const forumSchema = new mongoose.Schema({
   user: {
     type: mongoose.Schema.Types.ObjectId,
     required: true,
     ref: "User",
+    autopopulate: true,
   },
   title: {
     type: String,
@@ -18,6 +20,7 @@ const forumSchema = new mongoose.Schema({
     {
       type: mongoose.Schema.Types.ObjectId,
       ref: "Comment",
+      autopopulate: true,
     },
   ],
   createdAt: {
@@ -25,5 +28,6 @@ const forumSchema = new mongoose.Schema({
     default: Date.now,
   },
 });
+forumSchema.plugin(Populate);
 
 module.exports = mongoose.model("Forum", forumSchema);

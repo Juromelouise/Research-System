@@ -30,7 +30,6 @@ export default function Login() {
           "Content-Type": "application/json",
         },
       };
-      // const { data } = await axios.post(`${process.env.REACT_APP_API}/api/v1/login`, form, config)
       const { data } = await axios.post(
         `${process.env.REACT_APP_API}/api/v1/login`,
         { email, password },
