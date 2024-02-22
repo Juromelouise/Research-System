@@ -12,10 +12,7 @@ exports.newPost = async (req, res) => {
 };
 
 exports.AllPost = async (req, res) => {
-  const forum = await Forum.find().populate({
-    path: "user",
-    model: User,
-  });
+  const forum = await Forum.find()
   res.status(200).json({
     forum,
   });
@@ -24,15 +21,6 @@ exports.AllPost = async (req, res) => {
 exports.getSinglepost = async (req, res) => {
   let id = req.params.id;
   const forum = await Forum.findById({ _id: id })
-    .populate({
-      path: "user",
-      model: User,
-    })
-    .populate({
-      path: "comments",
-      model: Comment,
-    });
-
   res.status(200).json({
     forum,
   });
