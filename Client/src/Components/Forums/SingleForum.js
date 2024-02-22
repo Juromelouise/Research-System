@@ -50,7 +50,7 @@ const SingleForum = () => {
     newComment(id, formData);
   };
 
-  const newComment = async (id, commentdata, ) => {
+  const newComment = async (id, commentdata) => {
     try {
       const config = {
         headers: {
@@ -63,7 +63,6 @@ const SingleForum = () => {
         commentdata,
         config
       );
-      // console.log(data.success);
       setContent("");
       getPost(id);
     } catch (error) {
@@ -96,7 +95,6 @@ const SingleForum = () => {
       const { data } = await axios.get(
         `${process.env.REACT_APP_API}/forum/single/post/${id}`
       );
-      // console.log(data.forum.comments);
       setForums(data.forum);
       setComments(data.forum.comments);
     } catch (error) {
@@ -119,13 +117,17 @@ const SingleForum = () => {
 
   const renderComments = (commentList, depth = 0) => {
     return commentList.map((comment) => (
-      <MDBListGroupItem key={comment._id} className="d-flex align-items-center">
-        <div className="flex-grow-1" style={{ marginLeft: `${depth * 20}px` }}>
+      <MDBListGroupItem
+        key={comment._id}
+        className="d-flex align-items-start"
+        style={{ paddingLeft: `${depth * 20}px` }}
+      >
+        <div className="flex-grow-1">
           <strong>{comment.user.name}</strong> - {comment.content}
+          <Button variant="link" onClick={() => handleShowReplyModal(comment)}>
+            Reply
+          </Button>
         </div>
-        <Button variant="link" onClick={() => handleShowReplyModal(comment)}>
-          Reply
-        </Button>
         {comment.comments.length > 0 && (
           <MDBListGroup className="mt-2">
             {renderComments(comment.comments, depth + 1)}
@@ -157,13 +159,7 @@ const SingleForum = () => {
           </form>
           <div className="mt-3">
             <h5 className="card-title">Comments</h5>
-            <MDBListGroup>
-              {comments.map((comment) => (
-                <React.Fragment key={comment._id}>
-                  {renderComments([comment])}
-                </React.Fragment>
-              ))}
-            </MDBListGroup>
+            <MDBListGroup>{renderComments(comments)}</MDBListGroup>
           </div>
         </MDBCardBody>
       </MDBCard>
