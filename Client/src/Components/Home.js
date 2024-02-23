@@ -4,6 +4,15 @@ import { useParams, useNavigate } from "react-router-dom";
 const Home = () => {
   return (
     <div>
+
+      <div class="hero">
+      <div class="glide" id="glide_1">
+        <div class="glide__track" data-glide-el="track">
+          <ul class="glide__slides">
+            <li class="glide__slide">
+              <div class="center">
+                <div class="left">
+                    
       {/* <!-- Header Start --> */}
       <div class="container-fluid header bg-white p-0">
         <div class="row g-0 align-items-center flex-column-reverse flex-md-row">
@@ -25,11 +34,11 @@ const Home = () => {
           </div>
           <div class="col-md-6 animated fadeIn">
             <div class="owl-carousel header-carousel">
-              <div class="owl-carousel-item">
+              <div class="right">
                 <img class="img-fluid" src="../home.png" alt="" />
               </div>
               <div class="owl-carousel-item">
-                <image class="img-fluid" src="image/onion1.png" alt="" />
+                <image class="img-fluid" src="../onion1.png" alt="" />
               </div>
             </div>
           </div>
@@ -40,15 +49,6 @@ const Home = () => {
         <div id="tab-1" class="tab-pane fade show p-0 active">
           <div class="row g-4">
             <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
-              <div class="property-item rounded overflow-hidden">
-                <div class="position-relative overflow-hidden">
-                  {/* <a href=""><img class="img-fluid" src="img/property-1.jpg" alt=""></a> */}
-                  <div class="bg-primary rounded text-white position-absolute start-0 top-0 m-4 py-1 px-3">
-                    For Sell
-                  </div>
-                  <div class="bg-white rounded-top text-primary position-absolute start-0 bottom-0 mx-4 pt-1 px-3">
-                    Appartment
-                  </div>
                 </div>
                 <div class="p-4 pb-0">
                   <a class="d-block h5 mb-2" href="">
@@ -73,7 +73,12 @@ const Home = () => {
             </div>
           </div>
         </div>
-      </div>
+    </div>
+    </li>
+    </ul>
+    </div>
+    </div>
+    </div>
     </div>
   );
 };
