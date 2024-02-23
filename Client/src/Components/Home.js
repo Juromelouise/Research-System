@@ -40,26 +40,23 @@ const Home = () => {
                       </div>
                     </div>
                     <div className="hero"></div>
-<div className="glide" id="glide_2">
-  <div className="glide__track" data-glide-el="track">
-    <ul className="glide__slides"></ul>
-    {/* <li className="glide__slide"> */}
-    <div className="center">
-      <div className="right">
-        {/* Header Start */}
+                     <div className="glide" id="glide_2">
+                      <div className="glide__track" data-glide-el="track">
+                        <ul className="glide__slides"></ul>
+                           <div className="center">
+                             <div className="right">
         <div className="container-fluid header bg-white p-0">
           <div className="row g-0 align-items-left flex-column-reverse flex-md-row">
             <div className="col-md-6 p-5 mt-lg-5">
               <div className="col-md-6 animated fadeIn">
                 <div className="owl-carousel header-carousel">
                   <div className="left">
-                    <img className="img-fluid" src="../logo.png" alt="" />
+                    <img className="img-fluid" src="../onion.jpg" alt="" />
                   </div>
                 </div>
               </div>
             </div>
             <div className="col-md-6 p-5 mt-lg-5 animated fadeIn">
-              <div className="right"></div>
               <div>
                 <h1 className="display-5 mb-4">
                   <span className="text-primary align-items-left">"Overview of Onion" </span>
@@ -81,7 +78,6 @@ const Home = () => {
             </div>
           </div>
         </div>
-        {/* Header End */}
       </div>
     </div>
   </div>
