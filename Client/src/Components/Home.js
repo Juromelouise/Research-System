@@ -4,82 +4,93 @@ import { useParams, useNavigate } from "react-router-dom";
 const Home = () => {
   return (
     <div>
-
-      <div class="hero">
-      <div class="glide" id="glide_1">
-        <div class="glide__track" data-glide-el="track">
-          <ul class="glide__slides">
-            <li class="glide__slide">
-              <div class="center">
-                <div class="left">
-                    
-      {/* <!-- Header Start --> */}
-      <div class="container-fluid header bg-white p-0">
-        <div class="row g-0 align-items-center flex-column-reverse flex-md-row">
-          <div class="col-md-6 p-5 mt-lg-5">
-            <h1 class="display-5 animated fadeIn mb-4">
-              Onion <span class="text-primary">Supply </span>Chain
-            </h1>
-            <p class="animated fadeIn mb-4 pb-2">
-              Optimizing Onion Supply Chain: A Web-Based Platform for Improved
-              Communication and Transparency. This web-based platform gives a
-              chance and improves the safest and fastest way to exchange and
-              promote a Filipino onion. By using a web platform, it will be
-              possible to demonstrate the need for improvements in the onion
-              supply chain and assist small farmers who are unable to voice
-              their concerns to the public. This will help them understand why
-              onions are always becoming more expensive. Enhancing transparency
-              and facilitating better communication might be possible
-            </p>
-          </div>
-          <div class="col-md-6 animated fadeIn">
-            <div class="owl-carousel header-carousel">
-              <div class="right">
-                <img class="img-fluid" src="../home.png" alt="" />
-              </div>
-              <div class="owl-carousel-item">
-                <image class="img-fluid" src="../onion1.png" alt="" />
+      <div className="hero"></div>
+        <div className="glide" id="glide_1"></div>
+          <div className="glide__track" data-glide-el="track"></div>
+            <ul className="glide__slides"></ul>
+              {/* <li className="glide__slide"> */}
+                <div className="center"></div>
+                  <div className="left"></div>
+                    {/* Header Start */}
+                    <div className="container-fluid header bg-white p-0">
+                      <div className="row g-0 align-items-center flex-column-reverse flex-md-row">
+                        <div className="col-md-6 p-5 mt-lg-5">
+                          <h1 className="display-5 animated fadeIn mb-4">
+                            <span className="text-primary">"Onistem" </span>
+                          </h1>
+                          <p className="animated fadeIn mb-4 pb-2">
+                            Optimizing Onion Supply Chain: A Web-Based Platform for Improved
+                            Communication and Transparency. This web-based platform gives a
+                            chance and improves the safest and fastest way to exchange and
+                            promote a Filipino onion. By using a web platform, it will be
+                            possible to demonstrate the need for improvements in the onion
+                            supply chain and assist small farmers who are unable to voice
+                            their concerns to the public. This will help them understand why
+                            onions are always becoming more expensive. Enhancing transparency
+                            and facilitating better communication might be possible
+                          </p>
+                        </div>
+                        <div className="col-md-6 animated fadeIn">
+                          <div className="owl-carousel header-carousel">
+                            <div className="right">
+                              <img className="img-fluid" src="../home.png" alt="" />
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div className="hero"></div>
+<div className="glide" id="glide_2">
+  <div className="glide__track" data-glide-el="track">
+    <ul className="glide__slides"></ul>
+    {/* <li className="glide__slide"> */}
+    <div className="center">
+      <div className="right">
+        {/* Header Start */}
+        <div className="container-fluid header bg-white p-0">
+          <div className="row g-0 align-items-left flex-column-reverse flex-md-row">
+            <div className="col-md-6 p-5 mt-lg-5">
+              <div className="col-md-6 animated fadeIn">
+                <div className="owl-carousel header-carousel">
+                  <div className="left">
+                    <img className="img-fluid" src="../logo.png" alt="" />
+                  </div>
+                </div>
               </div>
             </div>
-          </div>
-        </div>
-      </div>
-      {/* <!-- Header End --> */}
-      <div class="tab-content">
-        <div id="tab-1" class="tab-pane fade show p-0 active">
-          <div class="row g-4">
-            <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
-                </div>
-                <div class="p-4 pb-0">
-                  <a class="d-block h5 mb-2" href="">
-                    Overview of onion
-                  </a>
-                  <p>
-                    <i class="fa fa-map-marker-alt text-primary me-2"></i>The
-                    onion, scientifically known as Allium cepa, is a globally
-                    cultivated vegetable belonging to the genus Allium.
-                    Originating in Southwest Asia, onions are now grown across
-                    the world, primarily in temperate regions.Onions are
-                    versatile vegetables, suitable for both raw consumption and
-                    cooking. Spring onions and green onions are smaller versions
+            <div className="col-md-6 p-5 mt-lg-5 animated fadeIn">
+              <div className="right"></div>
+              <div>
+                <h1 className="display-5 mb-4">
+                  <span className="text-primary align-items-left">"Overview of Onion" </span>
+                </h1>
+                <p className="mb-4 pb-2">
+                The onion, scientifically known as Allium cepa, is a globally
+                 cultivated vegetable belonging to the genus Allium.
+                Originating in Southwest Asia, onions are now grown across
+                 the world, primarily in temperate regions. Onions are
+                  versatile vegetables, suitable for both raw consumption and
+                   cooking. Spring onions and green onions are smaller versions
                     of mature onions, while shallots, pearl onions, and others
-                    offer distinct tastes and textures.Additionally, onions
+                    offer distinct tastes and textures. Additionally, onions
                     possess medicinal qualities, being used to treat respiratory
                     issues like asthma and to lower blood sugar and cholesterol
-                    levels{" "}
-                  </p>
-                </div>
+                  levels
+                </p>
               </div>
             </div>
           </div>
         </div>
+        {/* Header End */}
+      </div>
     </div>
-    </li>
-    </ul>
-    </div>
-    </div>
-    </div>
-    </div>
+  </div>
+</div>
+</div>
+                          
+                        
+      
   );
 };
+
 export default Home;
