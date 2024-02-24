@@ -35,14 +35,14 @@ const Header = () => {
     display: "flex",
     justifyContent: "space-between",
     alignItems: "center",
-    backgroundColor: "#072D60",
+    backgroundColor: "#1F0337",
     color: "#fff",
-    padding: "1rem",
+    padding: "0rem",
     textAlign: "center",
   };
 
   const logoStyle = {
-    width: "50px",
+    width: "100px",
     marginRight: "10px",
   };
 
@@ -112,14 +112,16 @@ const Header = () => {
 
   return (
     <header style={headerStyle}>
-      <Link to="/">
-        <img src="../logo.png" alt="Logo" style={logoStyle} />{" "}
-      </Link>
-      {/* Added alt attribute */}
-      <h3>Onistem</h3>
+      <div>
+        <Link to="/">
+          <img src="../logo.png" alt="Logo" style={logoStyle} />{" "}
+        </Link>
+        {/* Added alt attribute */}
+        <h5>ONISTEM</h5>
+      </div>
       <nav className="navbar navbar-expand-lg navbar-dark">
         <div className="container">
-          <ul className="navbar-nav me-auto mb-2 mb-lg-0">
+          <ul className="navbar-nav me-auto mb-2 mb-lg-0" style={navStyle}>
             <li className="nav-item">
               <Link to="/" className="nav-link" style={{ color: "#fff" }}>
                 Home
@@ -127,7 +129,7 @@ const Header = () => {
             </li>
             <li className="nav-item dropdown">
               <a
-                href="#"
+                href="#fff"
                 className="nav-link dropdown-toggle"
                 role="button"
                 data-bs-toggle="dropdown"
@@ -202,15 +204,15 @@ const Header = () => {
               />
               <div className="dropdown-content">
                 {" "}
-                <button className="dropdown-item" onClick={logoutUser}>
-                  Logout
-                </button>
                 <Link to="/profile">
                   <button className="dropdown-item">Profile</button>
                 </Link>
                 <Link to="/dashboard">
                   <button className="dropdown-item">Dashboard</button>
                 </Link>
+                <button className="dropdown-item" onClick={logoutUser}>
+                  Logout
+                </button>
               </div>
             </div>
           </>
