@@ -16,8 +16,10 @@ import DialogActions from "@mui/material/DialogActions";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 import { Link } from "react-router-dom";
+import { getUser } from "../../utils/helpers";
 
 const Forum = () => {
+  const user = getUser();
   const [openModal, setOpenModal] = useState(false);
   const [title, setTitle] = useState("");
   const [post, setPost] = useState("");
@@ -139,32 +141,38 @@ const Forum = () => {
               </IconButton>
             </Card>
           ))}
-          <IconButton
-            color="primary"
-            aria-label="Open Modal"
-            onClick={handleOpenModal}
-            sx={{
-              position: "fixed",
-              bottom: 20,
-              right: 20,
-              backgroundColor: "#00e5ff",
-              "&:hover": {
-                backgroundColor: "#00a0b2",
-              },
-              zIndex: 9999,
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              padding: "10px 20px",
-              borderRadius: 4,
-              boxShadow: "0px 4px 6px rgba(0, 0, 0, 0.1)",
-            }}
-          >
-            <AddIcon />
-            <Typography sx={{ marginLeft: 1 }}>
-              Start a new Discussion
-            </Typography>
-          </IconButton>
+          {user ? (
+            <IconButton
+              color="primary"
+              aria-label="Open Modal"
+              onClick={handleOpenModal}
+              sx={{
+                position: "fixed",
+                bottom: 20,
+                right: 20,
+                backgroundColor: "#00e5ff",
+                "&:hover": {
+                  backgroundColor: "#00a0b2",
+                },
+                zIndex: 9999,
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                padding: "10px 20px",
+                borderRadius: 4,
+                boxShadow: "0px 4px 6px rgba(0, 0, 0, 0.1)",
+              }}
+            >
+              <AddIcon />
+              <Typography sx={{ marginLeft: 1 }}>
+                Start a new Discussion
+              </Typography>
+            </IconButton>
+          ) : (
+            <>
+              <h1>login first</h1>
+            </>
+          )}
 
           {/* Modal */}
           <Dialog
@@ -209,32 +217,38 @@ const Forum = () => {
       ) : (
         <Fragment>
           <h1>Create New Discussion</h1>{" "}
-          <IconButton
-            color="primary"
-            aria-label="Open Modal"
-            onClick={handleOpenModal}
-            sx={{
-              position: "fixed",
-              bottom: 20,
-              right: 20,
-              backgroundColor: "#00e5ff",
-              "&:hover": {
-                backgroundColor: "#00a0b2",
-              },
-              zIndex: 9999,
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              padding: "10px 20px",
-              borderRadius: 4,
-              boxShadow: "0px 4px 6px rgba(0, 0, 0, 0.1)",
-            }}
-          >
-            <AddIcon />
-            <Typography sx={{ marginLeft: 1 }}>
-              Start a new Discussion
-            </Typography>
-          </IconButton>
+          {user ? (
+            <IconButton
+              color="primary"
+              aria-label="Open Modal"
+              onClick={handleOpenModal}
+              sx={{
+                position: "fixed",
+                bottom: 20,
+                right: 20,
+                backgroundColor: "#00e5ff",
+                "&:hover": {
+                  backgroundColor: "#00a0b2",
+                },
+                zIndex: 9999,
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                padding: "10px 20px",
+                borderRadius: 4,
+                boxShadow: "0px 4px 6px rgba(0, 0, 0, 0.1)",
+              }}
+            >
+              <AddIcon />
+              <Typography sx={{ marginLeft: 1 }}>
+                Start a new Discussion
+              </Typography>
+            </IconButton>
+          ) : (
+            <>
+              <h1>login first</h1>
+            </>
+          )}
           {/* Modal */}
           <Dialog
             open={openModal}
