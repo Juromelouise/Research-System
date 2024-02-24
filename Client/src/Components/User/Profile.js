@@ -28,48 +28,85 @@ const Profile = () => {
   useEffect(() => {
     getProfile();
   }, []);
+
   return (
-    <Fragment>
-      <Fragment>
-        <h2 className="mt-5 ml-5">My Profile</h2>
-        <div className="row justify-content-around mt-5 user-info">
-          <div className="col-12 col-md-3">
-            <figure className="avatar avatar-profile">
+    <section style={{ backgroundColor: "#072D60" }}>
+      <div className="container py-5">
+        <div className="row">
+          <div className="col">
+            <nav aria-label="breadcrumb" className="bg-light rounded-3 p-3 mb-4">
+              <ol className="breadcrumb mb-0">
+                <li className="breadcrumb-item"><a href="#">Home</a></li>
+                <li className="breadcrumb-item"><a href="#">User</a></li>
+                <li className="breadcrumb-item active" aria-current="page">User Profile</li>
+              </ol>
+            </nav>
+          </div>
+        </div>
+
+        <div className="row">
+          <div className="col-lg-4">
+            <div className="card mb-4">
+              <div className="card-body text-center">
+              <figure className="avatar avatar-profile">
               <img
-                className="rounded-circle img-fluid"
+                className="rounded-circle img-fluid" style={{ width: "150px", height: "150px" }}
                 src={user.avatar?.url}
                 alt={user.name}
               />
             </figure>
-            <Link
-              to="/me/update"
-              id="edit_profile"
-              className="btn btn-primary btn-block my-5"
-            >
-              Edit Profile
-            </Link>
+                <h5 className="my-1">{user.name}</h5>
+                <p className="text-muted mb-1">User</p>
+                <p className="text-muted mb-4">Resident of Taguig City</p>
+              </div>
+            </div>
+            
           </div>
-
-          <div className="col-12 col-md-5">
-            <h4>Full Name</h4>
-            <p>{user.name}</p>
-
-            <h4>Email Address</h4>
-            <p>{user.email}</p>
-
-            <h4>Joined On</h4>
-            <p>{String(user.createdAt).substring(0, 10)}</p>
-
-            <Link
-              to="/password/update"
-              className="btn btn-primary btn-block mt-3"
-            >
-              Change Password
-            </Link>
+          <div className="col-lg-8">
+            <div className="card mb-4">
+              <div className="card-body">
+                <div className="row">
+                  <div className="col-sm-3">
+                    <p className="mb-0">NAME:</p>
+                  </div>
+                  <div className="col-sm-9">
+                  <p>{user.name}</p>
+                  </div>
+                </div>
+                <hr />
+                <div className="row">
+                  <div className="col-sm-3">
+                  <p className="mb-0">EMAIL:</p>
+                  </div>
+                  <div className="col-sm-9">
+                    <p className="text-muted mb-0">{user.email}</p>
+                  </div>
+                </div>
+                <hr />
+                <div className="row">
+                  <div className="col-sm-3">
+                    <p className="mb-0">PHONE NUMBER:</p>
+                  </div>
+                  <div className="col-sm-9">
+                  <p className="text-muted mb-0">{user.phone}</p>
+                  </div>
+                </div>
+                <hr />
+                
+                <div className="row">
+                  <div className="col-sm-3">
+                    <p className="mb-0">JOIN ON:</p>
+                  </div>
+                  <div className="col-sm-9">
+                  <p>{String(user.createdAt).substring(0, 10)}</p>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
-      </Fragment>
-    </Fragment>
+      </div>
+    </section>
   );
 };
 
