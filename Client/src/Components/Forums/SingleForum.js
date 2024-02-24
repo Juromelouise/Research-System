@@ -12,8 +12,10 @@ import axios from "axios";
 import { useParams } from "react-router-dom";
 import { getToken } from "../../utils/helpers";
 import { Modal, Button } from "react-bootstrap";
+import { getUser } from "../../utils/helpers";
 
 const SingleForum = () => {
+  const user = getUser();
   let { id } = useParams();
   const [content, setContent] = useState("");
   const [contents, setContents] = useState("");
@@ -124,9 +126,16 @@ const SingleForum = () => {
       >
         <div className="flex-grow-1">
           <strong>{comment.user.name}</strong> - {comment.content}
-          <Button variant="link" onClick={() => handleShowReplyModal(comment)}>
-            Reply
-          </Button>
+          {user ? (
+            <Button
+              variant="link"
+              onClick={() => handleShowReplyModal(comment)}
+            >
+              Reply
+            </Button>
+          ) : (
+            <></>
+          )}
         </div>
         {comment.comments.length > 0 && (
           <MDBListGroup className="mt-2">
@@ -146,17 +155,24 @@ const SingleForum = () => {
           <p className="text-muted">
             Posted on: {formatDate(forums?.createdAt)}
           </p>
-          <form onSubmit={handleSubmit}>
-            <MDBInput
-              className="mx-auto"
-              style={{ width: 800, height: 100 }}
-              type="textarea"
-              label="Add a comment"
-              value={content}
-              onChange={(e) => setContent(e.target.value)}
-            />
-            <MDBBtn type="submit">Post Comment</MDBBtn>
-          </form>
+          {user ? (
+            <form onSubmit={handleSubmit}>
+              <MDBInput
+                className="mx-auto"
+                style={{ width: 800, height: 100 }}
+                type="textarea"
+                label="Add a comment"
+                value={content}
+                onChange={(e) => setContent(e.target.value)}
+              />
+              <MDBBtn type="submit">Post Comment</MDBBtn>
+            </form>
+          ) : (
+            <>
+              <h1>Login First</h1>
+            </>
+          )}
+
           <div className="mt-3">
             <h5 className="card-title">Comments</h5>
             <MDBListGroup>{renderComments(comments)}</MDBListGroup>
