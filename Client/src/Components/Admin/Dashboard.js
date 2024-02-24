@@ -15,7 +15,6 @@ import Grid from "@mui/material/Grid";
 import Paper from "@mui/material/Paper";
 import MenuIcon from "@mui/icons-material/Menu";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
-import NotificationsIcon from "@mui/icons-material/Notifications";
 import { mainListItems, secondaryListItems } from "./ListItems";
 import ProductTable from "./ProductTable";
 import UserTable from "./UserTable";
@@ -111,7 +110,7 @@ export default function Dashboard() {
               Dashboard
             </Typography>
             <IconButton color="inherit">
-              <Badge badgeContent={4} color="secondary">
+              <Badge color="secondary">
                 <Link to="/profile">
                   <Avatar src={user.avatar.url}></Avatar>
                 </Link>

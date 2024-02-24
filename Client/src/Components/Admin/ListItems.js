@@ -24,13 +24,17 @@ export const mainListItems = (
       <ListItemIcon>
         <PeopleIcon />
       </ListItemIcon>
+      <Link to="/user/list">
       <ListItemText primary="Users" />
+      </Link>
     </ListItemButton>
     <ListItemButton>
       <ListItemIcon>
       <Inventory2Icon />
       </ListItemIcon>
+      <Link to="/product/list">
       <ListItemText primary="Product" />
+      </Link>
     </ListItemButton>
   </React.Fragment>
 );

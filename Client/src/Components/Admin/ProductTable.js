@@ -60,6 +60,11 @@ const ProductTable = () => {
           sort: "asc",
         },
         {
+          label: "Product Image",
+          field: "images",
+          sort: "asc",
+        },
+        {
           label: "Price",
           field: "price",
           sort: "asc",
@@ -73,9 +78,11 @@ const ProductTable = () => {
     };
 
     products.forEach((product) => {
+      console.log(product)
       data.rows.push({
         id: product._id,
         name: product.name,
+        images: <img src={product.images[0].url}></img>,
         price: `$${product.price}`,
         actions: (
           <Fragment>
@@ -114,11 +121,11 @@ const ProductTable = () => {
             <Button
               component={Link}
               to="/product/create"
-              className="AddProduct-btn"
+              className={`AddProduct-btn ${isHovered ? "hovered" : ""}`}
               sx={{
                 mt: 3,
+                backgroundColor: "black",
                 color: "white",
-                backgroundColor: isHovered ? "gray" : "black",
                 transition: "color 0.3s, background-color 0.3s",
                 margin: "20px 30px",
                 padding: "15px",
