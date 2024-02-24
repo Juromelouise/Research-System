@@ -104,9 +104,11 @@ const Header = () => {
 
   return (
     <header style={headerStyle}>
-      <img src="../logo.png" alt="Logo" style={logoStyle} />{" "}
+      <Link to="/">
+        <img src="../logo.png" alt="Logo" style={logoStyle} />{" "}
+      </Link>
       {/* Added alt attribute */}
-      <h3>Onion Supply Chain</h3>
+      <h3>Onistem</h3>
       <nav>
         <ul style={navStyle}>
           <li style={navItemStyle}>
@@ -119,22 +121,33 @@ const Header = () => {
               About
             </a>
           </li>
-          <li style={navItemStyle}>
-            <a
-              href="/farmer/info"
-              style={{ color: "#fff", textDecoration: "none" }}
-            >
-              Farmers
-            </a>
-          </li>
-          <li style={navItemStyle}>
-            <a
-              href="/seller/info"
-              style={{ color: "#fff", textDecoration: "none" }}
-            >
-              Sellers
-            </a>
-          </li>
+          {user.role === "farmer" ? (
+            <>
+              {" "}
+              <li style={navItemStyle}>
+                <a
+                  href="/seller/info"
+                  style={{ color: "#fff", textDecoration: "none" }}
+                >
+                  Sellers
+                </a>
+              </li>
+            </>
+          ) : user.role === "seller" ? (
+            <>
+              {" "}
+              <li style={navItemStyle}>
+                <a
+                  href="/farmer/info"
+                  style={{ color: "#fff", textDecoration: "none" }}
+                >
+                  Farmers
+                </a>
+              </li>
+            </>
+          ) : (
+            <></>
+          )}
         </ul>
       </nav>
       <nav>
@@ -153,6 +166,9 @@ const Header = () => {
                 <button className="dropdown-item" onClick={logoutUser}>
                   Logout
                 </button>
+                <Link to="/profile">
+                  <button className="dropdown-item">Profile</button>
+                </Link>
                 <button>
                   <Link to="/dashboard" className="dropdown-item">
                     {" "}

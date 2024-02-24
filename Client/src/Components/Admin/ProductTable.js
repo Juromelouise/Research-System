@@ -38,7 +38,11 @@ const ProductTable = () => {
         Authorization: `Bearer ${getToken()}`,
       },
     };
-    await axios.delete(`${process.env.REACT_APP_API}/api/v1/delete/product/${productId}`, config)
+    await axios.delete(
+      `${process.env.REACT_APP_API}/api/v1/delete/product/${productId}`,
+      config
+    );
+    getAdminProducts();
     console.log(`Deleting product with ID: ${productId}`);
   };
 

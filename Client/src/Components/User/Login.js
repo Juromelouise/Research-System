@@ -6,7 +6,7 @@ import CssBaseline from "@mui/material/CssBaseline";
 import TextField from "@mui/material/TextField";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
-import {Link} from 'react-router-dom'
+import { Link } from "react-router-dom";
 import Paper from "@mui/material/Paper";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
@@ -15,7 +15,7 @@ import Typography from "@mui/material/Typography";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { useNavigate } from "react-router-dom";
 import { authenticate } from "../../utils/helpers";
-import axios from 'axios'
+import axios from "axios";
 
 const defaultTheme = createTheme();
 
@@ -29,6 +29,7 @@ export default function Login() {
         headers: {
           "Content-Type": "application/json",
         },
+        withCredentials: true,
       };
       const { data } = await axios.post(
         `${process.env.REACT_APP_API}/api/v1/login`,
@@ -56,7 +57,7 @@ export default function Login() {
           sm={4}
           md={7}
           sx={{
-            backgroundImage:"url(../login.png)",
+            backgroundImage: "url(../login.png)",
             backgroundRepeat: "no-repeat",
             backgroundColor: (t) =>
               t.palette.mode === "light"
