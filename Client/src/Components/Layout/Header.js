@@ -143,7 +143,7 @@ const Header = () => {
               </ul>
             </li>
             <li className="nav-item">
-              <Link to="/" className="nav-link" style={{ color: "#fff" }}>
+              <Link to="/forum" className="nav-link" style={{ color: "#fff" }}>
                 Forums and Discussions
               </Link>
             </li>
