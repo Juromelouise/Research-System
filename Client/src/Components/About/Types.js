@@ -145,7 +145,7 @@ const Types = () => {
                       <div>
                         <h1 className="display-5 mb-4">
                           <span className="text-primary align-items-left">
-                            " Red onion"{" "}
+                            "Shallots(multiplier onion)"{" "}
                           </span>
                         </h1>
                         <p className="mb-4 pb-2">
