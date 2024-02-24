@@ -8,6 +8,7 @@ import { Avatar } from "@mui/material";
 const Header = () => {
   const user = getUser();
   const [isDropdownOpen, setDropdownOpen] = useState(false);
+  const aboutDropdownItems = ["Season", "Onion Types", "Fertilizers"];
   const navigate = useNavigate();
 
   const logoutUser = async () => {
@@ -116,10 +117,25 @@ const Header = () => {
               Home
             </a>
           </li>
-          <li style={navItemStyle}>
-            <a href="/about" style={{ color: "#fff", textDecoration: "none" }}>
+          <li className="nav-item dropdown">
+            <a
+              href="#"
+              className="nav-link dropdown-toggle"
+              role="button"
+              data-bs-toggle="dropdown"
+              style={{ color: "#fff", textDecoration: "none" }}
+            >
               About
             </a>
+            <ul className="dropdown-menu">
+              {aboutDropdownItems.map((item, index) => (
+                <li key={index}>
+                  <Link className="dropdown-item" to={`/about/${item.toLowerCase()}`}>
+                    {item}
+                  </Link>
+                </li>
+              ))}
+            </ul>
           </li>
           {user.role === "farmer" ? (
             <>
