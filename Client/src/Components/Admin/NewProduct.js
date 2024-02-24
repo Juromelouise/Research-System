@@ -8,7 +8,7 @@ const NewProduct = () => {
   const [price, setPrice] = useState("");
   const [images, setImages] = useState([]);
   const [success, setSuccess] = useState("");
-  const [imagesPreview, setImagesPreview] = useState([])
+  const [imagesPreview, setImagesPreview] = useState([]);
   const [error, setError] = useState("");
   let navigate = useNavigate();
 
@@ -20,9 +20,6 @@ const NewProduct = () => {
     images.forEach((image) => {
       formData.append("images", image);
     });
-    // for (const pair of formData.entries()) {
-    //   console.log(pair[0], pair[1]);
-    // }
     newProduct(formData);
   };
 
@@ -40,6 +37,7 @@ const NewProduct = () => {
         formData,
         config
       );
+      alert("Product Created Succesfully");
       setSuccess(data.success);
     } catch (error) {
       setError(error);
@@ -51,9 +49,8 @@ const NewProduct = () => {
     if (error) {
       console.log(error);
     }
-
     if (success) {
-      navigate("/dashboard");
+      navigate(-1);
     }
   }, [error, success, navigate]);
 

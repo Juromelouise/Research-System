@@ -68,7 +68,6 @@ export default function Register() {
       const config = {
         headers: {
             "Content-Type": "multipart/form-data",
-          // "Content-Type": "application/json",
         },
       };
 
@@ -78,6 +77,7 @@ export default function Register() {
         config
       );
       setIsAuthenticated(true);
+      alert('User Created Succesfully')
       navigate("/signin");
     } catch (error) {
       console.log(error);

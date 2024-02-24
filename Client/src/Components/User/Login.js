@@ -37,6 +37,7 @@ export default function Login() {
         config
       );
       console.log(data);
+      alert('Login')
       authenticate(data, () => navigate("/"));
     } catch (error) {
       console.log(error);

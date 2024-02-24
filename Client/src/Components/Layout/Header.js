@@ -14,7 +14,8 @@ const Header = () => {
   const logoutUser = async () => {
     try {
       await axios.get(`${process.env.REACT_APP_API}/api/v1/logout`);
-      logout(() => navigate("/homepage"));
+      alert("User Logout");
+      logout(() => navigate("/"));
     } catch (error) {
       console.log(error);
     }
@@ -30,13 +31,13 @@ const Header = () => {
     alignItems: "center",
     backgroundColor: "#072D60",
     color: "#fff",
-    padding: "1rem", // Increased padding for better spacing
+    padding: "1rem",
     textAlign: "center",
   };
 
   const logoStyle = {
-    width: "50px", // Adjust the width as needed
-    marginRight: "10px", // Add some margin for spacing
+    width: "50px",
+    marginRight: "10px",
   };
 
   const navStyle = {
@@ -110,61 +111,77 @@ const Header = () => {
       </Link>
       {/* Added alt attribute */}
       <h3>Onistem</h3>
-      <nav>
-        <ul style={navStyle}>
-          <li style={navItemStyle}>
-            <a href="/" style={{ color: "#fff", textDecoration: "none" }}>
-              Home
-            </a>
-          </li>
-          <li className="nav-item dropdown">
-            <a
-              href="#"
-              className="nav-link dropdown-toggle"
-              role="button"
-              data-bs-toggle="dropdown"
-              style={{ color: "#fff", textDecoration: "none" }}
-            >
-              About
-            </a>
-            <ul className="dropdown-menu">
-              {aboutDropdownItems.map((item, index) => (
-                <li key={index}>
-                  <Link className="dropdown-item" to={`/about/${item.toLowerCase()}`}>
-                    {item}
+      <nav className="navbar navbar-expand-lg navbar-dark">
+        <div className="container">
+          <ul className="navbar-nav me-auto mb-2 mb-lg-0">
+            <li className="nav-item">
+              <Link to="/" className="nav-link" style={{ color: "#fff" }}>
+                Home
+              </Link>
+            </li>
+            <li className="nav-item dropdown">
+              <a
+                href="#"
+                className="nav-link dropdown-toggle"
+                role="button"
+                data-bs-toggle="dropdown"
+                style={{ color: "#fff" }}
+              >
+                About
+              </a>
+              <ul className="dropdown-menu">
+                {aboutDropdownItems.map((item, index) => (
+                  <li key={index}>
+                    <Link
+                      className="dropdown-item"
+                      to={`/about/${item.toLowerCase()}`}
+                    >
+                      {item}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </li>
+            <li className="nav-item">
+              <Link to="/" className="nav-link" style={{ color: "#fff" }}>
+                Forums and Discussions
+              </Link>
+            </li>
+            {user.role === "farmer" && (
+              <>
+                <li className="nav-item">
+                  <Link
+                    to="/seller/info"
+                    className="nav-link"
+                    style={{ color: "#fff" }}
+                  >
+                    Sellers
                   </Link>
                 </li>
-              ))}
-            </ul>
-          </li>
-          {user.role === "farmer" ? (
-            <>
-              {" "}
-              <li style={navItemStyle}>
-                <a
-                  href="/seller/info"
-                  style={{ color: "#fff", textDecoration: "none" }}
-                >
-                  Sellers
-                </a>
-              </li>
-            </>
-          ) : user.role === "seller" ? (
-            <>
-              {" "}
-              <li style={navItemStyle}>
-                <a
-                  href="/farmer/info"
-                  style={{ color: "#fff", textDecoration: "none" }}
+                <li className="nav-item">
+                  <Link
+                    to="/product/create"
+                    className="nav-link"
+                    style={{ color: "#fff" }}
+                  >
+                    Post Product
+                  </Link>
+                </li>
+              </>
+            )}
+            {user.role === "seller" && (
+              <li className="nav-item">
+                <Link
+                  to="/farmer/info"
+                  className="nav-link"
+                  style={{ color: "#fff" }}
                 >
                   Farmers
-                </a>
+                </Link>
               </li>
-            </>
-          ) : (
-            <></>
-          )}
-        </ul>
+            )}
+          </ul>
+        </div>
       </nav>
       <nav>
         {user ? (
@@ -185,12 +202,9 @@ const Header = () => {
                 <Link to="/profile">
                   <button className="dropdown-item">Profile</button>
                 </Link>
-                <button>
-                  <Link to="/dashboard" className="dropdown-item">
-                    {" "}
-                    Dashboard
-                  </Link>
-                </button>
+                <Link to="/dashboard">
+                  <button className="dropdown-item">Dashboard</button>
+                </Link>
               </div>
             </div>
           </>
@@ -199,11 +213,19 @@ const Header = () => {
             {isDropdownOpen && (
               <div style={{ ...dropdownStyle, ...{ display: "block" } }}>
                 {" "}
-                {/* Adjusted style object */}
-                <Link to="/signin" style={dropdownItemStyle}>
+                <Link
+                  to="/signin"
+                  style={dropdownItemStyle}
+                  onClick={toggleDropdown}
+                >
                   Sign In
                 </Link>
-                <Link to="/signup" style={dropdownItemStyle}>
+                <hr className="dropdown-divider" />
+                <Link
+                  to="/signup"
+                  style={dropdownItemStyle}
+                  onClick={toggleDropdown}
+                >
                   Sign Up
                 </Link>
               </div>
