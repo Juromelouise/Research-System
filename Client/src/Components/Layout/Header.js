@@ -8,7 +8,13 @@ import { Avatar } from "@mui/material";
 const Header = () => {
   const user = getUser();
   const [isDropdownOpen, setDropdownOpen] = useState(false);
-  const aboutDropdownItems = ["Season", "Onion Types", "Fertilizers", "Production"];
+  const aboutDropdownItems = [
+    "Season",
+    "Onion Types",
+    "Fertilizers",
+    "Production",
+    "Challenges",
+  ];
   const navigate = useNavigate();
 
   const logoutUser = async () => {

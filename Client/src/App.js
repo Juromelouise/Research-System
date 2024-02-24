@@ -19,6 +19,7 @@ import Season from "./Components/About/Season";
 import Fertilizer from "./Components/About/Fertilizer";
 import Types from "./Components/About/Types";
 import Production from "./Components/About/Production";
+import Problem from "./Components/About/Problem";
 
 function App() {
   return (
@@ -31,6 +32,7 @@ function App() {
           <Route path="/signup" element={<Register />} exact="true" />
           <Route path="/about/season" element={<Season/>} exact="true" />
           <Route path="/about/production" element={<Production/>} exact="true" />
+          <Route path="/about/challenges" element={<Problem/>} exact="true" />
           <Route path="/about/fertilizers" element={<Fertilizer />} exact="true" />
           <Route path="/about/onion types" element={<Types />} exact="true" />
           <Route path="/dashboard" element={<Dashboard />} exact="true" />
