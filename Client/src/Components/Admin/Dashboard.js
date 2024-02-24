@@ -86,7 +86,7 @@ export default function Dashboard() {
           <Toolbar
             sx={{
               pr: "24px",
-              height: "74px",
+              height: "88px",
             }}
           >
             <IconButton
