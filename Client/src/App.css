@@ -1,3 +1,9 @@
+/* @import url("https://fonts.googleapis.com/css2?family=Annapurna+SIL:wght@400;700&family=Jacquarda+Bastarda+9&display=swap");
+
+* {
+  font-family: "Jacquarda Bastarda 9", serif;
+} */
+
 .App {
   text-align: center;
 }
@@ -57,7 +63,7 @@
   box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
   z-index: 1;
   left: -100px;
-  text-align: center
+  text-align: center;
 }
 
 .dropdown:hover .dropdown-content {

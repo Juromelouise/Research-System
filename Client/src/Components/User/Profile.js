@@ -8,10 +8,10 @@ const Profile = () => {
 
   const getProfile = async () => {
     const config = {
-      // headers: {
-      //  Authorization: `Bearer ${getToken()}`,
-      // },
-      withCredentials: true,
+      headers: {
+       Authorization: `Bearer ${getToken()}`,
+      },
+      // withCredentials: true,
     };
     try {
       const { data } = await axios.get(
