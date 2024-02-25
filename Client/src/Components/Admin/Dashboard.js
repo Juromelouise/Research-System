@@ -85,7 +85,8 @@ export default function Dashboard() {
           <Toolbar
             sx={{
               pr: "24px",
-              height: "112px",
+              height: "111px",
+              backgroundColor: "#1F0337",
             }}
           >
             <IconButton
@@ -107,7 +108,7 @@ export default function Dashboard() {
               noWrap
               sx={{ flexGrow: 1 }}
             >
-              Dashboard
+              <h1>DASHBOARD</h1>
             </Typography>
             <IconButton color="inherit">
               <Badge color="secondary">
@@ -141,10 +142,7 @@ export default function Dashboard() {
         <Box
           component="main"
           sx={{
-            backgroundColor: (theme) =>
-              theme.palette.mode === "light"
-                ? theme.palette.grey[100]
-                : theme.palette.grey[900],
+            backgroundColor: "#072D60", // Set background color to #072D60
             flexGrow: 1,
             height: "100vh",
             overflow: "auto",

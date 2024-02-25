@@ -92,7 +92,7 @@ export default function Register() {
 
   return (
     <ThemeProvider theme={defaultTheme}>
-      <Container component="main" maxWidth="xs" sx={{backgroundColor: "white"}}>
+      <Container component="main" maxWidth="xs" sx={{backgroundColor: "#406EAB"}}>
         <CssBaseline />
         <Box
           sx={{
@@ -197,14 +197,14 @@ export default function Register() {
             <Button
               type="submit"
               fullWidth
-              variant="contained"
+              variant="contained" 
               sx={{ mt: 3, mb: 2 }}
             >
               Sign Up
             </Button>
             <Grid container justifyContent="flex-end">
               <Grid item>
-                <Link to="/signin" variant="body2">
+                <Link to="/signin" variant="body2"style={{ color: 'black' }}>
                   Already have an account? Sign in
                 </Link>
               </Grid>

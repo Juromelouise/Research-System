@@ -104,7 +104,7 @@ export default function UserTable() {
         <img
           src={row.avatar.url}
           alt={row.avatar.public_id}
-          style={{ width: "100px", height: "100px" }}
+          style={{ width: "50px", height: "50px" }}
         />
       ),
       role: row.role,
@@ -113,18 +113,19 @@ export default function UserTable() {
         <Fragment>
           <Link
             onClick={() => updateRoleSeller(row._id)}
-            style={{ textDecoration: "none" }}
+            style={{ textDecoration: "none" }} 
           >
-            <button className="edit-btn">Seller</button>
+            <Button variant="contained" color="primary" className="edit-btn">Seller</Button>
           </Link>
           <Link
             onClick={() => updateRoleFarmer(row._id)}
             style={{ textDecoration: "none" }}
           >
-            <button className="edit-btn">Farmer</button>
+           <Button variant="contained" color="primary" className="edit-btn">Farmer</Button>
           </Link>
-          <Link onClick={() => deleteUserHandler(row._id)}>
-            <button className="delete-btn">Delete</button>
+          <Link onClick={() => deleteUserHandler(row._id)}
+          >
+          <Button variant="contained" color="secondary" className="delete-btn">Delete</Button>
           </Link>
         </Fragment>
       ),
@@ -140,7 +141,7 @@ export default function UserTable() {
         </List>
         {/* Main content */}
         <div className="col-12 col-md-10">
-          <p className="star">ALL USER</p>
+          <p className="star" style={{ color: "#fff" }}><h1> ALL USERS</h1></p>
 
           <div className="custom-mdb-table">
             <MDBDataTable
@@ -159,13 +160,13 @@ export default function UserTable() {
             sx={{
               mt: 3,
               color: "white",
-              backgroundColor: "black",
+              backgroundColor: "purple",
               transition: "color 0.3s, background-color 0.3s",
               margin: "20px 30px",
               padding: "15px",
               "&:hover": {
                 color: "white", // Text color on hover
-                backgroundColor: "gray", // Background color on hover
+                backgroundColor: "grey", // Background color on hover
               },
             }}
             onMouseEnter={() => setIsHovered(true)}

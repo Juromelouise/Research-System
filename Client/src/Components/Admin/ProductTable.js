@@ -87,14 +87,12 @@ const ProductTable = () => {
         actions: (
           <Fragment>
             <Link to={`/product/update/${product._id}`}>
-              <button className="edit-btn">Edit</button>
+            <Button variant="contained" color="primary" className="edit-btn">Edit</Button>
             </Link>
-            <button
-              className="delete-btn"
-              onClick={() => deleteProductHandler(product._id)}
-            >
-              Delete
-            </button>
+          <Link onClick={() => deleteUserHandler(row._id)}
+          >
+          <Button variant="contained" color="secondary" className="delete-btn">Delete</Button>
+          </Link>
           </Fragment>
         ),
       });
@@ -108,7 +106,7 @@ const ProductTable = () => {
       <div style={{ display: "flex" }}>
         <div className="col-12 col-md-10">
           <Fragment>
-            <p className="star">ALL PRODUCTS</p>
+          <p className="star" style={{ color: "#fff" }}><h1> PRODUCTS</h1></p>
             <div className="custom-mdb-table">
               <MDBDataTable
                 data={productsList()}
@@ -124,11 +122,15 @@ const ProductTable = () => {
               className={`AddProduct-btn ${isHovered ? "hovered" : ""}`}
               sx={{
                 mt: 3,
-                backgroundColor: "black",
+                backgroundColor: "purple",
                 color: "white",
                 transition: "color 0.3s, background-color 0.3s",
                 margin: "20px 30px",
                 padding: "15px",
+                "&:hover": {
+                  color: "white", // Text color on hover
+                  backgroundColor: "grey", // Background color on hover
+                },
               }}
               onMouseEnter={() => setIsHovered(true)}
               onMouseLeave={() => setIsHovered(false)}

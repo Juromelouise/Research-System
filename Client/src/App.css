@@ -77,13 +77,13 @@
   text-decoration: none;
   display: block;
   border: none;
-  background-color: #fff;
+  background-color: #406EAB;
   cursor: pointer;
 }
 
 .dropdown-content a:hover,
 .dropdown-content button:hover {
-  background-color: #f1f1f1;
+  background-color: #ffffff;
 }
 
 	/* Coded with love by Mutiullah Samim */
@@ -117,7 +117,7 @@
     width: 170px;
     top: 65px;
     border-radius: 50%;
-    background: #5D0664;
+    background: #1F0337;
     padding: 10px;
     text-align: center;
   }
@@ -125,7 +125,7 @@
     height: 150px;
     width: 150px;
     border-radius: 50%;
-    border: 2px solid white;
+    border: 5px solid white;
   }
   .form_container {
     margin-top: 100px;

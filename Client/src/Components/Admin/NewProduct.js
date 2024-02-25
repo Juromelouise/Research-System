@@ -78,18 +78,19 @@ const NewProduct = () => {
         margin: "auto",
         paddingTop: "50px",
         borderRadius: "8px",
+        backgroundColor: "#406EAB",
         boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
       }}
     >
-      <h2 style={{ textAlign: "center", marginBottom: "24px", color: "#333" }}>
+      <h2 style={{ textAlign: "center", marginBottom: "24px", color: "black" }}>
         Create New Item
       </h2>
       <form
         onSubmit={handleSubmit}
         style={{ display: "flex", flexDirection: "column", padding: "16px" }}
       >
-        <label style={{ marginBottom: "8px", fontSize: "14px", color: "#555" }}>
-          Title:
+        <label style={{ marginBottom: "8px", fontSize: "15px", color: "black" }}>
+          PRODUCT NAME:
         </label>
         <input
           type="text"
@@ -105,8 +106,8 @@ const NewProduct = () => {
           required
         />
 
-        <label style={{ marginBottom: "8px", fontSize: "14px", color: "#555" }}>
-          Price:
+        <label style={{ marginBottom: "8px", fontSize: "15px", color: "black" }}>
+          PRICE:
         </label>
         <input
           type="number"
@@ -123,8 +124,8 @@ const NewProduct = () => {
           required
         ></input>
 
-        <label style={{ marginBottom: "8px", fontSize: "14px", color: "#555" }}>
-          Image URL:
+        <label style={{ marginBottom: "8px", fontSize: "15px", color: "black" }}>
+          IMAGE URL:
         </label>
         <input
           type="file"
@@ -134,7 +135,7 @@ const NewProduct = () => {
             padding: "12px",
             marginBottom: "24px",
             borderRadius: "4px",
-            border: "1px solid #ddd",
+            border: "5px solid #ddd",
           }}
           required
           multiple
@@ -153,7 +154,7 @@ const NewProduct = () => {
         <button
           type="submit"
           style={{
-            backgroundColor: "#61dafb",
+            backgroundColor: "#5D0664",
             color: "#fff",
             padding: "12px",
             borderRadius: "4px",

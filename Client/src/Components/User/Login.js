@@ -114,15 +114,15 @@ export default function Login() {
 
           <div className="mt-4">
             <div className="d-flex justify-content-center links">
-              <Link to="/signup" variant="body2">
+              <Link to="/signup" variant="body2"style={{ color: 'black' }}>
                 Don't have an account?{" "}
-                <a href="#" className="ml-2">
+                <a href="#" className="ml-2"style={{ color: 'black' }}>
                   Sign Up
                 </a>
               </Link>
             </div>
             <div className="d-flex justify-content-center links">
-              <a href="#">Forgot your password?</a>
+              <a href="#"style={{ color: 'black' }}>Forgot your password?</a>
             </div>
           </div>
         </div>

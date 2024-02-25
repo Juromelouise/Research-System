@@ -150,7 +150,7 @@ const Forum = () => {
                 position: "fixed",
                 bottom: 20,
                 right: 20,
-                backgroundColor: "#00e5ff",
+                backgroundColor: "#23BFA3",
                 "&:hover": {
                   backgroundColor: "#00a0b2",
                 },
@@ -219,16 +219,16 @@ const Forum = () => {
           <h1>Create New Discussion</h1>{" "}
           {user ? (
             <IconButton
-              color="primary"
+              color="#5D0664"
               aria-label="Open Modal"
               onClick={handleOpenModal}
               sx={{
                 position: "fixed",
                 bottom: 20,
                 right: 20,
-                backgroundColor: "#00e5ff",
+                backgroundColor: "#black",
                 "&:hover": {
-                  backgroundColor: "#00a0b2",
+                  backgroundColor: "#5D0664",
                 },
                 zIndex: 9999,
                 display: "flex",
@@ -240,13 +240,13 @@ const Forum = () => {
               }}
             >
               <AddIcon />
-              <Typography sx={{ marginLeft: 1 }}>
+              <Typography sx={{ marginLeft: 1}}>
                 Start a new Discussion
               </Typography>
             </IconButton>
           ) : (
             <>
-              <h1>login first</h1>
+              <h1>LOG IN FIRST</h1>
             </>
           )}
           {/* Modal */}
