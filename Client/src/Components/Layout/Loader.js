@@ -4,12 +4,12 @@ import { DNA } from "react-loader-spinner";
 const Loader = () => {
   return (
     <DNA
-    visible={true}
-    height="500"
-    width="500"
-    ariaLabel="dna-loading"
-    wrapperStyle={{marginTop: "200px"}}
-    wrapperClass="dna-wrapper"
+      visible={true}
+      height="500"
+      width="500"
+      ariaLabel="dna-loading"
+      wrapperStyle={{ marginTop: "20f0px" }}
+      wrapperClass="dna-wrapper"
     />
   );
 };

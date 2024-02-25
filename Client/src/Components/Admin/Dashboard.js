@@ -85,7 +85,7 @@ export default function Dashboard() {
           <Toolbar
             sx={{
               pr: "24px",
-              height: "88px",
+              height: "112px",
             }}
           >
             <IconButton
@@ -155,7 +155,7 @@ export default function Dashboard() {
             <Grid container spacing={3}>
               <Grid item xs={12}>
                 <Paper sx={{ p: 2, display: "flex", flexDirection: "column" }}>
-                  <ProductTable  />
+                  <ProductTable />
                 </Paper>
               </Grid>
               <Grid item xs={12}>
