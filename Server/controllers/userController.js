@@ -40,6 +40,7 @@ exports.registerUser = async (req, res, next) => {
 
   sendToken(user, 200, res);
 };
+
 exports.loginUser = async (req, res, next) => {
   const { email, password } = req.body;
 
@@ -72,6 +73,13 @@ exports.logout = async (req, res, next) => {
   });
 };
 
+exports.deleteUser = async (req, res) => {
+  await User.findByIdAndDelete(req.params.id);
+  res.status(200).json({
+    success: true,
+  });
+};
+
 exports.getUserProfile = async (req, res, next) => {
   const user = await User.findById(req.user.id);
   res.status(200).json({
@@ -81,7 +89,7 @@ exports.getUserProfile = async (req, res, next) => {
 };
 
 exports.getAllUsers = async (req, res) => {
-  const user = await User.find();
+  const user = await User.find({ _id: { $ne: req.user._id } });
 
   res.status(200).json({
     user,
@@ -119,4 +127,3 @@ exports.allSellers = async (req, res) => {
     users,
   });
 };
-

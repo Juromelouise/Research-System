@@ -4,7 +4,6 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 import { Avatar } from "@mui/material";
-
 const Header = () => {
   const user = getUser();
   const [isDropdownOpen, setDropdownOpen] = useState(false);

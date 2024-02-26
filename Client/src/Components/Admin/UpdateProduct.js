@@ -32,7 +32,7 @@ const UpdateProduct = () => {
         `${process.env.REACT_APP_API}/api/v1/product/${id}`
       );
       setProduct(data.product);
-     setOldImages(data.product.images);
+      setOldImages(data.product.images);
       setSuccess(data.success);
       setName(data.product.name);
       setPrice(data.product.price);
@@ -99,7 +99,9 @@ const UpdateProduct = () => {
         onSubmit={handleSubmit}
         style={{ display: "flex", flexDirection: "column", padding: "16px" }}
       >
-        <label style={{ marginBottom: "8px", fontSize: "15px", color: "black" }}>
+        <label
+          style={{ marginBottom: "8px", fontSize: "15px", color: "black" }}
+        >
           PRODUCT NAME:
         </label>
         <input
@@ -116,7 +118,9 @@ const UpdateProduct = () => {
           required
         />
 
-        <label style={{ marginBottom: "8px", fontSize: "15px", color: "black" }}>
+        <label
+          style={{ marginBottom: "8px", fontSize: "15px", color: "black" }}
+        >
           PRICE:
         </label>
         <input

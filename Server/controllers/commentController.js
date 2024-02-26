@@ -31,6 +31,14 @@ exports.replyComment = async (req, res) => {
   });
 };
 
+exports.deleteComment = async (req, res) => {
+  await Comment.findByIdAndDelete(req.params.id);
+
+  res.status(200).json({
+    success: true,
+  });
+};
+
 // exports.allComment = async (req, res) => {
 //   const id = req.params.id
 //   const comments = await Comment.findById(id);

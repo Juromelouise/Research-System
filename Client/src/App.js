@@ -20,6 +20,8 @@ import Fertilizer from "./Components/About/Fertilizer";
 import Types from "./Components/About/Types";
 import Production from "./Components/About/Production";
 import Problem from "./Components/About/Problem";
+import SingleProduct from "./Components/Product/SingleProduct";
+
 
 function App() {
   return (
@@ -45,6 +47,7 @@ function App() {
           <Route path="/seller/info" element={<SellerInfo/>} exact="true" />
           <Route path="/forum" element={<Forum/>} exact="true" />
           <Route path="/forum/open/:id" element={<SingleForum/>} exact="true" />
+          <Route path="/single/user/product" element={<SingleProduct/>} exact="true" />
         </Routes>
       </Router>
     </div>
