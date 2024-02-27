@@ -78,21 +78,34 @@ const ProductTable = () => {
     };
 
     products.forEach((product) => {
-      console.log(product)
+      console.log(product);
       data.rows.push({
         id: product._id,
         name: product.name,
-        images: <img src={product.images[0].url}></img>,
+        images: (
+          <img
+            src={product.images[0].url}
+            alt={product.images[0].public_id}
+            style={{ width: "50px", height: "50px" }}
+          />
+        ),
         price: `$${product.price}`,
         actions: (
           <Fragment>
             <Link to={`/product/update/${product._id}`}>
-            <Button variant="contained" color="primary" className="edit-btn">Edit</Button>
+              <Button variant="contained" color="primary" className="edit-btn">
+                Edit
+              </Button>
             </Link>
-          <Link onClick={() => deleteUserHandler(row._id)}
-          >
-          <Button variant="contained" color="secondary" className="delete-btn">Delete</Button>
-          </Link>
+            <Link onClick={() => deleteUserHandler(row._id)}>
+              <Button
+                variant="contained"
+                color="secondary"
+                className="delete-btn"
+              >
+                Delete
+              </Button>
+            </Link>
           </Fragment>
         ),
       });
@@ -106,7 +119,9 @@ const ProductTable = () => {
       <div style={{ display: "flex" }}>
         <div className="col-12 col-md-10">
           <Fragment>
-          <p className="star" style={{ color: "#fff" }}><h1> PRODUCTS</h1></p>
+            <p className="star" style={{ color: "#fff" }}>
+              <h1> PRODUCTS</h1>
+            </p>
             <div className="custom-mdb-table">
               <MDBDataTable
                 data={productsList()}

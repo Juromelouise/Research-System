@@ -42,6 +42,9 @@ const UpdateProduct = () => {
   };
 
   const updateProduct = async (id, productData) => {
+    for (const pair of productData.entries()) {
+      console.log(pair[0], pair[1]);
+    }
     try {
       const config = {
         headers: {
@@ -93,11 +96,12 @@ const UpdateProduct = () => {
       }}
     >
       <h2 style={{ textAlign: "center", marginBottom: "24px", color: "black" }}>
-        Create New Item
+        Update Item
       </h2>
       <form
         onSubmit={handleSubmit}
         style={{ display: "flex", flexDirection: "column", padding: "16px" }}
+        encType='multipart/form-data'
       >
         <label
           style={{ marginBottom: "8px", fontSize: "15px", color: "black" }}
@@ -192,7 +196,7 @@ const UpdateProduct = () => {
             cursor: "pointer",
           }}
         >
-          Create
+          Update
         </button>
       </form>
     </div>

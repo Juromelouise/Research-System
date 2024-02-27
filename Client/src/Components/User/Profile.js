@@ -92,6 +92,11 @@ const Profile = () => {
                 </div>
               </div>
             </div>
+            <Link to={`/update/profile/${user._id}`}>
+            <button>
+              UPDATE PROFILE
+            </button>
+            </Link>
           </div>
         </div>
       </div>

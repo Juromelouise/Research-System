@@ -126,29 +126,32 @@ const Header = () => {
                 Home
               </Link>
             </li>
- <li className="nav-item dropdown">
-  <a
-    href="#"
-    className="nav-link dropdown-toggle"
-    role="button"
-    data-bs-toggle="dropdown"
-    style={{ color: "#fff" }}
-  >
-    About
-  </a>
-  <ul className="dropdown-menu" style={{ backgroundColor: "#406EAB" }}>
-    {aboutDropdownItems.map((item, index) => (
-      <li key={index}>
-        <Link
-          className="dropdown-item"
-          to={`/about/${item.toLowerCase()}`}
-        >
-          {item}
-        </Link>
-      </li>
-    ))}
-  </ul>
-</li>
+            <li className="nav-item dropdown">
+              <a
+                href="#"
+                className="nav-link dropdown-toggle"
+                role="button"
+                data-bs-toggle="dropdown"
+                style={{ color: "#fff" }}
+              >
+                About
+              </a>
+              <ul
+                className="dropdown-menu"
+                style={{ backgroundColor: "#406EAB" }}
+              >
+                {aboutDropdownItems.map((item, index) => (
+                  <li key={index}>
+                    <Link
+                      className="dropdown-item"
+                      to={`/about/${item.toLowerCase()}`}
+                    >
+                      {item}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </li>
 
             <li className="nav-item">
               <Link to="/forum" className="nav-link" style={{ color: "#fff" }}>
@@ -207,6 +210,13 @@ const Header = () => {
                 <Link to="/profile">
                   <button className="dropdown-item">Profile</button>
                 </Link>
+                {user.role === "farmer" ? (
+                  <Link to="/profile">
+                    <button className="dropdown-item">Product List</button>
+                  </Link>
+                ) : (
+                  <></>
+                )}
                 <Link to="/dashboard">
                   <button className="dropdown-item">Dashboard</button>
                 </Link>
@@ -218,33 +228,38 @@ const Header = () => {
           </>
         ) : (
           <nav style={{ position: "relative" }}>
-          {isDropdownOpen && (
-            <div style={{ ...dropdownStyle, ...{ display: "block", backgroundColor: "#406EAB" } }}>
-              <a
-                href="/signin"
-                className="dropdown-item"
-                style={dropdownItemStyle}
-                onClick={toggleDropdown}
+            {isDropdownOpen && (
+              <div
+                style={{
+                  ...dropdownStyle,
+                  ...{ display: "block", backgroundColor: "#406EAB" },
+                }}
               >
-                Sign In
-              </a>
-              <hr className="dropdown-divider" />
-              <a
-                href="/signup"
-                className="dropdown-item"
-                style={dropdownItemStyle}
-                onClick={toggleDropdown}
-              >
-                Sign Up
-              </a>
+                <a
+                  href="/signin"
+                  className="dropdown-item"
+                  style={dropdownItemStyle}
+                  onClick={toggleDropdown}
+                >
+                  Sign In
+                </a>
+                <hr className="dropdown-divider" />
+                <a
+                  href="/signup"
+                  className="dropdown-item"
+                  style={dropdownItemStyle}
+                  onClick={toggleDropdown}
+                >
+                  Sign Up
+                </a>
+              </div>
+            )}
+            <div style={{ position: "relative", display: "inline-block" }}>
+              <button onClick={toggleDropdown} style={loginButtonStyle}>
+                Login
+              </button>
             </div>
-          )}
-          <div style={{ position: "relative", display: "inline-block" }}>
-            <button onClick={toggleDropdown} style={loginButtonStyle}>
-              Login
-            </button>
-          </div>
-        </nav>
+          </nav>
         )}
       </nav>
     </header>

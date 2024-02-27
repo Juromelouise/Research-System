@@ -52,6 +52,7 @@ exports.newProduct = async (req, res) => {
 };
 
 exports.updateProduct = async (req, res, next) => {
+  console.log(req.params.id);
   let products = await Product.findById(req.params.id);
 
   if (!products) {
@@ -65,7 +66,7 @@ exports.updateProduct = async (req, res, next) => {
   if (typeof req.body.images === "string") {
     images.push(req.body.images);
   } else {
-    images = req.body.images;
+    images = req.body.images.flat();
   }
   if (images !== undefined) {
     for (let i = 0; i < products.images.length; i++) {

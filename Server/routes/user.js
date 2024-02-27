@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 const upload = require("../utils/multer");
 
-const {registerUser, loginUser, logout, getUserProfile, getAllUsers, updateRoleSeller, updateRoleFarmer, allFarmers, allSellers, deleteUser} = require('../controllers/userController');
+const {registerUser, loginUser, logout, getUserProfile, getAllUsers, updateRoleSeller, updateRoleFarmer, allFarmers, allSellers, deleteUser, updateProfile} = require('../controllers/userController');
 const { isAuthenticatedUser } = require("../middlewares/auth");
 
 
@@ -16,5 +16,6 @@ router.get("/get/seller", allSellers)
 router.put("/update/role/seller/:id", updateRoleSeller)
 router.put("/update/role/farmer/:id", updateRoleFarmer)
 router.delete("/delete/user/:id", isAuthenticatedUser, deleteUser)
+router.put("/user/update",isAuthenticatedUser, updateProfile)
 
 module.exports = router;

@@ -19,7 +19,7 @@ router.post(
   upload.array("images", 10),
   newProduct
 );
-router.put("/update/product/:id", isAuthenticatedUser, updateProduct);
+router.put("/update/product/:id", isAuthenticatedUser, upload.array("images", 10), updateProduct);
 router.delete("/delete/product/:id", isAuthenticatedUser, deleteProduct);
 router.get("/products", isAuthenticatedUser, getProduct);
 router.get("/product/:id", product);
