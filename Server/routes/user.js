@@ -16,6 +16,6 @@ router.get("/get/seller", allSellers)
 router.put("/update/role/seller/:id", updateRoleSeller)
 router.put("/update/role/farmer/:id", updateRoleFarmer)
 router.delete("/delete/user/:id", isAuthenticatedUser, deleteUser)
-router.put("/user/update",isAuthenticatedUser, updateProfile)
+router.put("/user/update",isAuthenticatedUser, upload.single("avatar"), updateProfile)
 
 module.exports = router;

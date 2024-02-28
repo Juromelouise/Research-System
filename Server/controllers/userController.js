@@ -41,7 +41,7 @@ exports.registerUser = async (req, res, next) => {
   sendToken(user, 200, res);
 };
 
-exports.loginUser = async (req, res, next) => {
+exports.loginUser = async (req, res, next) => { 
   const { email, password } = req.body;
 
   if (!email || !password) {
