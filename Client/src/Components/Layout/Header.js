@@ -3,7 +3,7 @@ import { getUser, logout } from "../../utils/helpers";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
-import { Avatar } from "@mui/material";
+import { Avatar, Button } from "@mui/material";
 const Header = () => {
   const user = getUser();
   const [isDropdownOpen, setDropdownOpen] = useState(false);
@@ -199,19 +199,20 @@ const Header = () => {
           <>
             <div className="dropdown">
               {" "}
-              <Avatar
-                sx={{ bgcolor: "secondary.main" }}
-                src={user.avatar && user.avatar.url}
-                alt={user && user.name}
-                className="dropdown-trigger"
-              />
+              <Button className="dropdown-trigger">
+                <Avatar
+                  sx={{ bgcolor: "secondary.main" }}
+                  src={user.avatar && user.avatar.url}
+                  alt={user && user.name}
+                />
+              </Button>
               <div className="dropdown-content">
                 {" "}
                 <Link to="/profile">
                   <button className="dropdown-item">Profile</button>
                 </Link>
                 {user.role === "farmer" ? (
-                  <Link to="/profile">
+                  <Link to="/single/user/product">
                     <button className="dropdown-item">Product List</button>
                   </Link>
                 ) : (
@@ -220,9 +221,11 @@ const Header = () => {
                 <Link to="/dashboard">
                   <button className="dropdown-item">Dashboard</button>
                 </Link>
-                <button className="dropdown-item" onClick={logoutUser}>
-                  Logout
-                </button>
+                <Link>
+                  <button className="dropdown-item" onClick={logoutUser}>
+                    Logout
+                  </button>
+                </Link>
               </div>
             </div>
           </>

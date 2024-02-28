@@ -98,47 +98,45 @@ const Forum = () => {
               sx={{
                 width: 1200,
                 marginBottom: 1,
-                height: 135,
-                display: "flex",
-                alignItems: "center",
+                minHeight: 135, 
+                position: "relative", 
+                display: "flex", 
+                alignItems: "center",   
               }}
             >
               <Avatar
                 sx={{ width: 70, height: 70, marginRight: 2, marginLeft: 15 }}
+                src={forums.user.avatar.url}
                 alt={`Avatar ${forums.post}`}
               >
                 {1}
               </Avatar>
-              <React.Fragment>
-                <CardContent sx={{ marginLeft: 15 }}>
-                  <Link to={`/forum/open/${forums._id}`}>
-                    <Typography variant="h3" component="div">
-                      {forums.title}
-                    </Typography>
-                  </Link>
-                  <Typography variant="body2">
-                    {forums.user.name}
-                    <br />
-                    {forums.post}
+              <div style={{ flex: 1 }}>
+                <Link to={`/forum/open/${forums._id}`}>
+                  <Typography variant="h3" component="div">
+                    {forums.title}
                   </Typography>
-                </CardContent>
-              </React.Fragment>
-              <IconButton
-                color="primary"
-                aria-label="Comments"
-                sx={{
-                  marginLeft: "auto", // Align to the right (end) of the card
-                  backgroundColor: "#f5f5f5", // Light gray background
-                  position: "absolute", // Positioning absolute
-                  bottom: 5, // Distance from the bottom
-                  right: 5, // Distance from the right
+                </Link>
+                <Typography variant="body2">
+                  <strong>{forums.user.name}</strong>
+                  <br />
+                  {forums.post}
+                </Typography>
+              </div>
+              <div
+                style={{
+                  position: "absolute",
+                  bottom: 5, 
+                  right: 5, 
                 }}
               >
-                <CommentIcon />
-                <Typography variant="body2" sx={{ marginLeft: 1 }}>
-                  5 {/* Replace with the actual number of comments */}
-                </Typography>
-              </IconButton>
+                <IconButton color="primary" aria-label="Comments">
+                  <CommentIcon />
+                  <Typography variant="body2" sx={{ marginLeft: 1 }}>
+                    {forums.comments.length}
+                  </Typography>
+                </IconButton>
+              </div>
             </Card>
           ))}
           {user ? (
@@ -240,7 +238,7 @@ const Forum = () => {
               }}
             >
               <AddIcon />
-              <Typography sx={{ marginLeft: 1}}>
+              <Typography sx={{ marginLeft: 1 }}>
                 Start a new Discussion
               </Typography>
             </IconButton>

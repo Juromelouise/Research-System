@@ -9,21 +9,16 @@ import InputLabel from "@mui/material/InputLabel";
 import Button from "@mui/material/Button";
 import axios from "axios";
 import { useParams, useNavigate } from "react-router-dom";
-import { getUser, getToken, authenticate } from "../../utils/helpers";
+import { getToken, logout } from "../../utils/helpers";
+import { Avatar } from "@mui/material";
 
 export default function UpdateProfile() {
   const navigate = useNavigate();
   let { id } = useParams();
-  const user = getUser();
   const [avatar, setAvatar] = useState("");
   const [avatarPreview, setAvatarPreview] = useState("");
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
-
-  useEffect(() => {
-    setName(user.name);
-    setEmail(user.email);
-  }, []);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -36,6 +31,38 @@ export default function UpdateProfile() {
     }
 
     updateUser(formData);
+  };
+
+  const getUser = async (id) => {
+    try {
+      const config = {
+        headers: {
+          Authorization: `Bearer ${getToken()}`,
+        },
+      };
+      const { data } = await axios.get(
+        `${process.env.REACT_APP_API}/api/v1/profile`,
+        config
+      );
+      setName(data.user.name);
+      setEmail(data.user.email);
+      setAvatarPreview(data.user.avatar.url);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  useEffect(() => {
+    getUser(id);
+  }, []);
+
+  const logoutUser = async () => {
+    try {
+      await axios.get(`${process.env.REACT_APP_API}/api/v1/logout`);
+      logout(() => navigate("/"));
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const updateUser = async (formData) => {
@@ -51,7 +78,10 @@ export default function UpdateProfile() {
         formData,
         config
       );
-      authenticate(data, () => navigate("/profile"));
+      alert(
+        "To apply the changes in your updated profile, We logout your account. Please sign in again"
+      );
+      logoutUser();
     } catch (err) {
       console.log(err);
     }
@@ -142,23 +172,21 @@ export default function UpdateProfile() {
                   Avatar
                 </InputLabel>
               </Grid>
-              <Grid>
-                <Button>
-                  <Grid item xs={12} sm={11}>
-                    <TextField
-                      required
-                      fullWidth
-                      name="avatar"
-                      type="file"
-                      id="avatar"
-                      onChange={onChange}
-                    />
-                  </Grid>
-                </Button>
+              <Grid item xs={12} sm={4}>
+                <TextField
+                  required
+                  fullWidth
+                  name="avatar"
+                  type="file"
+                  id="avatar"
+                  onChange={onChange}
+                />
               </Grid>
-              <Grid item xs={12} sm={6} />
+              <Grid item xs={12} sm={1}>
+                <Avatar src={avatarPreview} sx={{ width: 56, height: 56 }} />
+              </Grid>
               <Grid item xs={12} sm={5} />
-              <Grid item xs={12} sm={15}>
+              <Grid item xs={12} sm={12}>
                 <Button
                   variant="contained"
                   sx={{ color: "#ff781f" }}
@@ -167,7 +195,6 @@ export default function UpdateProfile() {
                   Save
                 </Button>
               </Grid>
-              <Grid item xs={12} sm={5} />
             </Grid>
           </Box>
         </Box>
