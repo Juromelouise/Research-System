@@ -74,9 +74,14 @@ import ImageListItemBar from "@mui/material/ImageListItemBar";
 import axios from "axios";
 import { getToken } from "../../utils/helpers";
 import { useState, useEffect } from "react";
+import {useLocation} from 'react-router-dom'
 
 export default function TitlebarBelowImageList() {
   const [product, setProduct] = useState([]);
+
+  const location = useLocation();
+  const query = new URLSearchParams(location.search);
+  console.log(query.get('fid'));
 
   const getProduct = async () => {
     try {

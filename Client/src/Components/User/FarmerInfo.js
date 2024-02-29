@@ -7,9 +7,12 @@ import {
   MDBTableHead,
   MDBTableBody,
 } from "mdb-react-ui-kit";
+import { Button } from "@mui/material";
+import { Link } from 'react-router-dom';
 
 const FarmerInfo = () => {
   const [farmer, setFarmer] = useState([]);
+
 
   const getFarmer = async () => {
     try {
@@ -17,11 +20,12 @@ const FarmerInfo = () => {
         `${process.env.REACT_APP_API}/api/v1/get/farmer`
       );
       setFarmer(data.users);
-      console.log(data.users)
+      console.log(data.users);
+
     } catch (error) {
       console.log(error);
     }
-  };
+  };;
   useEffect(() => {
     getFarmer();
   }, []);
@@ -33,6 +37,7 @@ const FarmerInfo = () => {
           <th scope="col">Phone Number</th>
           <th scope="col">Location</th>
           <th scope="col">Position</th>
+          <th scope="col">Check Product</th>
         </tr>
       </MDBTableHead>
       <MDBTableBody>
@@ -56,9 +61,10 @@ const FarmerInfo = () => {
               <p className="fw-normal mb-1">{farmers.phone}</p>
             </td>
             <td>
-            <p className="fw-normal mb-1">{farmers.location}</p>
+              <p className="fw-normal mb-1">{farmers.location}</p>
             </td>
             <td>{farmers.role}</td>
+            <td><Link to={`/single/user/product?fid=${farmers._id}`}><Button>Check</Button></Link></td>
           </tr>
         ))}
       </MDBTableBody>
