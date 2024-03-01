@@ -147,10 +147,26 @@ exports.SingleUserProduct = async (req, res) => {
 };
 
 exports.UserProduct = async (req, res) => {
-  const product = await Product.find({ user: req.user._id });
-
-  res.status(200).json({
-    product,
-    success: true,
-  });
+  try {
+    if (req.query.fid !== "" && req.query.fid !== "null") {
+      const product = await Product.find({ user: req.query.fid });
+      res.status(200).json({
+        product,
+        success: true,
+      });
+    } else if (req.user && req.user._id) {
+      const product = await Product.find({ user: req.user._id });
+      res.status(200).json({
+        product,
+        success: true,
+      });
+    } else {
+      res.status(400).json({
+        success: false,
+        message: "User ID is null.",
+      });
+    }
+  } catch (error) {
+    console.log(error);
+  }
 };
