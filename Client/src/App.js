@@ -22,6 +22,7 @@ import Production from "./Components/About/Production";
 import Problem from "./Components/About/Problem";
 import SingleProduct from "./Components/Product/SingleProduct";
 import UpdateProfile from "./Components/User/UpdateProfile";
+import About from "./Components/About/About";
 
 
 function App() {
@@ -38,6 +39,7 @@ function App() {
           <Route path="/about/challenges" element={<Problem/>} exact="true" />
           <Route path="/about/fertilizers" element={<Fertilizer />} exact="true" />
           <Route path="/about/onion types" element={<Types />} exact="true" />
+          <Route path="/about" element={<About />} exact="true" />
           <Route path="/dashboard" element={<Dashboard />} exact="true" />
           <Route path="/product/create" element={<NewProduct />} exact="true" />
           <Route path="/product/update/:id" element={<UpdateProduct />} exact="true" />
