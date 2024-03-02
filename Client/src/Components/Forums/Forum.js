@@ -27,6 +27,7 @@ const Forum = () => {
   const [title, setTitle] = useState("");
   const [post, setPost] = useState("");
   const [forum, setForum] = useState([]);
+  const [filteredforums, setFilteredforums] = useState([]);
   const [search, setSearch] = useState("");
 
   const handleOpenModal = () => {
@@ -56,6 +57,7 @@ const Forum = () => {
       );
       setForum(data.forum);
       setTitle("");
+      getAllPost();
       setPost("");
     } catch (error) {
       console.log(error);
@@ -66,13 +68,25 @@ const Forum = () => {
     const { data } = await axios.get(
       `${process.env.REACT_APP_API}/forum/all/post`
     );
-    console.log(data.forum);
+    // console.log(data.forum);
+    setFilteredforums(data.forum);
     setForum(data.forum);
+  };
+
+  const handleSearch = () => {
+    const filteredForum = forum.filter((post) =>
+      post.title.toLowerCase().includes(search.toLowerCase())
+    );
+    setFilteredforums(filteredForum);
   };
 
   useEffect(() => {
     getAllPost();
   }, []);
+
+  useEffect(() => {
+    handleSearch();
+  }, [search]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -110,6 +124,7 @@ const Forum = () => {
         <Button onClick={handleOpen} style={buttonStyle}>
           <SearchTwoToneIcon />
         </Button>
+
         <Modal
           open={open}
           onClose={handleClose}
@@ -134,7 +149,7 @@ const Forum = () => {
                   />
                 </Grid>
                 <Grid item xs={4}>
-                  <Button>
+                  <Button onClick={handleClose}>
                     <SearchTwoToneIcon />
                   </Button>
                 </Grid>
@@ -143,7 +158,7 @@ const Forum = () => {
           </Box>
         </Modal>
       </>
-      {forum.length > 0 ? (
+      {filteredforums.length > 0 ? (
         <Box
           sx={{
             display: "flex",
@@ -154,7 +169,7 @@ const Forum = () => {
             padding: 4,
           }}
         >
-          {forum.map((forums) => (
+          {filteredforums.map((forums) => (
             <Card
               key={forums._id}
               variant="outlined"

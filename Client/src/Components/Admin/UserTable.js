@@ -39,11 +39,10 @@ export default function UserTable() {
         },
       };
       await axios.delete(
-        `${process.env.REACT_APP_API}/api/v1/admin/user/${id}`,
+        `${process.env.REACT_APP_API}/api/v1/delete/user/${id}`,
         config
       );
-      const updatedUsers = user.filter((user) => user._id !== id);
-      setUsers(updatedUsers);
+      getUsers();
     } catch (error) {
       console.log(error);
     }
@@ -54,20 +53,24 @@ export default function UserTable() {
   }, []);
 
   const updateRoleSeller = async (id) => {
-    try{
-      const {data} = await axios.put(`${process.env.REACT_APP_API}/api/v1/update/role/seller/${id}`)
-      setUsers(data.users)
-    }catch(error){
-      console.log(error)
+    try {
+      const { data } = await axios.put(
+        `${process.env.REACT_APP_API}/api/v1/update/role/seller/${id}`
+      );
+      setUsers(data.users);
+    } catch (error) {
+      console.log(error);
     }
   };
 
   const updateRoleFarmer = async (id) => {
-    try{
-      const {data} = await axios.put(`${process.env.REACT_APP_API}/api/v1/update/role/farmer/${id}`)
-      setUsers(data.users)
-    }catch(error){
-      console.log(error)
+    try {
+      const { data } = await axios.put(
+        `${process.env.REACT_APP_API}/api/v1/update/role/farmer/${id}`
+      );
+      setUsers(data.users);
+    } catch (error) {
+      console.log(error);
     }
   };
 
@@ -113,19 +116,28 @@ export default function UserTable() {
         <Fragment>
           <Link
             onClick={() => updateRoleSeller(row._id)}
-            style={{ textDecoration: "none" }} 
+            style={{ textDecoration: "none" }}
           >
-            <Button variant="contained" color="primary" className="edit-btn">Seller</Button>
+            <Button variant="contained" color="primary" className="edit-btn">
+              Seller
+            </Button>
           </Link>
           <Link
             onClick={() => updateRoleFarmer(row._id)}
             style={{ textDecoration: "none" }}
           >
-           <Button variant="contained" color="primary" className="edit-btn">Farmer</Button>
+            <Button variant="contained" color="primary" className="edit-btn">
+              Farmer
+            </Button>
           </Link>
-          <Link onClick={() => deleteUserHandler(row._id)}
-          >
-          <Button variant="contained" color="secondary" className="delete-btn">Delete</Button>
+          <Link onClick={() => deleteUserHandler(row._id)}>
+            <Button
+              variant="contained"
+              color="secondary"
+              className="delete-btn"
+            >
+              Delete
+            </Button>
           </Link>
         </Fragment>
       ),
@@ -141,7 +153,9 @@ export default function UserTable() {
         </List>
         {/* Main content */}
         <div className="col-12 col-md-10">
-          <p className="star" style={{ color: "#fff" }}><h1> ALL USERS</h1></p>
+          <p className="star" style={{ color: "#fff" }}>
+            <h1> ALL USERS</h1>
+          </p>
 
           <div className="custom-mdb-table">
             <MDBDataTable
