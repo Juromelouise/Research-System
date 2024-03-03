@@ -56,6 +56,67 @@ const Season = () => {
               </div>
             </div>
           </div>
+
+          <div className="hero"></div>
+          <div className="glide" id="glide_2">
+            <div className="glide__track" data-glide-el="track">
+              <ul className="glide__slides"></ul>
+              <div className="center">
+                <div className="right">
+                  <div className="container-fluid header bg-white p-0">
+                    <div className="row g-0 align-items-left flex-column-reverse flex-md-row">
+                      <div className="col-md-6 p-5 mt-lg-5">
+                        <div className="col-md-10 animated fadeIn">
+                          <div className="owl-carousel header-carousel">
+                            <div className="left">
+                              <img
+                                className="img-fluid"
+                                src="../red onion.jpg"
+                                alt=""
+                              />
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div className="col-md-6 p-5 mt-lg-5 animated fadeIn">
+                        <div>
+                          <h1 className="display-5 mb-4">
+                            <span className="text-primary align-items-left">
+                              {" "}
+                            </span>
+                          </h1>
+                          <p className="mb-4 pb-2">
+                  <ul>
+                   <li>Yellow onions:
+                   <ul>
+                <li>Planting: Can be planted as early as October.</li>
+                <li>Harvest Season: Typically varies, but harvest occurs after around four months of growth.</li>
+               </ul>
+              </li>
+              <li>Red onions:
+                <ul>
+                <li>Planting: Can be planted as late as January.</li>
+                <li>Harvest Season: Varies depending on planting time, usually after around four months of growth.</li>
+               </ul>
+              </li>
+             <li>White onions:
+               <ul>
+                <li>Planting: Best planted during the dry season, starting around December or January.</li>
+                <li>Harvest Season: Typically starts in the second week of January until February, after around four months of growth.</li>
+                  </ul>
+                 </li>
+               </ul>
+                </p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          
           <List component="nav">
             <Divider sx={{ my: 1 }} />
           </List>
