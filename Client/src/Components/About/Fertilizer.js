@@ -38,14 +38,16 @@ const Fertilizer = () => {
                   </span>
                 </h1>
                 <p className="animated fadeIn mb-4 pb-2">
-                Organic fertilizers are beneficial for plant growth as they improve soil health, 
-                promote microbial activity, and reduce environmental impact compared to synthetic fertilizers.
+                Organic onion grow without the use of artificial pesticides or herbicides. Instead, 
+                they are grown naturally through crop rotation, composting and 
+                the use of helpful insects to combat pests. Both the environment 
+                and human health are protected in this process.
                 </p>
               </div>
               <div className="col-md-5 animated fadeIn">
                 <div className="owl-carousel header-carousel">
                   <div className="right">
-                    <img className="img-fluid" src="../fertilizer.jpeg" alt="" />
+                    <img className="img-fluid" src="../org.jpg" alt="" />
                   </div>
                 </div>
               </div>
@@ -81,7 +83,7 @@ const Fertilizer = () => {
                           </h1>
                           <p className="mb-4 pb-2">
                           Fish fertilizer contains high levels of essential nutrients like nitrogen, phosphorus, potassium, 
-                          calcium, magnesium, and sulfur— all important components required by onion plants for growth.
+                          calcium, magnesium, and sulfur,all important components required by onion plants for growth.
                           Fish fertilizers are excellent for growing onions naturally without overwhelming them with synthetic 
                           chemicals or burning roots due to imbalanced pH levels in conventional types often encountered issues
                            with commercial-grade products. Find yourself pleased at how much healthier your bulbs will be with this eco-friendly option!
@@ -106,24 +108,19 @@ const Fertilizer = () => {
               <div className="row g-0 align-items-center flex-column-reverse flex-md-row">
                 <div className="col-md-6 p-5 mt-lg-5">
                   <h1 className="display-5 animated fadeIn mb-4">
-                    <span className="text-primary">"Yellow Granex " </span>
+                    <span className="text-primary">"Compost " </span>
                   </h1>
                   <p className="animated fadeIn mb-4 pb-2">
-                    The yellow varieties grown for the traditional market are
-                    either the granex (flat) or the grano (round) type, short
-                    day onions. White onions are characterized by their milder,
-                    sweeter taste and tender texture, making them suitable for
-                    raw applications like salads, salsas, and sandwiches.
-                    Conversely, yellow onions offer a stronger, more robust
-                    flavor that holds its structure well during cooking, making
-                    them ideal for sautéed onion dishes, soups, stews, and
-                    braises
+                    Compost is a rich source of organic matter and nutrients
+                    improving soil structure,drainage, and fertilizer.
+                    You can make your own compost from kitchen scraps or 
+                    yard waste.
                   </p>
                 </div>
                 <div className="col-md-5 animated fadeIn">
                   <div className="owl-carousel header-carousel">
                     <div className="right">
-                      <img className="img-fluid" src="../white.jpg" alt="" />
+                      <img className="img-fluid" src="../fertilizer.jpeg" alt="" />
                     </div>
                   </div>
                 </div>
@@ -143,7 +140,7 @@ const Fertilizer = () => {
                               <div className="left">
                                 <img
                                   className="img-fluid"
-                                  src="../shallots1.jpg"
+                                  src="../frut.jpg"
                                   alt=""
                                 />
                               </div>
@@ -154,26 +151,16 @@ const Fertilizer = () => {
                           <div>
                             <h1 className="display-5 mb-4">
                               <span className="text-primary align-items-left">
-                                "Shallots(multiplier onion)"{" "}
+                                " Fermented Fruit Juice"{" "}
                               </span>
                             </h1>
                             <p className="mb-4 pb-2">
-                              Shallot, locally known as “sibuyas Tagalog,” is a
-                              spice crop extensively grown in the country
-                              primarily for culinary purposes. In contrast to
-                              other onion types, shallot has a milder and more
-                              subtle flavor, which makes it a good ingredient
-                              for pickling and garnishing.Shallots actually come
-                              in both red and yellow skins just like onions.
-                              However, peel back those dried-up skins and you’re
-                              likely to find what looks like a narrow red onion
-                              that’s not quite as purple as a red onion usually
-                              is.The shallot is not only different in shape but
-                              also in how it grows. Like garlic, the shallot
-                              grows in clusters of two or more. That’s why when
-                              you slice a shallot in half, you can expect to
-                              find two separate halves of a bulb in what seems
-                              to be a single bulb
+                            Fermented Fruit Juice or FFJ for short, 
+                            is a homemade fertilizer created by fermented fruits. 
+                            Because of its potential advantages for better plant 
+                            development, fruit sweetness, and soil health, it is well-liked by organic farmers. 
+                            More research is required, even if some studies indicate it to be effective. 
+                            "Remember, it's not a replacement for a balanced fertilizer program."
                             </p>
                           </div>
                         </div>
