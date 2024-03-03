@@ -126,33 +126,11 @@ const Header = () => {
                 Home
               </Link>
             </li>
-            <li className="nav-item dropdown">
-              <a
-                href="#"
-                className="nav-link dropdown-toggle"
-                role="button"
-                data-bs-toggle="dropdown"
-                style={{ color: "#fff" }}
-              >
+            <li className="nav-item">
+              <Link to="/about" className="nav-link" style={{ color: "#fff" }}>
                 About
-              </a>
-              <ul
-                className="dropdown-menu"
-                style={{ backgroundColor: "#406EAB" }}
-              >
-                {aboutDropdownItems.map((item, index) => (
-                  <li key={index}>
-                    <Link
-                      className="dropdown-item"
-                      to={`/about/${item.toLowerCase()}`}
-                    >
-                      {item}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
+              </Link>
             </li>
-
             <li className="nav-item">
               <Link to="/forum" className="nav-link" style={{ color: "#fff" }}>
                 Forums and Discussions
