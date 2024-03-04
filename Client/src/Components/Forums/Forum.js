@@ -68,7 +68,6 @@ const Forum = () => {
     const { data } = await axios.get(
       `${process.env.REACT_APP_API}/forum/all/post`
     );
-    // console.log(data.forum);
     setFilteredforums(data.forum);
     setForum(data.forum);
   };
