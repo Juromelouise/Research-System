@@ -36,3 +36,18 @@ exports.deletePost = async (req, res) => {
     });
   }
 };
+
+exports.updatePost = async (req, res) => {
+  try {
+    await Forum.findByIdAndUpdate(req.params.id, req.body, {
+      new: true,
+      runValidators: true,
+      useFindandModify: false,
+    });
+    res.status(200).json({
+      success: true,
+    });
+  } catch (error) {
+    console.log(error);
+  }
+};

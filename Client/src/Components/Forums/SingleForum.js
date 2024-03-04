@@ -25,6 +25,8 @@ const SingleForum = () => {
   let { id } = useParams();
   const [content, setContent] = useState("");
   const [contents, setContents] = useState("");
+  const [title, setTitle] = useState("");
+  const [post, setPost] = useState("");
   const [comments, setComments] = useState([]);
   const [forums, setForums] = useState("");
   const [showReplyModal, setShowReplyModal] = useState(false);
@@ -41,8 +43,8 @@ const SingleForum = () => {
   };
 
   const handleUpdateClick = async (forum) => {
-    console.log("Update clicked for forum post", forum);
     setupdateModal(true);
+    getPostinfo(id);
     handleOptionsClose();
   };
 
@@ -181,6 +183,49 @@ const SingleForum = () => {
     return formattedDate;
   };
 
+  const handleUpdate = (e) => {
+    e.preventDefault();
+    const formData = new FormData();
+    formData.append("title", title);
+    formData.append("post", post);
+    // for (const pair of formData.entries()) {
+    //   console.log(pair[0], pair[1]);
+    // }
+    updatePost(formData);
+    handleCloseUpdate();
+  };
+
+  const updatePost = async (formdata) => {
+    try {
+      const config = {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${getToken()}`,
+        },
+      };
+      await axios.put(
+        `${process.env.REACT_APP_API}/forum/update/post/${id}`,
+        formdata,
+        config
+      );
+      getPost(id);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const getPostinfo = async (id) => {
+    try {
+      const { data } = await axios.get(
+        `${process.env.REACT_APP_API}/forum/single/post/${id}`
+      );
+      setTitle(data.forum.title);
+      setPost(data.forum.post);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   const renderComments = (commentList, depth = 0) => {
     return commentList.map((comment) => (
       <MDBListGroupItem
@@ -302,19 +347,35 @@ const SingleForum = () => {
           <Modal.Title>Update Post</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <form onSubmit={handleReplySubmit}>
-            <MDBInput
-              className="mx-auto"
-              style={{ width: 300, height: 100 }}
-              type="textarea"
-              value={contents}
-              onChange={(e) => setContents(e.target.value)}
-            />
-            <MDBBtn type="submit">Post Reply</MDBBtn>
+          <form onSubmit={handleUpdate}>
+            <div className="mb-4">
+              {/* Label and Textarea for updating post content */}
+              <label>Title</label>
+              <MDBInput
+                className="mx-auto"
+                style={{ width: 300 }}
+                type="textarea"
+                value={title}
+                onChange={(e) => setTitle(e.target.value)}
+              />
+            </div>
+
+            <div className="mb-4">
+              {/* Label and Input field for updating forum title */}
+              <label>Post</label>
+              <MDBInput
+                className="mx-auto"
+                style={{ width: 300 }}
+                type="text"
+                value={post}
+                onChange={(e) => setPost(e.target.value)}
+              />
+            </div>
+
+            <MDBBtn type="submit">Update Post and Title</MDBBtn>
           </form>
         </Modal.Body>
       </Modal>
-
     </MDBContainer>
   );
 };
