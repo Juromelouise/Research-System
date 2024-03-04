@@ -45,8 +45,8 @@ const About = () => {
       >
         {LeftItemList}
       </div>
-      <div style={{ flex: "1", textAlign: "center", overflowY: "auto" ,color: "white"}}>
-        <h1 >About Us</h1>
+      <div style={{ flex: "1", textAlign: "left", overflowY: "auto", color: "white", fontFamily: "Times New Roman" }}>
+        <h1 style={{ fontSize: "40px" }}>ABOUT US</h1>
         <List component="nav">
           <Divider sx={{ my: 1 }} />
         </List>
@@ -68,28 +68,25 @@ const About = () => {
                   </a>
                 </MDBRipple>
               </div>
-              <div className="col-md-7" >
-                <h3 style={{color: "white"}}>Optimizing Onion Supply Chain: A Web-Based Platform for 
-                                              Improved Communication and Transparency</h3>
-                <p  style={{color: "white"}}>  
-                  {" "}
-                  <span> </span>The researchers will provide a solution by creating a web-based platform for onion 
-                 supply chains that will help to communicate with local farmers and local sellers to gain buyers. 
-                 This web-based platform will indicate information on all processes of growing onions, some 
-                 alternative solutions for farmers' unexpected problems, strategies for local sellers to choose 
-                 good quality onions, and the locations of local farmers and local sellers for transacting their 
-                 businesses. By using this web-based platform, buyers will be able to know why there is an 
-                 unpredictable increasing price of onions and be able to learn the problems of local farmers and 
-                 local sellers they face.
+              <div className="col-md-6" style={{ textAlign: "left" }}>
+                <h2 style={{ color: "white", fontSize: "36px" }}>Optimizing Onion Supply Chain: A Web-Based Platform for Improved Communication and Transparency</h2>
+                <p style={{ color: "white", fontSize: "24px" }}>
+                  <span> </span>The researchers will provide a solution by creating a web-based platform for onion
+                  supply chains that will help to communicate with local farmers and local sellers to gain buyers.
+                  This web-based platform will indicate information on all processes of growing onions, some
+                  alternative solutions for farmers' unexpected problems, strategies for local sellers to choose
+                  good quality onions, and the locations of local farmers and local sellers for transacting their
+                  businesses. By using this web-based platform, buyers will be able to know why there is an
+                  unpredictable increasing price of onions and be able to learn the problems of local farmers and
+                  local sellers they face.
                 </p>
                 <hr />
-
-                <p style={{color: "white"}}>
+                <p style={{ color: "white", fontSize: "24px" }}>
                   {" "}
-                  In this context, to enhance information efficiency, improve businesses, and raise 
-awareness about the sudden increase in onion price, with the use of a web-based platform that 
-the researchers provide. It will improve communication with transparency between the onion 
-supply chain.
+                  In this context, to enhance information efficiency, improve businesses, and raise
+                  awareness about the sudden increase in onion price, with the use of a web-based platform that
+                  the researchers provide. It will improve communication with transparency between the onion
+                  supply chain.
                 </p>
 
                 <MDBBtn outline rounded>
@@ -98,7 +95,7 @@ supply chain.
               </div>
             </div>
           </p>
-      
+
         </MDBModalBody>
 
 
