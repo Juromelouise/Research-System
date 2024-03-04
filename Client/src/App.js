@@ -23,6 +23,8 @@ import Problem from "./Components/About/Problem";
 import SingleProduct from "./Components/Product/SingleProduct";
 import UpdateProfile from "./Components/User/UpdateProfile";
 import About from "./Components/About/About";
+import AdminCreateProduct from "./Components/Admin/AdminCreateProduct";
+
 
 
 function App() {
@@ -52,6 +54,9 @@ function App() {
           <Route path="/forum/open/:id" element={<SingleForum/>} exact="true" />
           <Route path="/single/user/product" element={<SingleProduct/>} exact="true" />
           <Route path="/update/profile/:id" element={<UpdateProfile/>} exact="true" />
+
+
+          <Route path="/admin/create/product" element={<AdminCreateProduct/> } exact="true" />
         </Routes>
       </Router>
     </div>

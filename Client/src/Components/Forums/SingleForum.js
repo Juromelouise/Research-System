@@ -188,9 +188,9 @@ const SingleForum = () => {
     const formData = new FormData();
     formData.append("title", title);
     formData.append("post", post);
-    // for (const pair of formData.entries()) {
-    //   console.log(pair[0], pair[1]);
-    // }
+    for (const pair of formData.entries()) {
+      console.log(pair[0], pair[1]);
+    }
     updatePost(formData);
     handleCloseUpdate();
   };

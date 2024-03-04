@@ -4,7 +4,6 @@ import { MDBDataTable } from "mdbreact";
 import List from "@mui/material/List";
 import Divider from "@mui/material/Divider";
 import Button from "@mui/material/Button";
-import { mainListItems } from "./ListItems";
 import axios from "axios";
 import { getToken } from "../../utils/helpers";
 
@@ -54,10 +53,10 @@ export default function UserTable() {
 
   const updateRoleSeller = async (id) => {
     try {
-      const { data } = await axios.put(
+      await axios.put(
         `${process.env.REACT_APP_API}/api/v1/update/role/seller/${id}`
       );
-      setUsers(data.users);
+      getUsers();
     } catch (error) {
       console.log(error);
     }
@@ -65,10 +64,10 @@ export default function UserTable() {
 
   const updateRoleFarmer = async (id) => {
     try {
-      const { data } = await axios.put(
+      await axios.put(
         `${process.env.REACT_APP_API}/api/v1/update/role/farmer/${id}`
       );
-      setUsers(data.users);
+      getUsers();
     } catch (error) {
       console.log(error);
     }

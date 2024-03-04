@@ -97,7 +97,7 @@ const ProductTable = () => {
                 Edit
               </Button>
             </Link>
-            <Link onClick={() => deleteUserHandler(row._id)}>
+            <Link onClick={() => deleteProductHandler(product._id)}>
               <Button
                 variant="contained"
                 color="secondary"
@@ -133,7 +133,7 @@ const ProductTable = () => {
             </div>
             <Button
               component={Link}
-              to="/product/create"
+              to="/admin/create/product"
               className={`AddProduct-btn ${isHovered ? "hovered" : ""}`}
               sx={{
                 mt: 3,
