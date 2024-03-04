@@ -12,7 +12,7 @@ import { Link } from "@mui/material";
 
 export const LeftItemList = (
   <React.Fragment>
-    <Link href="/about" underline="none" color="#1c1c1c">
+    <Link href="/about" underline="none" color="white">
       <ListItemButton>
         <ListItemIcon>
           <InfoIcon />
@@ -20,7 +20,7 @@ export const LeftItemList = (
         <ListItemText primary="About" />
       </ListItemButton>
     </Link>
-    <Link href="/about/onion types" underline="none" color="#1c1c1c">
+    <Link href="/about/onion types" underline="none" color="white">
       <ListItemButton>
         <ListItemIcon>
           <GridViewIcon />
@@ -28,7 +28,7 @@ export const LeftItemList = (
         <ListItemText primary="Types" />
       </ListItemButton>
     </Link>
-    <Link href="/about/season" underline="none" color="#1c1c1c">
+    <Link href="/about/season" underline="none" color="white">
       <ListItemButton>
         <ListItemIcon>
           <CalendarMonthIcon />
@@ -36,7 +36,7 @@ export const LeftItemList = (
         <ListItemText primary="Season" />
       </ListItemButton>
     </Link>
-    <Link href="/about/fertilizers" underline="none" color="#1c1c1c">
+    <Link href="/about/fertilizers" underline="none" color="white">
       <ListItemButton>
         <ListItemIcon>
           <SpaIcon />
@@ -44,7 +44,7 @@ export const LeftItemList = (
         <ListItemText primary="Fertilizer" />
       </ListItemButton>
     </Link>
-    <Link href="/about/production" underline="none" color="#1c1c1c">
+    <Link href="/about/production" underline="none" color="white">
       <ListItemButton>
         <ListItemIcon>
           <PrecisionManufacturingIcon />
@@ -52,7 +52,7 @@ export const LeftItemList = (
         <ListItemText primary="Production" />
       </ListItemButton>
     </Link>
-    <Link href="/about/challenges" underline="none" color="#1c1c1c">
+    <Link href="/about/challenges" underline="none" color="white">
       <ListItemButton>
         <ListItemIcon>
           <ReportProblemIcon />

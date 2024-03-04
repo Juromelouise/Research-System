@@ -140,7 +140,7 @@ const Fertilizer = () => {
                               <div className="left">
                                 <img
                                   className="img-fluid"
-                                  src="../frut.jpg"
+                                  src="../faa.jpg"
                                   alt=""
                                 />
                               </div>
@@ -151,16 +151,14 @@ const Fertilizer = () => {
                           <div>
                             <h1 className="display-5 mb-4">
                               <span className="text-primary align-items-left">
-                                " Fermented Fruit Juice"{" "}
+                                "Fish Amino Acid "{" "}
                               </span>
                             </h1>
                             <p className="mb-4 pb-2">
-                            Fermented Fruit Juice or FFJ for short, 
-                            is a homemade fertilizer created by fermented fruits. 
-                            Because of its potential advantages for better plant 
-                            development, fruit sweetness, and soil health, it is well-liked by organic farmers. 
-                            More research is required, even if some studies indicate it to be effective. 
-                            "Remember, it's not a replacement for a balanced fertilizer program."
+                            Fish entrails are used to make fish amino acids (FAA), a natural fertilizer. 
+                            They give plants easily accessible nitrogen and
+                            essential amino acids, which enhance growth while improving the condition of the soil it can 
+                            be used as a foliar spray or soil drench 
                             </p>
                           </div>
                         </div>
