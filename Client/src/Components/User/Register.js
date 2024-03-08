@@ -23,19 +23,21 @@ export default function Register() {
   const [user, setUser] = useState({
     name: "",
     email: "",
-    location: "",
+    baranggay: "",
+    city: "",
     phone: "",
     password: "",
   });
 
-  const { name, email, location, phone, password } = user;
+  const { name, email, location, phone, password, baranggay, city } = user;
 
   const handleSubmit = (event) => {
     event.preventDefault();
     const formData = new FormData();
     formData.set("name", name);
     formData.set("email", email);
-    formData.set("location", location);
+    formData.set("baranggay", baranggay);
+    formData.set("city", city);
     formData.set("phone", phone);
     formData.set("password", password);
     formData.set("avatar", avatar);
@@ -50,7 +52,8 @@ export default function Register() {
       reader.onload = () => {
         if (reader.readyState === 2) {
           setAvatarPreview(reader.result);
-          setAvatar(reader.result);
+          setAvatar(e.target.files[0]);
+          console.log(avatar);
         }
       };
 
@@ -67,7 +70,7 @@ export default function Register() {
     try {
       const config = {
         headers: {
-            "Content-Type": "multipart/form-data",
+          "Content-Type": "multipart/form-data",
         },
       };
 
@@ -77,7 +80,7 @@ export default function Register() {
         config
       );
       setIsAuthenticated(true);
-      alert('User Created Succesfully')
+      alert("User Created Succesfully");
       navigate("/signin");
     } catch (error) {
       console.log(error);
@@ -92,7 +95,11 @@ export default function Register() {
 
   return (
     <ThemeProvider theme={defaultTheme}>
-      <Container component="main" maxWidth="xs" sx={{backgroundColor: "#406EAB"}}>
+      <Container
+        component="main"
+        maxWidth="xs"
+        sx={{ backgroundColor: "#406EAB" }}
+      >
         <CssBaseline />
         <Box
           sx={{
@@ -141,9 +148,20 @@ export default function Register() {
                   required
                   fullWidth
                   id="location"
-                  label="Location"
-                  name="location"
-                  value={location}
+                  label="Baranggay"
+                  name="baranggay"
+                  value={baranggay}
+                  onChange={onChange}
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  required
+                  fullWidth
+                  id="location"
+                  label="City"
+                  name="city"
+                  value={city}
                   onChange={onChange}
                 />
               </Grid>
@@ -197,14 +215,14 @@ export default function Register() {
             <Button
               type="submit"
               fullWidth
-              variant="contained" 
+              variant="contained"
               sx={{ mt: 3, mb: 2 }}
             >
               Sign Up
             </Button>
             <Grid container justifyContent="flex-end">
               <Grid item>
-                <Link to="/signin" variant="body2"style={{ color: 'black' }}>
+                <Link to="/signin" variant="body2" style={{ color: "black" }}>
                   Already have an account? Sign in
                 </Link>
               </Grid>

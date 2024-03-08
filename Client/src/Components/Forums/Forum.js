@@ -247,7 +247,7 @@ const Forum = () => {
             </>
           ) : (
             <>
-              <h1>login first</h1>
+              <h1 style={{color: "white"}}>login First to Create a Post</h1>
             </>
           )}
 

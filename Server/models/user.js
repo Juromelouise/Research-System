@@ -15,9 +15,13 @@ const userSchema = new mongoose.Schema({
     type: Number,
     required: [true, "Please input Phone Number"],
   },
-  location: {
+  baranggay: {
     type: String,
-    required: [true, "Please put Location"],
+    required: [true, "Please put a Baranggay"],
+  },
+  city: {
+    type: String,
+    required: [true, "Please put a City"],
   },
   password: {
     type: String,
@@ -44,6 +48,18 @@ const userSchema = new mongoose.Schema({
   role: {
     type: String,
     default: "buyer",
+  },
+  description: {
+    type: String,
+  },
+  season: {
+    type: String,
+  },
+  fertilizer: {
+    type: String,
+  },
+  type: {
+    type: String,
   },
   createdAt: {
     type: Date,

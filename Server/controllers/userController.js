@@ -1,35 +1,41 @@
 const User = require("../models/user");
 const cloudinary = require("cloudinary");
 const sendToken = require("../utils/jwtToken");
+const { uploadSingle, destroyUploaded } = require("../utils/UploadCloudinary");
 // const crypto = require("crypto");
 
 exports.registerUser = async (req, res, next) => {
-  console.log(req.file);
-  const cloudinaryResult = await cloudinary.v2.uploader.upload(
-    req.body.avatar,
-    {
-      folder: "avatars",
-      width: 150,
-      crop: "scale",
-    },
-    (err, result) => {
-      console.log(err, result);
-    }
-  );
+  // console.log(req.file);
+  const imageDetails = await uploadSingle(req.file.path, "avatar");
+  console.log(imageDetails);
+  req.body.avatar = imageDetails;
+  // const cloudinaryResult = await cloudinary.v2.uploader.upload(
+  //   req.file.path,
+  //   {
+  //     folder: "avatars",
+  //     width: 150,
+  //     crop: "scale",
+  //   },
+  //   (err, result) => {
+  //     console.log(err, result);
+  //   }
+  // );
 
-  const { name, phone, location, email, password } = req.body;
+  // const { name, phone, baranggay, email, password, city } = req.body;
 
-  const user = await User.create({
-    name,
-    email,
-    password,
-    phone,
-    location,
-    avatar: {
-      public_id: cloudinaryResult.public_id,
-      url: cloudinaryResult.secure_url,
-    },
-  });
+  // const user = await User.create({
+  //   name,
+  //   email,
+  //   password,
+  //   phone,
+  //   baranggay,
+  //   city,
+  //   avatar: {
+  //     public_id: cloudinaryResult.public_id,
+  //     url: cloudinaryResult.secure_url,
+  //   },
+  // });
+  const user = await User.create(req.body);
 
   if (!user) {
     return res.status(500).json({

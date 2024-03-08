@@ -196,9 +196,13 @@ const Header = () => {
                 ) : (
                   <></>
                 )}
-                <Link to="/dashboard">
-                  <button className="dropdown-item">Dashboard</button>
-                </Link>
+                {user.role === "admin" || user.role === "Admin" ? (
+                  <Link to="/dashboard">
+                    <button className="dropdown-item">Dashboard</button>
+                  </Link>
+                ) : (
+                  <></>
+                )}
                 <Link>
                   <button className="dropdown-item" onClick={logoutUser}>
                     Logout
