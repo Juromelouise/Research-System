@@ -9,6 +9,7 @@ const Production = () => {
     setOpen(!open);
   };
   return (
+
     <div style={{ display: "flex", height: "100vh" }}>
       <div
         style={{
@@ -22,6 +23,8 @@ const Production = () => {
       >
         {LeftItemList}
       </div>
+
+
       <div style={{ flex: "1", textAlign: "center", overflowY: "auto" }}>
       <div className="hero"></div>
           <div className="glide" id="glide_1"></div>

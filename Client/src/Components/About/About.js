@@ -30,6 +30,7 @@ const About = () => {
   };
 
   return (
+    
     <div style={{ display: "flex", height: "100vh" }}>
       <div
         style={{
@@ -45,6 +46,7 @@ const About = () => {
       >
         {LeftItemList}
       </div>
+      
       <div style={{ flex: "1", textAlign: "left", overflowY: "auto", color: "white", fontFamily: "Times New Roman" }}>
         <h1 style={{ fontSize: "40px" }}>ABOUT US</h1>
         <List component="nav">

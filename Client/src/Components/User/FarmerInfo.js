@@ -10,6 +10,8 @@ import {
 import { Button } from "@mui/material";
 import { Link } from 'react-router-dom';
 
+
+
 const FarmerInfo = () => {
   const [farmer, setFarmer] = useState([]);
 
@@ -37,7 +39,7 @@ const FarmerInfo = () => {
           <th scope="col">Phone Number</th>
           <th scope="col">Location</th>
           <th scope="col">Position</th>
-          <th scope="col">Check Product</th>
+          <th scope="col">More Information</th>
         </tr>
       </MDBTableHead>
       <MDBTableBody>
@@ -64,7 +66,7 @@ const FarmerInfo = () => {
               <p className="fw-normal mb-1">{farmers.location}</p>
             </td>
             <td>{farmers.role}</td>
-            <td><Link to={`/single/user/product?fid=${farmers._id}`}><Button>Check</Button></Link></td>
+            <td><Link to={`/single/user/product?fid=${farmers._id}`}><Button>Check Information</Button></Link></td>
           </tr>
         ))}
       </MDBTableBody>
