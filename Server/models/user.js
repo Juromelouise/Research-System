@@ -12,7 +12,7 @@ const userSchema = new mongoose.Schema({
     minLength: [10, "Name must exceed 10 Letters"],
   },
   phone: {
-    type: Number,
+    type: String,
     required: [true, "Please input Phone Number"],
   },
   baranggay: {
@@ -45,7 +45,7 @@ const userSchema = new mongoose.Schema({
       required: true,
     },
   },
-  Attachement: [
+  attachment: [
     {
       public_id: {
         type: String,

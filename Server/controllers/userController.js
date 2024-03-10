@@ -1,40 +1,38 @@
 const User = require("../models/user");
 const cloudinary = require("cloudinary");
 const sendToken = require("../utils/jwtToken");
-const { uploadSingle, destroyUploaded } = require("../utils/UploadCloudinary");
+const {
+  uploadSingle,
+  destroyUploaded,
+  uploadMultiple,
+} = require("../utils/UploadCloudinary");
 // const crypto = require("crypto");
 
 exports.registerUser = async (req, res, next) => {
-  // console.log(req.file);
   const imageDetails = await uploadSingle(req.file.path, "avatar");
   console.log(imageDetails);
   req.body.avatar = imageDetails;
-  // const cloudinaryResult = await cloudinary.v2.uploader.upload(
-  //   req.file.path,
-  //   {
-  //     folder: "avatars",
-  //     width: 150,
-  //     crop: "scale",
-  //   },
-  //   (err, result) => {
-  //     console.log(err, result);
-  //   }
-  // );
 
-  // const { name, phone, baranggay, email, password, city } = req.body;
+  const user = await User.create(req.body);
 
-  // const user = await User.create({
-  //   name,
-  //   email,
-  //   password,
-  //   phone,
-  //   baranggay,
-  //   city,
-  //   avatar: {
-  //     public_id: cloudinaryResult.public_id,
-  //     url: cloudinaryResult.secure_url,
-  //   },
-  // });
+  if (!user) {
+    return res.status(500).json({
+      success: false,
+      message: "user not created",
+    });
+  }
+
+  sendToken(user, 200, res);
+};
+
+exports.registerSupplerSeller = async (req, res) => {
+  const imageDetails = await uploadSingle(req.files.avatar[0].path, "avatar");
+  console.log(req.files)
+  const attachement = await uploadMultiple(req.files.attachment ,"attachment")
+
+  req.body.avatar = imageDetails;
+  req.body.attachment = attachement;
+
   const user = await User.create(req.body);
 
   if (!user) {

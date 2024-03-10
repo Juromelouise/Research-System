@@ -2,11 +2,15 @@ const express = require("express");
 const router = express.Router();
 const upload = require("../utils/multer");
 
-const {registerUser, loginUser, logout, getUserProfile, getAllUsers, updateRoleSeller, updateRoleFarmer, allFarmers, allSellers, deleteUser, updateProfile, checkLogin} = require('../controllers/userController');
+const {registerUser, loginUser, logout, getUserProfile, getAllUsers, updateRoleSeller, updateRoleFarmer, allFarmers, allSellers, deleteUser, updateProfile, registerSupplerSeller} = require('../controllers/userController');
 const { isAuthenticatedUser } = require("../middlewares/auth");
 
 
 router.post("/register",upload.single("avatar"), registerUser);
+router.post("/register/supplier/seller",upload.fields([
+    {name: "avatar", maxCount: 1},
+    {name: "attachment", maxCount: 10}
+]), registerSupplerSeller);
 router.post("/login", loginUser);
 router.get("/logout", logout)
 router.get("/profile",isAuthenticatedUser, getUserProfile)

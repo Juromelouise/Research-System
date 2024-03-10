@@ -13,8 +13,7 @@ import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
-import FormControl from "@mui/material/FormControl";
-import Select, { SelectChangeEvent } from "@mui/material/Select";
+import Select from "@mui/material/Select";
 import axios from "axios";
 
 const defaultTheme = createTheme();
@@ -22,8 +21,8 @@ const defaultTheme = createTheme();
 export default function Register() {
   let navigate = useNavigate();
   const [avatar, setAvatar] = useState("");
-  const [attachement, setAttachment] = useState([]);
-  const [attachementPreview, setAttachementPreview] = useState("");
+  const [attachment, setAttachment] = useState([]);
+  const [attachmentPreview, setAttachementPreview] = useState([]);
   const [avatarPreview, setAvatarPreview] = useState("");
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [user, setUser] = useState({
@@ -65,8 +64,9 @@ export default function Register() {
     formData.set("phone", phone);
     formData.set("password", password);
     formData.set("avatar", avatar);
-    attachement.forEach((attachements) => {
-      formData.append("attachement", attachements);
+      console.log(Array(...attachment))
+    Array(...attachment).forEach((attachements) => {
+      formData.append("attachment", attachements);
     });
 
     formData.set("role", role);
@@ -93,37 +93,55 @@ export default function Register() {
     }
     if (e.target.name === "attachment") {
       const reader = new FileReader();
+      setAttachment(e.target.files);
 
+      // console.log(e.target.files)
       reader.onload = () => {
         if (reader.readyState === 2) {
           setAttachementPreview(reader.result);
-          setAttachment(e.target.files);
         }
       };
     } else {
       setUser({ ...user, [e.target.name]: e.target.value });
     }
   };
+  // console.log(attachment)
 
   const register = async (userData) => {
     for (const pair of userData.entries()) {
       console.log(pair[0], pair[1]);
     }
-    try {
-      const config = {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-      };
 
-      const response = await axios.post(
-        `${process.env.REACT_APP_API}/api/v1/register`,
-        userData,
-        config
-      );
-      setIsAuthenticated(true);
-      alert("User Created Succesfully");
-      navigate("/signin");
+    try {
+      if (user.role === "buyer") {
+        const config = {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        };
+        await axios.post(
+          `${process.env.REACT_APP_API}/api/v1/register`,
+          userData,
+          config
+        );
+        setIsAuthenticated(true);
+        alert("User Created Succesfully");
+        navigate("/signin");
+      } else {
+        const config = {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        };
+        await axios.post(
+          `${process.env.REACT_APP_API}/api/v1/register/supplier/seller`,
+          userData,
+          config
+        );
+        setIsAuthenticated(true);
+        alert("User Created Succesfully");
+        navigate("/signin");
+      }
     } catch (error) {
       console.log(error);
     }
@@ -177,14 +195,11 @@ export default function Register() {
                   User:
                 </InputLabel>
                 <Select
-                  labelId="demo-simple-select-label"
-                  id="demo-simple-select"
-                  label="User"
+                  label="Role"
                   name="role"
                   value={role}
                   onChange={onChange}
                   fullWidth
-                  sx={{ mb: 2 }}
                 >
                   <MenuItem value="buyer">Buyer</MenuItem>
                   <MenuItem value="seller">Seller</MenuItem>
@@ -270,6 +285,8 @@ export default function Register() {
                       fullWidth
                       name="description"
                       id="description"
+                      multiline
+                      rows={4}
                       label="Description"
                       value={description}
                       onChange={onChange}
@@ -313,17 +330,25 @@ export default function Register() {
                 <></>
               )}
               {user.role === "supplier" || user.role === "seller" ? (
-                <Grid item xs={12}>
-                  <TextField
-                    required
-                    fullWidth
-                    name="attachment"
-                    label="Input Valid ID"
-                    type="file"
-                    id="attachment"
-                    onChange={onChange}
-                  />{" "}
-                </Grid>
+                <>
+                  <Grid item xs={12}>
+                    <TextField
+                      required
+                      fullWidth
+                      name="attachment"
+                      InputLabelProps={{
+                        shrink: true,
+                      }}
+                      label="Input Valid ID"
+                      type="file"
+                      id="attachment"
+                      inputProps={{
+                        multiple: true,
+                      }}
+                      onChange={onChange}
+                    />{" "}
+                  </Grid>
+                </>
               ) : (
                 <></>
               )}
