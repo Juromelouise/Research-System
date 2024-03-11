@@ -9,7 +9,7 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: [true, "Please enter your Full Name"],
     trim: true,
-    minLength: [10, "Name must exceed 10 Letters"],
+    minLength: [5, "Name must exceed 10 Letters"],
   },
   phone: {
     type: String,

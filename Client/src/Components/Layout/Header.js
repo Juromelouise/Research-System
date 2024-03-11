@@ -136,7 +136,7 @@ const Header = () => {
                 Forums and Discussions
               </Link>
             </li>
-            {user.role === "farmer" && (
+            {user.role === "supplier" && (
               <>
                 <li className="nav-item">
                   <Link
@@ -189,7 +189,7 @@ const Header = () => {
                 <Link to="/profile">
                   <button className="dropdown-item">Profile</button>
                 </Link>
-                {user.role === "farmer" ? (
+                {user.role === "supplier" ? (
                   <Link to="/single/user/product">
                     <button className="dropdown-item">Product List</button>
                   </Link>

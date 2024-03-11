@@ -15,6 +15,7 @@ import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import Select from "@mui/material/Select";
 import axios from "axios";
+import { Loader } from "../Layout/Loader";
 
 const defaultTheme = createTheme();
 
@@ -25,6 +26,7 @@ export default function Register() {
   const [attachmentPreview, setAttachementPreview] = useState([]);
   const [avatarPreview, setAvatarPreview] = useState("");
   const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [loading, setLoading] = useState(false);
   const [user, setUser] = useState({
     name: "",
     email: "",
@@ -64,7 +66,7 @@ export default function Register() {
     formData.set("phone", phone);
     formData.set("password", password);
     formData.set("avatar", avatar);
-      console.log(Array(...attachment))
+    console.log(Array(...attachment));
     Array(...attachment).forEach((attachements) => {
       formData.append("attachment", attachements);
     });
@@ -74,7 +76,7 @@ export default function Register() {
     formData.set("season", season);
     formData.set("fertilizer", fertilizer);
     formData.set("type", type);
-
+    setLoading(true);
     register(formData);
   };
 
@@ -126,6 +128,7 @@ export default function Register() {
         );
         setIsAuthenticated(true);
         alert("User Created Succesfully");
+        setLoading(false);
         navigate("/signin");
       } else {
         const config = {
@@ -155,6 +158,7 @@ export default function Register() {
 
   return (
     <ThemeProvider theme={defaultTheme}>
+      {loading ? <Loader open={loading} /> : <></>}
       <Container
         component="main"
         maxWidth="xs"
