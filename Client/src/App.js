@@ -25,8 +25,6 @@ import UpdateProfile from "./Components/User/UpdateProfile";
 import About from "./Components/About/About";
 import AdminCreateProduct from "./Components/Admin/AdminCreateProduct";
 
-
-
 function App() {
   return (
     <div className="App">

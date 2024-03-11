@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 const Populate = require("mongoose-autopopulate");
+const mongooseDelete = require("mongoose-delete");
 
 const forumSchema = new mongoose.Schema({
   user: {
@@ -28,6 +29,8 @@ const forumSchema = new mongoose.Schema({
     default: Date.now,
   },
 });
+
+forumSchema.plugin(mongooseDelete, { overrideMethods: "all" });
 forumSchema.plugin(Populate);
 
 module.exports = mongoose.model("Forum", forumSchema);

@@ -24,15 +24,39 @@ exports.getSinglepost = async (req, res) => {
   });
 };
 
-exports.deletePost = async (req, res) => {
+exports.UserDeletePost = async (req, res) => {
+  try {
+    const deletedPost = await Forum.delete({ _id: req.params.id });
+    if (deletedPost.deletedCount === 0) {
+      return res.status(404).json({
+        success: false,
+        message: "Post not found",
+      });
+    }
+
+    res.status(200).json({
+      success: true,
+      message: "Post successfully soft deleted",
+    });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({
+      error: err.message || "Internal Server Error",
+    });
+  }
+};
+
+exports.AdminDeletePost = async (req, res) => {
   try {
     await Forum.findByIdAndDelete(req.params.id);
     res.status(200).json({
       success: true,
+      message: "Post successfully deleted",
     });
   } catch (err) {
+    console.error(err);
     res.status(500).json({
-      error: err,
+      error: err.message || "Internal Server Error",
     });
   }
 };
