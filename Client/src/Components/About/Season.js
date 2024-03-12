@@ -11,7 +11,7 @@ const Season = () => {
 
   return (
     <div>
-      <div style={{ display: "flex", height: "100vh", textAlign: "left"}}>
+       <div style={{ display: "flex", height: "100vh", fontFamily: "Times New Roman", color: "white" }}>
         <div
           style={{
             width: "20%",
@@ -25,62 +25,93 @@ const Season = () => {
           {LeftItemList}
         </div>
 
-        <div className="container-fluid p-0">
-            <div className="row g-0 align-items-center justify-content-center">
-              <div className="col-md-6 p-5 mt-lg-5" style={{ backgroundColor: "#ffffff", borderRadius: "10px" }}>
-                <h1 className="display-5 mb-4 text-center">
-                  <span className="text-primary">What is the best seasons to plant for onion?</span>
+        <div className="container-fluid header #1F0337">
+        <img src="../season.jpg" className="img-fluid" alt="Wild Landscape" style={{maxWidth: '100%', height: '50%'}} width={1300} height={300} />
+<hr/>
+        <div className="glide" id="glide_1"></div>
+          <div className="glide__track" data-glide-el="track"></div>
+          <ul className="glide__slides"></ul>
+          <div className="center"></div>
+          <div className="left"></div>
+          <div className="container-fluid header #1F0337">
+            <div className="row g-0 align-items-center flex-column-reverse flex-md-row">
+            <div className="col-md-6 p-5 "style={{ textAlign: "left" }}>
+                <h1 className="display-5 animated fadeIn mb-4">
+                  <span className="text-primary">
+                    What is the best seasons to plant for onion?{" "}
+                  </span>
                 </h1>
-                <p className="mb-4 pb-2">
-                  <ul>
-                    <li>
-                    For best growth and bulb quality, onion requires cooler
-                  weather during the early stages of growth and a dry atmosphere
-                  with moderately high temperature for bulb development &
-                  maturation. Planting can be done as early as October (yellow
-                  onions) to as late as January (red onions)
-                    </li>
-                   
-                  </ul>
+                <p style={{ color: "white", fontSize: "24px" }}>
+                <ul>
+                <li>
+                For best growth and bulb quality, onion requires cooler weather during the early stages of growth and a dry atmosphere with moderately high temperature for bulb development & maturation. Planting can be done as early as October (yellow onions) to as late as January (red onions)
+                </li>
+                </ul>
                 </p>
               </div>
-              <div className="col-md-6 p-5">
-                <img className="img-fluid" src="../onion1.png" alt="Yellow Granex" />
-              </div>
-            </div>
-
-
-          <div className="container-fluid p-0">
-            <div className="row g-0 align-items-center justify-content-center">
-              <div className="col-md-6 p-5 mt-lg-5" style={{ backgroundColor: "#ffffff", borderRadius: "10px" }}>
-                <h1 className="display-5 mb-4 text-center">
-                  <span className="text-primary">Yellow onions</span>
-                </h1>
-                <p className="mb-4 pb-2">
-                  <ul>
-                    <li>
-                      Planting: Can be planted as early as October.
-                    </li>
-                    <li>
-                      Harvest Season: Typically varies, but harvest occurs after around four months of growth.
-                    </li>
-                  </ul>
-                </p>
-              </div>
-              <div className="col-md-6 p-5">
-                <img className="img-fluid" src="../white.jpg" alt="Yellow Granex" />
+              <div className="col-md-6 animated fadeIn">
+                <div className="owl-carousel header-carousel">
+                  <div className="right">
+                    <img className="img-fluid" src="../farming.png" alt="" />
+                  </div>
+                </div>
               </div>
             </div>
           </div>
+          <hr />
 
-          <div className="container-fluid p-0">
-            <div className="row g-0 align-items-center justify-content-center">
-              <div className="col-md-6 p-5 mt-lg-5" style={{ backgroundColor: "#ffffff", borderRadius: "10px" }}>
-                <h1 className="display-5 mb-4 text-center">
-                  <span className="text-primary">Red onions</span>
+
+
+          <div className="glide" id="glide_1"></div>
+          <div className="glide__track" data-glide-el="track"></div>
+          <ul className="glide__slides"></ul>
+          <div className="center"></div>
+          <div className="left"></div>
+          <div className="container-fluid header #1F0337">
+            <div className="row g-0 align-items-center flex-column-reverse flex-md-row">
+            <div className="col-md-6 p-5 "style={{ textAlign: "left" }}>
+                <h1 className="display-5 animated fadeIn mb-4">
+                  <span className="text-primary">
+                    YELLOW ONIONS{" "}
+                  </span>
                 </h1>
-                <p className="mb-4 pb-2">
-                  <ul>
+                <p style={{ color: "white", fontSize: "24px" }}>
+                <ul>
+                <li>
+                Planting: Can be planted as early as October.
+                </li>
+                <li>
+                Harvest Season: Typically varies, but harvest occurs after around four months of growth.
+                </li>
+                </ul>
+                </p>
+              </div>
+              <div className="col-md-6 animated fadeIn">
+                <div className="owl-carousel header-carousel">
+                  <div className="right">
+                    <img className="img-fluid" src="../yellowonion.png" alt="" />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <hr />
+
+          <div className="glide" id="glide_1"></div>
+          <div className="glide__track" data-glide-el="track"></div>
+          <ul className="glide__slides"></ul>
+          <div className="center"></div>
+          <div className="left"></div>
+          <div className="container-fluid header #1F0337">
+            <div className="row g-0 align-items-center flex-column-reverse flex-md-row">
+            <div className="col-md-6 p-5 "style={{ textAlign: "left" }}>
+                <h1 className="display-5 animated fadeIn mb-4">
+                  <span className="text-primary">
+                    RED ONIONS{" "}
+                  </span>
+                </h1>
+                <p style={{ color: "white", fontSize: "24px" }}>
+                <ul>
                     <li>
                       Planting: Can be planted as late as January.
                     </li>
@@ -88,22 +119,35 @@ const Season = () => {
                       Harvest Season: Varies depending on planting time, usually after around four months of growth.
                     </li>
                   </ul>
+
                 </p>
               </div>
-              <div className="col-md-6 p-5">
-                <img className="img-fluid" src="../red onion.jpg" alt="Red Onion" />
+              <div className="col-md-6 animated fadeIn">
+                <div className="owl-carousel header-carousel">
+                  <div className="right">
+                    <img className="img-fluid" src="../redonion.png" alt="" />
+                  </div>
+                </div>
               </div>
             </div>
           </div>
+          <hr />
 
-          <div className="container-fluid p-0">
-            <div className="row g-0 align-items-center justify-content-center">
-              <div className="col-md-6 p-5 mt-lg-5" style={{ backgroundColor: "#ffffff", borderRadius: "10px" }}>
-                <h1 className="display-5 mb-4 text-center">
-                  <span className="text-primary">White onions</span>
+          <div className="glide" id="glide_1"></div>
+          <div className="glide__track" data-glide-el="track"></div>
+          <ul className="glide__slides"></ul>
+          <div className="center"></div>
+          <div className="left"></div>
+          <div className="container-fluid header #1F0337">
+            <div className="row g-0 align-items-center flex-column-reverse flex-md-row">
+            <div className="col-md-6 p-5 "style={{ textAlign: "left" }}>
+                <h1 className="display-5 animated fadeIn mb-4">
+                  <span className="text-primary">
+                    WHITE ONION{" "}
+                  </span>
                 </h1>
-                <p className="mb-4 pb-2">
-                  <ul>
+                <p style={{ color: "white", fontSize: "24px" }}>
+                <ul>
                     <li>
                       Planting: Best planted during the dry season, starting around December or January.
                     </li>
@@ -111,14 +155,22 @@ const Season = () => {
                       Harvest Season: Typically starts in the second week of January until February, after around four months of growth.
                     </li>
                   </ul>
+
+
                 </p>
               </div>
-              <div className="col-md-6 p-5">
-                <img className="img-fluid" src="../shallots1.jpg" alt="Shallots (Multiplier Onion)" />
+              <div className="col-md-6 animated fadeIn">
+                <div className="owl-carousel header-carousel">
+                  <div className="right">
+                    <img className="img-fluid" src="../whiteonion.png" alt="" />
+                  </div>
+                </div>
               </div>
             </div>
           </div>
+          <hr />
 
+          
           <List component="nav">
             <Divider sx={{ my: 1 }} />
           </List>

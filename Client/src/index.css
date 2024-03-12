@@ -45,3 +45,10 @@ code {
 .text-muted {
   color: white; /* Set text color to white */
 }
+
+
+.btn-purple {
+  background-color: purple;
+  border-color: purple;
+}
+

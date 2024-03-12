@@ -106,7 +106,7 @@ export default function TitlebarBelowImageList() {
               <hr />
               <div className="row">
                 <div className="col-sm-3">
-                  <p className="mb-0">AGE:</p>
+                  <p className="mb-0">BARANGAY:</p>
                 </div>
                 <div className="col-sm-9">
                   <p className="text-muted mb-0">{user.age}</p>
@@ -116,7 +116,7 @@ export default function TitlebarBelowImageList() {
 
               <div className="row">
                 <div className="col-sm-3">
-                  <p className="mb-0">GENDER:</p>
+                  <p className="mb-0">CITY:</p>
                 </div>
                 <div className="col-sm-9">
                   <p className="text-muted mb-0">{user.gender}</p>
@@ -126,6 +126,8 @@ export default function TitlebarBelowImageList() {
 
               <div className="row">
                 <div className="col-sm-3">
+<<<<<<< HEAD
+=======
                   <p className="mb-0">LOCATION:</p>
                 </div>
                 <div className="col-sm-9">
@@ -155,6 +157,7 @@ export default function TitlebarBelowImageList() {
               <hr />
               <div className="row">
                 <div className="col-sm-3">
+>>>>>>> 33ebb7509b501c3d76ce7f4442970a5372e008c8
                   <p className="mb-0">PHONE NUMBER:</p>
                 </div>
                 <div className="col-sm-9">
@@ -163,6 +166,47 @@ export default function TitlebarBelowImageList() {
                 </div>
               </div>
               <hr />
+
+              <div className="row">
+                <div className="col-sm-3">
+                  <p className="mb-0">EMAIL:</p>
+                </div>
+                <div className="col-sm-9">
+                  <p className="text-muted mb-0">{user.email}</p>
+                </div>
+              </div>
+              <hr />
+
+              <div className="row">
+                <div className="col-sm-3">
+                  <p className="mb-0">SEASON:</p>
+                </div>
+                <div className="col-sm-9">
+                  <p className="text-muted mb-0">{user.gender}</p>
+                </div>
+              </div>
+              <hr />
+
+              <div className="row">
+                <div className="col-sm-3">
+                  <p className="mb-0">FERTILIZER:</p>
+                </div>
+                <div className="col-sm-9">
+                  <p className="text-muted mb-0">{user.gender}</p>
+                </div>
+              </div>
+              <hr />
+
+              <div className="row">
+                <div className="col-sm-3">
+                  <p className="mb-0">ONION TYPE:</p>
+                </div>
+                <div className="col-sm-9">
+                  <p className="text-muted mb-0">{user.gender}</p>
+                </div>
+              </div>
+              <hr />
+
             </div>
           </div>
         </div>

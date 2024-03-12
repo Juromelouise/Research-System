@@ -3,6 +3,7 @@ import React, { Fragment, useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import { getToken } from "../../utils/helpers";
+import '../../index.css';
 
 const Profile = () => {
   const [user, setUser] = useState("");
@@ -40,7 +41,7 @@ const Profile = () => {
               <div className="card-body text-center">
               <figure className="avatar avatar-profile">
               <img
-                className="rounded-circle img-fluid" style={{ width: "150px", height: "150px" }}
+                className="rounded-circle img-fluid" style={{ width: "290px", height: "290px" }}
                 src={user.avatar?.url}
                 alt={user.name}
               />
@@ -50,18 +51,18 @@ const Profile = () => {
                 <p className="text-muted mb-4">Resident of Taguig City</p>
               </div>
             </div>
-            
           </div>
+
           <div className="col-lg-8">
             <div className="card mb-4">
               <div className="card-body">
               <div className="col-md-6" style={{ textAlign: "center" }}>
-                    <h2 style={{ color: "black", fontSize: "36px" }}>Personal Information</h2>
+                    <h2 style={{ color: "black", fontSize: "36px" }}><strong>Personal Information</strong></h2>
                   </div>
                 <div className="row">
                   <hr/>
                   <div className="col-sm-3">
-                    <p className="mb-0">NAME:</p>
+                  <p className="mb-0" style={{ textAlign: "justify" }}><strong>NAME:</strong></p>
                   </div>
                   <div className="col-sm-9">
                   <p>{user.name}</p>
@@ -71,7 +72,7 @@ const Profile = () => {
 
                 <div className="row">
                           <div className="col-sm-3">
-                            <p className="mb-0">AGE:</p>
+                            <p className="mb-0" style={{ textAlign: "justify" }}><strong>BARANGAY:</strong></p>
                           </div>
                           <div className="col-sm-9">
                             <p className="text-muted mb-0">{user.age}</p>
@@ -81,7 +82,7 @@ const Profile = () => {
 
                         <div className="row">
                           <div className="col-sm-3">
-                            <p className="mb-0">GENDER:</p>
+                            <p className="mb-0" style={{ textAlign: "justify" }}><strong>CITY:</strong></p>
                           </div>
                           <div className="col-sm-9">
                             <p className="text-muted mb-0">{user.gender}</p>
@@ -89,20 +90,10 @@ const Profile = () => {
                         </div>
                         <hr/>
 
-                        <div className="row">
-                          <div className="col-sm-3">
-                            <p className="mb-0">LOCATION:</p>
-                          </div>
-                          <div className="col-sm-9">
-                            <p className="text-muted mb-0">{user.location}</p>
-                          </div>
-                        </div>
-                        <hr/>
-
 
                 <div className="row">
                   <div className="col-sm-3">
-                  <p className="mb-0">EMAIL:</p>
+                  <p className="mb-0" style={{ textAlign: "justify" }}><strong>EMAIL:</strong></p>
                   </div>
                   <div className="col-sm-9">
                     <p className="text-muted mb-0">{user.email}</p>
@@ -111,7 +102,7 @@ const Profile = () => {
                 <hr />
                 <div className="row">
                   <div className="col-sm-3">
-                    <p className="mb-0">PHONE NUMBER:</p>
+                    <p className="mb-0" style={{ textAlign: "justify" }}><strong>PHONE NUMBER:</strong></p>
                   </div>
                   <div className="col-sm-9">
                   <p className="text-muted mb-0">{user.phone}</p>
@@ -121,7 +112,7 @@ const Profile = () => {
                 
                 <div className="row">
                   <div className="col-sm-3">
-                    <p className="mb-0">JOIN ON:</p>
+                    <p className="mb-0" style={{ textAlign: "justify" }}><strong>JOIN ON:</strong></p>
                   </div>
                   <div className="col-sm-9">
                   <p>{String(user.createdAt).substring(0, 10)}</p>
@@ -130,9 +121,9 @@ const Profile = () => {
               </div>
             </div>
             <Link to={`/update/profile/${user._id}`}>
-            <button>
-              UPDATE PROFILE
-            </button>
+              <center>
+                <button type="button" class="btn btn-purple" data-mdb-ripple-init><strong>Update</strong></button>
+             </center>
             </Link>
           </div>
         </div>
