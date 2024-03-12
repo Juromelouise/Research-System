@@ -136,7 +136,7 @@ const Header = () => {
                 Forums and Discussions
               </Link>
             </li>
-            {user.role === "farmer" && (
+            {user.role === "supplier" && (
               <>
                 <li className="nav-item">
                   <Link
@@ -158,16 +158,41 @@ const Header = () => {
                 </li>
               </>
             )}
+            {user.role === "buyer" && (
+              <>
+                <li className="nav-item">
+                  <Link
+                    to="/browse/product"
+                    className="nav-link"
+                    style={{ color: "#fff" }}
+                  >
+                    Product
+                  </Link>
+                </li>
+              
+              </>
+            )}
             {user.role === "seller" && (
-              <li className="nav-item">
-                <Link
-                  to="/farmer/info"
-                  className="nav-link"
-                  style={{ color: "#fff" }}
-                >
-                  Farmers
-                </Link>
-              </li>
+              <>
+                <li className="nav-item">
+                  <Link
+                    to="/farmer/info"
+                    className="nav-link"
+                    style={{ color: "#fff" }}
+                  >
+                    Farmers
+                  </Link>
+                </li>
+                <li className="nav-item">
+                  <Link
+                    to="/product/create"
+                    className="nav-link"
+                    style={{ color: "#fff" }}
+                  >
+                    Post Product
+                  </Link>
+                </li>
+              </>
             )}
           </ul>
         </div>
@@ -189,8 +214,15 @@ const Header = () => {
                 <Link to="/profile">
                   <button className="dropdown-item">Profile</button>
                 </Link>
-                {user.role === "farmer" ? (
+                {user.role === "supplier" ? (
                   <Link to="/single/user/product">
+                    <button className="dropdown-item">Product List</button>
+                  </Link>
+                ) : (
+                  <></>
+                )}
+                {user.role === "seller" ? (
+                  <Link to="/single/seller/product">
                     <button className="dropdown-item">Product List</button>
                   </Link>
                 ) : (

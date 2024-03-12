@@ -1,5 +1,5 @@
 import React from "react";
-import { ColorRing } from "react-loader-spinner";
+import { DNA } from "react-loader-spinner";
 import Backdrop from "@mui/material/Backdrop";
 import CircularProgress from "@mui/material/CircularProgress";
 import Button from "@mui/material/Button";
@@ -12,7 +12,7 @@ export const Loader = ({ open }) => {
           sx={{ color: "#fff", zIndex: (theme) => theme.zIndex.drawer + 1 }}
           open={open}
         >
-          <ColorRing
+          <DNA
             visible={open}
             height="80"
             width="80"

@@ -32,7 +32,7 @@ exports.replyComment = async (req, res) => {
 };
 
 exports.deleteComment = async (req, res) => {
-  await Comment.findByIdAndDelete(req.params.id);
+  await Comment.deleteById(req.params.id);
 
   res.status(200).json({
     success: true,

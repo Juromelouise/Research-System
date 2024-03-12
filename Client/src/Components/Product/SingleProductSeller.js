@@ -9,7 +9,7 @@ import { Link, useLocation } from "react-router-dom";
 import { Button } from "@mui/material";
 import { Loader } from "../Layout/Loader";
 
-export default function TitlebarBelowImageList() {
+const SingleProductSeller = () => {
   const user = getUser();
   const [product, setProduct] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -34,7 +34,7 @@ export default function TitlebarBelowImageList() {
       console.log(error);
     }
   };
-
+  
   const deleteProduct = async (id) => {
     try {
       const config = {
@@ -59,6 +59,7 @@ export default function TitlebarBelowImageList() {
 
   return (
     <>
+      {loading ? <Loader open={loading} /> : <></>}
       <div className="row">
         <div className="col-lg-8">
           <div className="card mb-4">
@@ -82,7 +83,7 @@ export default function TitlebarBelowImageList() {
               <hr />
               <div className="row">
                 <div className="col-sm-3">
-                  <p className="mb-0">BARANGAY:</p>
+                  <p className="mb-0">AGE:</p>
                 </div>
                 <div className="col-sm-9">
                   <p className="text-muted mb-0">{user.age}</p>
@@ -92,7 +93,7 @@ export default function TitlebarBelowImageList() {
 
               <div className="row">
                 <div className="col-sm-3">
-                  <p className="mb-0">CITY:</p>
+                  <p className="mb-0">GENDER:</p>
                 </div>
                 <div className="col-sm-9">
                   <p className="text-muted mb-0">{user.gender}</p>
@@ -102,8 +103,6 @@ export default function TitlebarBelowImageList() {
 
               <div className="row">
                 <div className="col-sm-3">
-<<<<<<< HEAD
-=======
                   <p className="mb-0">LOCATION:</p>
                 </div>
                 <div className="col-sm-9">
@@ -133,7 +132,6 @@ export default function TitlebarBelowImageList() {
               <hr />
               <div className="row">
                 <div className="col-sm-3">
->>>>>>> 33ebb7509b501c3d76ce7f4442970a5372e008c8
                   <p className="mb-0">PHONE NUMBER:</p>
                 </div>
                 <div className="col-sm-9">
@@ -142,47 +140,6 @@ export default function TitlebarBelowImageList() {
                 </div>
               </div>
               <hr />
-
-              <div className="row">
-                <div className="col-sm-3">
-                  <p className="mb-0">EMAIL:</p>
-                </div>
-                <div className="col-sm-9">
-                  <p className="text-muted mb-0">{user.email}</p>
-                </div>
-              </div>
-              <hr />
-
-              <div className="row">
-                <div className="col-sm-3">
-                  <p className="mb-0">SEASON:</p>
-                </div>
-                <div className="col-sm-9">
-                  <p className="text-muted mb-0">{user.gender}</p>
-                </div>
-              </div>
-              <hr />
-
-              <div className="row">
-                <div className="col-sm-3">
-                  <p className="mb-0">FERTILIZER:</p>
-                </div>
-                <div className="col-sm-9">
-                  <p className="text-muted mb-0">{user.gender}</p>
-                </div>
-              </div>
-              <hr />
-
-              <div className="row">
-                <div className="col-sm-3">
-                  <p className="mb-0">ONION TYPE:</p>
-                </div>
-                <div className="col-sm-9">
-                  <p className="text-muted mb-0">{user.gender}</p>
-                </div>
-              </div>
-              <hr />
-
             </div>
           </div>
         </div>
@@ -208,61 +165,59 @@ export default function TitlebarBelowImageList() {
         </div>
       </div>
 
-      {loading ? (
-        <Loader open={loading} />
-      ) : (
-        <div className="row">
-          <div
-            style={{
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "center",
-              height: "90vh",
-              padding: "20px",
-            }}
-          >
-            {product.length > 0 && product[0].user._id === user._id ? (
-              <Link to="/product/create">
-                <Button>Add Product</Button>
-              </Link>
-            ) : (
-              <></>
-            )}
-            <h1 style={{ color: "white" }}>All Products</h1>
-            <ImageList sx={{ width: 1000, height: 600 }}>
-              {product.map((item) => (
-                <ImageListItem key={item.images[0].url}>
-                  {item.images.map((image) => (
-                    <img
-                      key={image.url}
-                      srcSet={`${image.url}?w=248&fit=crop&auto=format&dpr=2 2x`}
-                      src={`${image.url}?w=248&fit=crop&auto=format`}
-                      loading="lazy"
-                    />
-                  ))}
-                  <ImageListItemBar
-                    title={item.name}
-                    subtitle={<span>by: {item.user.name}</span>}
-                    position="below"
-                    style={{ color: "white" }}
+      <div className="row">
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            height: "90vh",
+            padding: "20px",
+          }}
+        >
+          {product.length > 0 && product[0].user._id === user._id ? (
+            <Link to="/product/create">
+              <Button>Add Product</Button>
+            </Link>
+          ) : (
+            <></>
+          )}
+          <h1 style={{ color: "white" }}>All Products</h1>
+          <ImageList sx={{ width: 1000, height: 600 }}>
+            {product.map((item) => (
+              <ImageListItem key={item.images[0].url}>
+                {item.images.map((image) => (
+                  <img
+                    key={image.url}
+                    srcSet={`${image.url}?w=248&fit=crop&auto=format&dpr=2 2x`}
+                    src={`${image.url}?w=248&fit=crop&auto=format`}
+                    loading="lazy"
                   />
-                  <Link to={`/product/update/${item._id}`}>
-                    <Button>Edit</Button>{" "}
-                  </Link>
-                  <Button
-                    onClick={() => {
-                      deleteProduct(item._id);
-                      setLoading(true);
-                    }}
-                  >
-                    Delete
-                  </Button>{" "}
-                </ImageListItem>
-              ))}
-            </ImageList>
-          </div>
+                ))}
+                <ImageListItemBar
+                  title={item.name}
+                  subtitle={<span>by: {item.user.name}</span>}
+                  position="below"
+                  style={{ color: "white" }}
+                />
+                <Link to={`/product/update/${item._id}`}>
+                  <Button>Edit</Button>{" "}
+                </Link>
+                <Button
+                  onClick={() => {
+                    deleteProduct(item._id);
+                    setLoading(true);
+                  }}
+                >
+                  Delete
+                </Button>{" "}
+              </ImageListItem>
+            ))}
+          </ImageList>
         </div>
-      )}
+      </div>
     </>
   );
-}
+};
+
+export default SingleProductSeller;
