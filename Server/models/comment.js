@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 const Populate = require("mongoose-autopopulate");
+const mongooseDelete = require("mongoose-delete");
 
 const commentSchema = new mongoose.Schema({
   content: {
@@ -21,5 +22,6 @@ const commentSchema = new mongoose.Schema({
   ],
 });
 commentSchema.plugin(Populate);
+commentSchema.plugin(mongooseDelete, { overrideMethods: "all" });
 
 module.exports = mongoose.model("Comment", commentSchema);
