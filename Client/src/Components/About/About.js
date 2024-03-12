@@ -47,8 +47,15 @@ const About = () => {
         {LeftItemList}
       </div>
       
+        
+      
+
       <div style={{ flex: "1", textAlign: "left", overflowY: "auto", color: "white", fontFamily: "Times New Roman" }}>
-        <h1 style={{ fontSize: "40px" }}>ABOUT US</h1>
+       
+
+      <img src="./aboutus.jpg" className="img-fluid" alt="Wild Landscape" style={{maxWidth: '100%', height: '50%'}} width={1300} height={300} />
+
+
         <List component="nav">
           <Divider sx={{ my: 1 }} />
         </List>
@@ -62,6 +69,8 @@ const About = () => {
                   rippleColor="primary"
                 >
                   <img src="../group.jpg" className="w-100" />
+                  <hr/>
+                  <img src="../members.png" className="w-100" />
                   <a href="#!">
                     <div
                       className="mask"
@@ -72,6 +81,7 @@ const About = () => {
               </div>
               <div className="col-md-6" style={{ textAlign: "left" }}>
                 <h2 style={{ color: "white", fontSize: "36px" }}>Optimizing Onion Supply Chain: A Web-Based Platform for Improved Communication and Transparency</h2>
+                <hr/>
                 <p style={{ color: "white", fontSize: "24px" }}>
                   <span> </span>The researchers will provide a solution by creating a web-based platform for onion
                   supply chains that will help to communicate with local farmers and local sellers to gain buyers.
@@ -98,7 +108,9 @@ const About = () => {
             </div>
           </p>
 
+
         </MDBModalBody>
+        
 
 
 

@@ -60,7 +60,7 @@ export default function TitlebarBelowImageList() {
               <hr />
               <div className="row">
                 <div className="col-sm-3">
-                  <p className="mb-0">AGE:</p>
+                  <p className="mb-0">BARANGAY:</p>
                 </div>
                 <div className="col-sm-9">
                   <p className="text-muted mb-0">{user.age}</p>
@@ -70,7 +70,7 @@ export default function TitlebarBelowImageList() {
 
               <div className="row">
                 <div className="col-sm-3">
-                  <p className="mb-0">GENDER:</p>
+                  <p className="mb-0">CITY:</p>
                 </div>
                 <div className="col-sm-9">
                   <p className="text-muted mb-0">{user.gender}</p>
@@ -78,33 +78,6 @@ export default function TitlebarBelowImageList() {
               </div>
               <hr />
 
-              <div className="row">
-                <div className="col-sm-3">
-                  <p className="mb-0">LOCATION:</p>
-                </div>
-                <div className="col-sm-9">
-                  <p className="text-muted mb-0">{user.location}</p>
-                </div>
-              </div>
-              <hr />
-              <div className="row">
-                <div className="col-sm-3">
-                  <p className="mb-0">EMAIL:</p>
-                </div>
-                <div className="col-sm-9">
-                  <p className="text-muted mb-0">{user.email}</p>
-                </div>
-              </div>
-              <hr />
-              <div className="row">
-                <div className="col-sm-3">
-                  <p className="mb-0">LOCATION:</p>
-                </div>
-                <div className="col-sm-9">
-                  <p className="text-muted mb-0">{user.email}</p>
-                </div>
-              </div>
-              <hr />
               <div className="row">
                 <div className="col-sm-3">
                   <p className="mb-0">PHONE NUMBER:</p>
@@ -115,6 +88,47 @@ export default function TitlebarBelowImageList() {
                 </div>
               </div>
               <hr />
+
+              <div className="row">
+                <div className="col-sm-3">
+                  <p className="mb-0">EMAIL:</p>
+                </div>
+                <div className="col-sm-9">
+                  <p className="text-muted mb-0">{user.email}</p>
+                </div>
+              </div>
+              <hr />
+
+              <div className="row">
+                <div className="col-sm-3">
+                  <p className="mb-0">SEASON:</p>
+                </div>
+                <div className="col-sm-9">
+                  <p className="text-muted mb-0">{user.gender}</p>
+                </div>
+              </div>
+              <hr />
+
+              <div className="row">
+                <div className="col-sm-3">
+                  <p className="mb-0">FERTILIZER:</p>
+                </div>
+                <div className="col-sm-9">
+                  <p className="text-muted mb-0">{user.gender}</p>
+                </div>
+              </div>
+              <hr />
+
+              <div className="row">
+                <div className="col-sm-3">
+                  <p className="mb-0">ONION TYPE:</p>
+                </div>
+                <div className="col-sm-9">
+                  <p className="text-muted mb-0">{user.gender}</p>
+                </div>
+              </div>
+              <hr />
+
             </div>
           </div>
         </div>
