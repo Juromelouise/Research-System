@@ -25,10 +25,6 @@ import {
 const About = () => {
   const [open, setOpen] = useState(true);
 
-  const toggleDrawer = () => {
-    setOpen(!open);
-  };
-
   return (
     
     <div style={{ display: "flex", height: "100vh" }}>

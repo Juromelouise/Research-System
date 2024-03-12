@@ -63,7 +63,7 @@ const FarmerInfo = () => {
               <p className="fw-normal mb-1">{farmers.phone}</p>
             </td>
             <td>
-              <p className="fw-normal mb-1">{farmers.location}</p>
+              <p className="fw-normal mb-1">{farmers.baranggay}, {farmers.city}</p>
             </td>
             <td>{farmers.role}</td>
             <td><Link to={`/single/user/product?fid=${farmers._id}`}><Button>Check Information</Button></Link></td>

@@ -89,7 +89,7 @@ exports.deleteProduct = async (req, res, next) => {
 exports.SingleUserProduct = async (req, res) => {
   const id = req.params.id;
   try {
-    const user = await Product.find({ user: id });
+    const user = await Product.findById(id);
 
     res.status(200).json({
       user,
