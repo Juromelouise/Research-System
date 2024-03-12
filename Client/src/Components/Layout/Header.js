@@ -158,6 +158,20 @@ const Header = () => {
                 </li>
               </>
             )}
+            {user.role === "buyer" && (
+              <>
+                <li className="nav-item">
+                  <Link
+                    to="/browse/product"
+                    className="nav-link"
+                    style={{ color: "#fff" }}
+                  >
+                    Product
+                  </Link>
+                </li>
+              
+              </>
+            )}
             {user.role === "seller" && (
               <>
                 <li className="nav-item">

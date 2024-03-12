@@ -27,7 +27,7 @@ router.put(
   updateProduct
 );
 router.delete("/delete/product/:id", isAuthenticatedUser, deleteProduct);
-router.get("/products", isAuthenticatedUser, getProduct);
+router.get("/products", getProduct);
 router.get("/product/:id", product);
 router.get("/single/product", isAuthenticatedUser, UserProduct);
 router.get("/single/user/product/:id", isAuthenticatedUser, SingleUserProduct);
