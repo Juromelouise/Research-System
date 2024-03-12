@@ -102,8 +102,6 @@ export default function TitlebarBelowImageList() {
 
               <div className="row">
                 <div className="col-sm-3">
-<<<<<<< HEAD
-=======
                   <p className="mb-0">LOCATION:</p>
                 </div>
                 <div className="col-sm-9">
@@ -133,7 +131,6 @@ export default function TitlebarBelowImageList() {
               <hr />
               <div className="row">
                 <div className="col-sm-3">
->>>>>>> 33ebb7509b501c3d76ce7f4442970a5372e008c8
                   <p className="mb-0">PHONE NUMBER:</p>
                 </div>
                 <div className="col-sm-9">
