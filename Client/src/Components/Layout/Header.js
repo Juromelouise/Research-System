@@ -207,6 +207,13 @@ const Header = () => {
                 ) : (
                   <></>
                 )}
+                {user.role === "seller" ? (
+                  <Link to="/single/seller/product">
+                    <button className="dropdown-item">Product List</button>
+                  </Link>
+                ) : (
+                  <></>
+                )}
                 {user.role === "admin" || user.role === "Admin" ? (
                   <Link to="/dashboard">
                     <button className="dropdown-item">Dashboard</button>

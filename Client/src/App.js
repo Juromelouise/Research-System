@@ -24,6 +24,7 @@ import SingleProduct from "./Components/Product/SingleProduct";
 import UpdateProfile from "./Components/User/UpdateProfile";
 import About from "./Components/About/About";
 import AdminCreateProduct from "./Components/Admin/AdminCreateProduct";
+import SingleProductSeller from "./Components/Product/SingleProductSeller";
 
 function App() {
   return (
@@ -51,6 +52,7 @@ function App() {
           <Route path="/forum" element={<Forum/>} exact="true" />
           <Route path="/forum/open/:id" element={<SingleForum/>} exact="true" />
           <Route path="/single/user/product" element={<SingleProduct/>} exact="true" />
+          <Route path="/single/seller/product" element={<SingleProductSeller/>} exact="true" />
           <Route path="/update/profile/:id" element={<UpdateProfile/>} exact="true" />
 
 

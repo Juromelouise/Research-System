@@ -64,6 +64,12 @@ exports.product = async (req, res) => {
 };
 
 exports.deleteProduct = async (req, res, next) => {
+  let products = await Product.findById(req.params.id);
+  for (let i in products.images) {
+    let del = await destroyUploaded(products.images[i].public_id);
+    console.log(del.del);
+  }
+
   const product = await Product.findByIdAndDelete({
     _id: req.params.id,
   });
@@ -103,6 +109,7 @@ exports.UserProduct = async (req, res) => {
         success: true,
       });
     } else if (req.user && req.user._id) {
+      console.log(req.user._id);
       const product = await Product.find({ user: req.user._id });
       res.status(200).json({
         product,
