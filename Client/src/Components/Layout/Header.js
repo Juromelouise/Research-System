@@ -115,7 +115,6 @@ const Header = () => {
         <Link to="/">
           <img src="../logo.png" alt="Logo" style={logoStyle} />{" "}
         </Link>
-        {/* Added alt attribute */}
         <h5>ONISTEM</h5>
       </div>
       <nav className="navbar navbar-expand-lg navbar-dark">
@@ -134,6 +133,11 @@ const Header = () => {
             <li className="nav-item">
               <Link to="/forum" className="nav-link" style={{ color: "#fff" }}>
                 Forums and Discussions
+              </Link>
+            </li>
+            <li className="nav-item">
+              <Link to="/cart" className="nav-link" style={{ color: "#fff" }}>
+                Cart
               </Link>
             </li>
             {user.role === "supplier" && (

@@ -1,15 +1,21 @@
 import * as React from "react";
-import { useState } from "react";
-import { Link } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { Link, useLocation } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { authenticate } from "../../utils/helpers";
+import { getUser } from "../../utils/helpers";
 import axios from "axios";
-
 
 export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
+
+  const location = useLocation();
+  const query = new URLSearchParams(location.search);
+  const redirect = query.get("redirect");
+  console.log(redirect);
+
   const login = async (email, password) => {
     try {
       const config = {
@@ -30,6 +36,15 @@ export default function Login() {
       console.log(error);
     }
   };
+
+  useEffect(() => {
+    if (getUser() && redirect === "checkout") {
+      navigate(`/${redirect}`);
+    } else {
+      navigate("/signin");
+    }
+  }, [navigate, redirect]);
+
   const handleSubmit = (e) => {
     e.preventDefault();
     login(email, password);
@@ -101,15 +116,17 @@ export default function Login() {
 
           <div className="mt-4">
             <div className="d-flex justify-content-center links">
-              <Link to="/signup" variant="body2"style={{ color: 'black' }}>
+              <Link to="/signup" variant="body2" style={{ color: "black" }}>
                 Don't have an account?{" "}
-                <a href="#" className="ml-2"style={{ color: 'black' }}>
+                <a href="#" className="ml-2" style={{ color: "black" }}>
                   Sign Up
                 </a>
               </Link>
             </div>
             <div className="d-flex justify-content-center links">
-              <a href="#"style={{ color: 'black' }}>Forgot your password?</a>
+              <a href="#" style={{ color: "black" }}>
+                Forgot your password?
+              </a>
             </div>
           </div>
         </div>
