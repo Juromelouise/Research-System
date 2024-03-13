@@ -104,10 +104,11 @@ export default function UpdateProfile() {
 
   return (
     <React.Fragment>
-      <Paper elevation={3} sx={{ marginRight: "15%", marginLeft: "15%" }}>
+      <hr/>
+      <Paper elevation={10} sx={{ marginRight: "15%", backgroundColor: '#1f0337' , marginLeft: "15%", }}>
         <Box sx={{ padding: 5 }}>
-          <Typography variant="h6" gutterBottom sx={{ paddingBottom: 5 }}>
-            Update Profile
+          <Typography variant="h6" gutterBottom sx={{ paddingBottom: 1, backgroundColor: '#1f0337' , fontFamily: "Times New Roman", color: "white" }}>
+            <h1>UPDATE PROFILE</h1>
           </Typography>
           <Box component="form" noValidate onSubmit={handleSubmit}>
             <Grid container spacing={3}>
@@ -117,31 +118,35 @@ export default function UpdateProfile() {
                     display: "flex",
                     justifyContent: "center",
                     fontWeight: 700,
+                    color: "white"
                   }}
                 >
                   Name
                 </InputLabel>
               </Grid>
+
               <Grid item xs={12} sm={10}>
-                <TextField
-                  required
-                  id="name"
-                  name="name"
-                  label="Name"
-                  fullWidth
-                  size="small"
-                  autoComplete="off"
-                  variant="outlined"
-                  value={name}
-                  onChange={(e) => setName(e.target.value)}
-                />
-              </Grid>
-              <Grid item xs={12} sm={2}>
+  <TextField
+    required
+    id="name"
+    name="name"
+    label="Name"
+    fullWidth
+    size="small"
+    autoComplete="off"
+    variant="outlined"
+    value={name}
+    onChange={(e) => setName(e.target.value)}
+    inputProps={{ style: { color: 'white' } }}
+  />
+</Grid>
+              <Grid item xs={12} sm={2} color>
                 <InputLabel
                   sx={{
                     display: "flex",
                     justifyContent: "center",
                     fontWeight: 700,
+                    color: "white"
                   }}
                 >
                   Email
@@ -159,6 +164,7 @@ export default function UpdateProfile() {
                   variant="outlined"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
+                  inputProps={{ style: { color: 'white' } }}
                 />
               </Grid>
               <Grid item xs={12} sm={2}>
@@ -167,6 +173,7 @@ export default function UpdateProfile() {
                     display: "flex",
                     justifyContent: "center",
                     fontWeight: 700,
+                    color: "white"
                   }}
                 >
                   Avatar
@@ -180,6 +187,7 @@ export default function UpdateProfile() {
                   type="file"
                   id="avatar"
                   onChange={onChange}
+                  inputProps={{ style: { color: 'white' } }}
                 />
               </Grid>
               <Grid item xs={12} sm={1}>
@@ -189,7 +197,7 @@ export default function UpdateProfile() {
               <Grid item xs={12} sm={12}>
                 <Button
                   variant="contained"
-                  sx={{ color: "#ff781f" }}
+                  sx={{ color: "white" }}
                   type="submit"
                 >
                   Save

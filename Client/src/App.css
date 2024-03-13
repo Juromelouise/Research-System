@@ -92,7 +92,12 @@ html {
   margin: 0;
   padding: 0;
   height: 100%;
-  background: #072d60 !important;
+  /* Specify the background image */
+  background-image: url('C:\EUMAN\Onistem\Client\public\background.jpg');
+  /* Ensure the image covers the entire viewport */
+  background-size: cover;
+  /* Center the background image */
+  background-position: center;
 }
 .user_card {
   height: 650px;

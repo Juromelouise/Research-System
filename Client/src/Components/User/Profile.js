@@ -32,18 +32,19 @@ const Profile = () => {
   }, []);
 
   return (
-    <section style={{ backgroundColor: "#072D60" }}>
+   
       <div className="container py-5">
         
         <div className="row">
           <div className="col-lg-4">
             <div className="card mb-4">
-              <div className="card-body text-center">
+              <div className="card-body text-center"style={{ color: '#1f0337' }}>
               <figure className="avatar avatar-profile">
               <img
-                className="rounded-circle img-fluid" style={{ width: "290px", height: "290px" }}
+                className="rounded-circle img-fluid" style={{ width: "290px", height: "290px"}}
                 src={user.avatar?.url}
                 alt={user.name}
+                
               />
             </figure>
                 <h5 className="my-1">{user.name}</h5>
@@ -128,7 +129,7 @@ const Profile = () => {
           </div>
         </div>
       </div>
-    </section>
+    
   );
 };
 
