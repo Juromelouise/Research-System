@@ -8,10 +8,20 @@ const OrderSchema = new mongoose.Schema({
     ref: "User",
     autopopulate: true,
   },
-  city: {},
-  baranggay: {},
-  street: {},
-  mod: {},
+  city: {
+    type: String,
+  },
+  baranggay: { type: String },
+  street: { type: String },
+  mod: { type: String },
+  product: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      required: true,
+      ref: "Product",
+      autopopulate: true,
+    },
+  ],
   createdAt: {
     type: Date,
     default: Date.now,
