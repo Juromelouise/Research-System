@@ -157,7 +157,7 @@ exports.updateRoleFarmer = async (req, res) => {
 };
 
 exports.allFarmers = async (req, res) => {
-  const users = await User.find({ role: "farmer" });
+  const users = await User.find({ role: "supplier" });
   res.status(200).json({
     users,
   });

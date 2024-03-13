@@ -60,7 +60,7 @@ const BrowseProduct = () => {
                 {chunkArray(filteredProducts, 3).map((row, rowIndex) => (
                     <div key={rowIndex} style={{ display: 'flex', marginBottom: '20px', justifyContent: 'center' }}>
                         {row.map(product => (
-                            <Card key={product._id} sx={{ maxWidth: 345, marginRight: '20px' }}>
+                            <Card key={product._id} sx={{ maxWidth: 345, marginRight: '20px', bgcolor:'#01579b' }}>
                                 <CardHeader
                                     avatar={<Avatar sx={{ bgcolor: red[500] }}>{product.user?.name ? product.user.name.charAt(0) : ''}</Avatar>}
                                     title={product.name}
@@ -82,6 +82,7 @@ const BrowseProduct = () => {
                                         size="small"
                                         aria-expanded={expanded === product._id}
                                         onClick={() => setExpanded(expanded === product._id ? null : product._id)}
+                                        style={{ color: 'white' }}
                                     >
                                         Learn More
                                     </Button>
