@@ -13,6 +13,9 @@ import Link from '@mui/material/Link';
 import Typography from '@mui/material/Typography';
 import AddressForm from './AddressForm';
 import Review from './Review';
+import { useSelector } from 'react-redux';
+import { getToken } from '../../utils/helpers';
+import axios from 'axios';
 
 function Copyright() {
   return (
@@ -41,10 +44,45 @@ function getStepContent(step) {
 }
 
 export default function Checkout() {
+  const [loading, setLoading] = React.useState(false);
   const [activeStep, setActiveStep] = React.useState(0);
+  const { cartItems, shippingInfo } = useSelector((state) => state.cart);
+  const order = {
+    orderItems: cartItems,
+    shippingInfo,
+    // seller: cartItems.seller,
+  };
+  const [isNext, setIsNext] = React.useState(null);
+
+  const createOrder = async () => {
+    try {
+      const config = {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${getToken()}`,
+        },
+      };
+
+      order.totalPrice = order.orderItems.reduce((acc, item) => acc + item.price * item.quantity, 0)
+      console.log(order)
+      await axios.post(
+        `${process.env.REACT_APP_API}/order/neworder`,
+        order,
+        config
+      );
+      setActiveStep(activeStep + 1);
+      setLoading(false);
+      localStorage.clear();
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   const handleNext = () => {
-    setActiveStep(activeStep + 1);
+    setIsNext(prev => prev + 1);
+    setTimeout(() => {
+      setActiveStep(activeStep + 1);
+    }, 300)
   };
 
   const handleBack = () => {
@@ -78,21 +116,30 @@ export default function Checkout() {
             </React.Fragment>
           ) : (
             <React.Fragment>
-              {getStepContent(activeStep)}
+              {/* {getStepContent(activeStep)} */}
+              {activeStep === 0 ? <AddressForm isNext={isNext} /> : <Review />}
               <Box sx={{ display: 'flex', justifyContent: 'flex-end' }}>
                 {activeStep !== 0 && (
                   <Button onClick={handleBack} sx={{ mt: 3, ml: 1 }}>
                     Back
                   </Button>
                 )}
-
-                <Button
+                {activeStep === 0 ? <Button
                   variant="contained"
                   onClick={handleNext}
                   sx={{ mt: 3, ml: 1 }}
                 >
-                  {activeStep === steps.length - 1 ? 'Place order' : 'Next'}
-                </Button>
+                  Next
+                </Button> :
+                  <Button
+                    variant="contained"
+                    onClick={createOrder}
+                    sx={{ mt: 3, ml: 1 }}
+                  >
+                    Place Order
+                  </Button>
+                }
+
               </Box>
             </React.Fragment>
           )}

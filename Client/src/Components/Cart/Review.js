@@ -22,25 +22,26 @@ export default function Review() {
     seller: cartItems.seller,
   };
 
-  const createOrder = async (order) => {
-    try {
-      const config = {
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${getToken()}`,
-        },
-      };
-      await axios.post(
-        `${process.env.REACT_APP_API}/order/neworder`,
-        order,
-        config
-      );
-      setLoading(false);
-      // localStorage.clear();
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  // const createOrder = async (order) => {
+  //   try {
+  //     const config = {
+  //       headers: {
+  //         "Content-Type": "application/json",
+  //         Authorization: `Bearer ${getToken()}`,
+  //       },
+  //     };
+  //     await axios.post(
+  //       `${process.env.REACT_APP_API}/order/neworder`,
+  //       order,
+  //       config
+  //     );
+  //     setLoading(false);
+  //     // localStorage.clear();
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
+
   return (
     <React.Fragment>
       {loading ? <Loader open={loading} /> : <></>}
@@ -71,15 +72,6 @@ export default function Review() {
           </Typography>
           <Typography gutterBottom>{addresses.join(", ")}</Typography>
         </Grid>
-        <Button
-          onClick={() => {
-            createOrder(order);
-            setLoading(true);
-          }}
-          variant="primary"
-        >
-          Place Order
-        </Button>
       </Grid>
     </React.Fragment>
   );

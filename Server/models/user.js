@@ -77,6 +77,34 @@ const userSchema = new mongoose.Schema({
     type: Date,
     default: Date.now,
   },
+  reviews: [
+    {
+      user: {
+        type: mongoose.Schema.ObjectId,
+        ref: "User",
+        required: true,
+        autopopulate: true,
+      },
+      rating: {
+        type: Number,
+        required: true,
+      },
+      comment: {
+        type: mongoose.Schema.ObjectId,
+        ref: "Comment",
+        required: true,
+        autopopulate: true,
+      },
+    },
+  ],
+  seller: [
+    {
+      type: mongoose.Schema.ObjectId,
+      ref: "User",
+      required: true,
+      autopopulate: true,
+    },
+  ],
   resetPasswordToken: String,
   resetPasswordExpire: Date,
 });

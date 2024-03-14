@@ -21,6 +21,7 @@ import UserTable from "./UserTable";
 import { Avatar } from "@mui/material";
 import { getUser } from "../../utils/helpers";
 import { Link } from "react-router-dom";
+import Forum from "../Forums/Forum";
 
 const drawerWidth = 200;
 
@@ -140,27 +141,35 @@ export default function Dashboard() {
           </List>
         </Drawer>
         <Box
-  component="main"
-  sx={{
-    backgroundImage: `C:\EUMAN\Onistem\Client\public\background.jpg`, // Background image
-    backgroundSize: 'cover', // Ensure the image covers the entire box
-    backgroundPosition: 'center', // Center the background image
-    flexGrow: 1,
-    height: "100vh",
-    overflow: "auto",
-  }}
->
+          component="main"
+          sx={{
+            backgroundImage: `../public/background.jpg`, // Background image
+            backgroundSize: "cover", // Ensure the image covers the entire box
+            backgroundPosition: "center", // Center the background image
+            flexGrow: 1,
+            height: "100vh",
+            overflow: "auto",
+          }}
+        >
           <Toolbar />
           <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
-            <Grid container spacing={3}>
-              <Grid item xs={12}>
+            <Grid container spacing={1}>
+              <Grid item xs={14}>
                 <Paper sx={{ p: 2, display: "flex", flexDirection: "column" }}>
+                  <Box sx={{
+                    marginLeft: "120px"
+                  }}>
                   <ProductTable />
+                  </Box>
                 </Paper>
               </Grid>
-              <Grid item xs={12}>
+              <Grid item xs={14}>
                 <Paper sx={{ p: 2, display: "flex", flexDirection: "column" }}>
+                <Box sx={{
+                    marginLeft: "120px"
+                  }}>
                   <UserTable />
+                  </Box>
                 </Paper>
               </Grid>
             </Grid>
