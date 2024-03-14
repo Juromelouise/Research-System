@@ -173,7 +173,6 @@ const Header = () => {
                     Product
                   </Link>
                 </li>
-              
               </>
             )}
             {user.role === "seller" && (
@@ -187,17 +186,17 @@ const Header = () => {
                     Farmers
                   </Link>
                 </li>
-                <li className="nav-item">
-                  <Link
-                    to="/product/create"
-                    className="nav-link"
-                    style={{ color: "#fff" }}
-                  >
-                    Post Product
-                  </Link>
-                </li>
               </>
             )}
+            <li className="nav-item">
+              <Link
+                to="/product/create"
+                className="nav-link"
+                style={{ color: "#fff" }}
+              >
+                Post Product
+              </Link>
+            </li>
           </ul>
         </div>
       </nav>

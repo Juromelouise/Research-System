@@ -6,8 +6,42 @@ const {
   destroyUploaded,
   uploadMultiple,
 } = require("../utils/UploadCloudinary");
+exports.newProductUser = async (req, res) => {
+  console.log(req.files)
+  console.log("B")
+  const image = await uploadMultiple(req.files.images, "Onion-type");
+  const attachment = await uploadMultiple(req.files.attachment, "Onion-type");
+  req.body.user = req.user._id;
+  req.body.images = image;
+  const product = await Product.create(req.body);
+
+  await User.findByIdAndUpdate(
+    req.user._id,
+    {
+      attachment: attachment,
+      role: "seller",
+    },
+    {
+      new: true,
+      runValidators: true,
+      useFindandModify: false,
+    }
+  );
+  if (!product)
+    return res.status(400).json({
+      success: false,
+      message: "Product not created",
+    });
+
+  res.status(201).json({
+    success: true,
+    product,
+  });
+};
+
 exports.newProduct = async (req, res) => {
-  // console.log(req.files)
+  console.log(req.files)
+  console.log("b")
   const image = await uploadMultiple(req.files, "Onion-type");
   req.body.user = req.user._id;
   req.body.images = image;

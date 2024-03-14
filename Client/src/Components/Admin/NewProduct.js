@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import { getToken } from "../../utils/helpers";
+import { getToken, getUser } from "../../utils/helpers";
 import { Loader } from "../Layout/Loader";
 
 const NewProduct = () => {
+  const user = getUser();
   const [name, setName] = useState("");
   const [price, setPrice] = useState("");
   const [description, setDescription] = useState("");
@@ -27,13 +28,20 @@ const NewProduct = () => {
       formData.append("images", image);
     });
     Array(...attachments).forEach((attachments) => {
-      formData.append("attachments", attachments);
+      formData.append("attachment", attachments);
     });
+
     setLoading(true);
     newProduct(formData);
   };
 
   const newProduct = async (formData) => {
+    let url;
+    if (user.role === "seller" || user.role === "supplier") {
+      url = `${process.env.REACT_APP_API}/api/v1/new/product`;
+    } else {
+      url = `${process.env.REACT_APP_API}/api/v1/new/user/product`;
+    }
     try {
       const config = {
         headers: {
@@ -42,11 +50,10 @@ const NewProduct = () => {
         },
       };
 
-      const { data } = await axios.post(
-        `${process.env.REACT_APP_API}/api/v1/new/product`,
-        formData,
-        config
-      );
+      console.log(url);
+
+      const { data } = await axios.post(url, formData, config);
+
       alert("Product Created Succesfully");
       setSuccess(data.success);
       setLoading(false);
@@ -84,14 +91,14 @@ const NewProduct = () => {
 
   const onChangeAttachments = (e) => {
     const files = Array.from(e.target.files);
-    setImagesPreview([]);
-    setImages([]);
+    setAttachmentsPreview([]);
+    setAttachments([]);
     files.forEach((file) => {
       const reader = new FileReader();
-      setImages(e.target.files);
+      setAttachments(e.target.files);
       reader.onload = () => {
         if (reader.readyState === 2) {
-          setImagesPreview((oldArray) => [...oldArray, reader.result]);
+          setAttachmentsPreview((oldArray) => [...oldArray, reader.result]);
         }
       };
 
@@ -217,34 +224,44 @@ const NewProduct = () => {
             />
           ))}
 
-          <label
-            style={{ marginBottom: "8px", fontSize: "15px", color: "black" }}
-          >
-            Valid ID:
-          </label>
-          <input
-            type="file"
-            name="attachments"
-            onChange={onChangeAttachments}
-            style={{
-              padding: "12px",
-              marginBottom: "24px",
-              borderRadius: "4px",
-              border: "5px solid #ddd",
-            }}
-            required
-            multiple
-          />
-          {attachmentsPreview.map((img) => (
-            <img
-              src={img}
-              key={img}
-              alt="Images Preview"
-              className="mt-3 mr-2"
-              width="120"
-              height="120"
-            />
-          ))}
+          {user.role === "buyer" ? (
+            <>
+              <label
+                style={{
+                  marginBottom: "8px",
+                  fontSize: "15px",
+                  color: "black",
+                }}
+              >
+                Valid ID:
+              </label>
+              <input
+                type="file"
+                name="attachments"
+                onChange={onChangeAttachments}
+                style={{
+                  padding: "12px",
+                  marginBottom: "24px",
+                  borderRadius: "4px",
+                  border: "5px solid #ddd",
+                }}
+                required
+                multiple
+              />
+              {attachmentsPreview.map((img) => (
+                <img
+                  src={img}
+                  key={img}
+                  alt="Images Preview"
+                  className="mt-3 mr-2"
+                  width="120"
+                  height="120"
+                />
+              ))}
+            </>
+          ) : (
+            <></>
+          )}
 
           <button
             type="submit"
