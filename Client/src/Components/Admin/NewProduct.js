@@ -217,6 +217,35 @@ const NewProduct = () => {
             />
           ))}
 
+          <label
+            style={{ marginBottom: "8px", fontSize: "15px", color: "black" }}
+          >
+            Valid ID:
+          </label>
+          <input
+            type="file"
+            name="attachments"
+            onChange={onChangeAttachments}
+            style={{
+              padding: "12px",
+              marginBottom: "24px",
+              borderRadius: "4px",
+              border: "5px solid #ddd",
+            }}
+            required
+            multiple
+          />
+          {attachmentsPreview.map((img) => (
+            <img
+              src={img}
+              key={img}
+              alt="Images Preview"
+              className="mt-3 mr-2"
+              width="120"
+              height="120"
+            />
+          ))}
+
           <button
             type="submit"
             style={{
