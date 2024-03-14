@@ -14,10 +14,11 @@ import { getToken } from "../../utils/helpers";
 import { Modal, Button } from "react-bootstrap";
 import { getUser } from "../../utils/helpers";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
-import { IconButton } from "@mui/material";
+import { IconButton, TextField, Typography } from "@mui/material";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import { useNavigate } from "react-router-dom";
+import { toast } from 'react-toastify';
 
 const SingleForum = () => {
   const user = getUser();
@@ -94,6 +95,19 @@ const SingleForum = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    if (content === '') {
+      toast('🧅 Comment should have laman !', {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+      });
+      return ''
+    }
     const formData = new FormData();
     formData.append("content", content);
     newComment(id, formData);
@@ -234,7 +248,7 @@ const SingleForum = () => {
         style={{ paddingLeft: `${depth * 20}px` }}
       >
         <div className="flex-grow-1">
-          <strong>{comment.user.name}</strong> - {comment.content}
+          <strong>{comment.user.name}</strong> -  <pre><Typography>{comment.content} </Typography></pre>
           {user ? (
             <>
               <Button
@@ -298,16 +312,19 @@ const SingleForum = () => {
             Posted on: {formatDate(forums?.createdAt)}
           </p>
           {user ? (
-            <form onSubmit={handleSubmit}>
-              <MDBInput
+            <form onSubmit={handleSubmit} className="d-flex">
+              <TextField
+                multiline
+                fullWidth
+                sx={{ maxWidth: '85%' }}
                 className="mx-auto"
-                style={{ width: 800, height: 100 }}
                 type="textarea"
                 label="Add a comment"
+                name="content"
                 value={content}
                 onChange={(e) => setContent(e.target.value)}
               />
-              <MDBBtn type="submit">Post Comment</MDBBtn>
+              <Button style={{ maxHeight: 50 }} type="submit">Post Comment</Button>
             </form>
           ) : (
             <>
