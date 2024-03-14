@@ -1,60 +1,32 @@
-import * as React from 'react';
-import Grid from '@mui/material/Grid';
-import Typography from '@mui/material/Typography';
-import TextField from '@mui/material/TextField';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Checkbox from '@mui/material/Checkbox';
+import * as React from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useState } from "react";
+import { saveShippingInfo } from "../../actions/cartActions";
+import Grid from "@mui/material/Grid";
+import Typography from "@mui/material/Typography";
+import TextField from "@mui/material/TextField";
+import FormControlLabel from "@mui/material/FormControlLabel";
+import Checkbox from "@mui/material/Checkbox";
+import { Box, Button } from "@mui/material";
 
 export default function AddressForm() {
+  const { shippingInfo } = useSelector((state) => state.cart);
+  const [baranggay, setBaranggay] = useState(shippingInfo.baranggay);
+  const [city, setCity] = useState(shippingInfo.city);
+  const [postal, setPostal] = useState(shippingInfo.postal);
+  const [street, setStreet] = useState(shippingInfo.street);
+  const dispatch = useDispatch();
+  const submitHandler = (e) => {
+    e.preventDefault();
+    dispatch(saveShippingInfo({ baranggay, city, street, postal }));
+  };
   return (
     <React.Fragment>
       <Typography variant="h6" gutterBottom>
         Shipping address
       </Typography>
+      <Box component="form" noValidate onSubmit={submitHandler}>
       <Grid container spacing={3}>
-        <Grid item xs={12} sm={6}>
-          <TextField
-            required
-            id="firstName"
-            name="firstName"
-            label="First name"
-            fullWidth
-            autoComplete="given-name"
-            variant="standard"
-          />
-        </Grid>
-        <Grid item xs={12} sm={6}>
-          <TextField
-            required
-            id="lastName"
-            name="lastName"
-            label="Last name"
-            fullWidth
-            autoComplete="family-name"
-            variant="standard"
-          />
-        </Grid>
-        <Grid item xs={12}>
-          <TextField
-            required
-            id="address1"
-            name="address1"
-            label="Address line 1"
-            fullWidth
-            autoComplete="shipping address-line1"
-            variant="standard"
-          />
-        </Grid>
-        <Grid item xs={12}>
-          <TextField
-            id="address2"
-            name="address2"
-            label="Address line 2"
-            fullWidth
-            autoComplete="shipping address-line2"
-            variant="standard"
-          />
-        </Grid>
         <Grid item xs={12} sm={6}>
           <TextField
             required
@@ -64,15 +36,19 @@ export default function AddressForm() {
             fullWidth
             autoComplete="shipping address-level2"
             variant="standard"
+            value={city}
+            onChange={(e) => setCity(e.target.value)}
           />
         </Grid>
         <Grid item xs={12} sm={6}>
           <TextField
-            id="state"
-            name="state"
-            label="State/Province/Region"
+            id="street"
+            name="street"
+            label="Street/House No./Block"
             fullWidth
             variant="standard"
+            value={street}
+            onChange={(e) => setStreet(e.target.value)}
           />
         </Grid>
         <Grid item xs={12} sm={6}>
@@ -84,26 +60,33 @@ export default function AddressForm() {
             fullWidth
             autoComplete="shipping postal-code"
             variant="standard"
+            value={postal}
+            onChange={(e) => setPostal(e.target.value)}
           />
         </Grid>
         <Grid item xs={12} sm={6}>
           <TextField
             required
-            id="country"
-            name="country"
-            label="Country"
+            id="baranggay"
+            name="baranggay"
+            label="Baranggay"
             fullWidth
-            autoComplete="shipping country"
             variant="standard"
+            value={baranggay}
+            onChange={(e) => setBaranggay(e.target.value)}
           />
         </Grid>
         <Grid item xs={12}>
           <FormControlLabel
-            control={<Checkbox color="secondary" name="saveAddress" value="yes" />}
+            control={
+              <Checkbox color="secondary" name="saveAddress" value="yes" />
+            }
             label="Use this address for payment details"
           />
         </Grid>
+        <Button type="submit">Ok</Button>
       </Grid>
+      </Box>
     </React.Fragment>
   );
 }

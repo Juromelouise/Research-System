@@ -93,7 +93,7 @@ html {
   padding: 0;
   height: 100%;
   /* Specify the background image */
-  background-image: url('C:\EUMAN\Onistem\Client\public\background.jpg');
+  background-image: url('../public/background.jpg');
   /* Ensure the image covers the entire viewport */
   background-size: cover;
   /* Center the background image */

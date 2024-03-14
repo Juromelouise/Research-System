@@ -21,6 +21,7 @@ import Types from "./Components/About/Types";
 import Production from "./Components/About/Production";
 import Problem from "./Components/About/Problem";
 import SingleProduct from "./Components/Product/SingleProduct";
+import SingleProductSeller from "./Components/Product/SingleProductSeller";
 import UpdateProfile from "./Components/User/UpdateProfile";
 import About from "./Components/About/About";
 import AdminCreateProduct from "./Components/Admin/AdminCreateProduct";
@@ -67,6 +68,11 @@ function App() {
           <Route
             path="/forum/open/:id"
             element={<SingleForum />}
+            exact="true"
+          />
+          <Route
+            path="/single/seller/product"
+            element={<SingleProductSeller />}
             exact="true"
           />
           <Route
