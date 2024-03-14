@@ -14,7 +14,7 @@ import { getToken } from "../../utils/helpers";
 import { Modal, Button } from "react-bootstrap";
 import { getUser } from "../../utils/helpers";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
-import { IconButton, TextField, Typography } from "@mui/material";
+import { Box, IconButton, TextField, Typography } from "@mui/material";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import { useNavigate } from "react-router-dom";
@@ -23,6 +23,8 @@ import { toast } from 'react-toastify';
 import Filter from 'bad-words'
 import badWords from 'filipino-badwords-list'
 import { filterText } from "../../utils/filterText";
+import ReplyIcon from '@mui/icons-material/Reply';
+import DeleteIcon from '@mui/icons-material/Delete';
 
 const SingleForum = () => {
 
@@ -254,38 +256,42 @@ const SingleForum = () => {
     return commentList.map((comment) => (
       <MDBListGroupItem
         key={comment._id}
-        className="d-flex align-items-start"
+        className="d-flex align-items-start flex-column my-3 justify-content-between "
         style={{ paddingLeft: `${depth * 20}px` }}
       >
-        <div className="flex-grow-1">
-          <strong>{comment.user.name}</strong> -  <pre><Typography dangerouslySetInnerHTML={{ __html: filterText(comment?.content) }}></Typography></pre>
-          {user ? (
-            <>
-              <Button
-                variant="link"
-                onClick={() => handleShowReplyModal(comment)}
-              >
-                Reply
-              </Button>
-              {comment.user._id === user._id ? (
-                <Button
+        <div className="flex-grow-1 d-flex gap-2 align-items-center w-100">
+          <img src={comment?.user?.avatar?.url} width={75} height={75} sx={{ objectFit: 'cover' }} />
+          <div style={{ textAlign: 'left', }} className="d-flex justify-content-start w-100">
+            <div className="me-auto">
+              <Typography sx={{ fontWeight: 800 }}>{comment.user.name}</Typography>
+              <pre><Typography dangerouslySetInnerHTML={{ __html: filterText(comment?.content) }}></Typography></pre>
+            </div>
+            {user ? (
+              <div>
+                <IconButton
                   variant="link"
-                  onClick={() => deleteComment(comment._id, id)}
+                  onClick={() => handleShowReplyModal(comment)}
                 >
-                  Delete Comment
-                </Button>
-              ) : (
-                <></>
-              )}
-            </>
-          ) : (
-            <></>
-          )}
+                  <ReplyIcon />
+                </IconButton>
+                {comment.user._id === user._id ? (
+                  <Button
+                    variant="link"
+                    onClick={() => deleteComment(comment._id, id)}
+                  >
+                    <DeleteIcon />
+                  </Button>
+                ) : (
+                  <></>
+                )}
+              </div>
+            ) : (<></>)}
+          </div>
         </div>
         {comment.comments.length > 0 && (
-          <MDBListGroup className="mt-2">
+          <div className="ms-4 mb-1 w-100 ">
             {renderComments(comment.comments, depth + 1)}
-          </MDBListGroup>
+          </div>
         )}
       </MDBListGroupItem>
     ));
@@ -293,7 +299,7 @@ const SingleForum = () => {
 
   return (
     <MDBContainer style={{ marginTop: 20 }}>
-      <MDBCard>
+      <MDBCard style={{ width: '90%', margin: 'auto', }} className="px-4 py-4">
         <MDBCardBody>
           {forums && forums?.user._id === user._id ? (
             <div style={{ position: "absolute", top: 10, right: 10 }}>
@@ -313,20 +319,31 @@ const SingleForum = () => {
                 </MenuItem>
               </Menu>
             </div>
-          ) : (
-            <></>
-          )}
-          <h2 className="card-title">{forums?.title}</h2>
+          ) : (<></>)}
+
+          {/* <h2 className="card-title">{forums?.title}</h2>
           <p className="card-text">{forums?.post}</p>
           <p className="text-muted">
             Posted on: {formatDate(forums?.createdAt)}
-          </p>
+          </p> */}
+          <Box className='d-flex flex-column mb-3 gap-3 flex-md-row'>
+            <img src={forums?.user?.avatar?.url} width={150} height={150} sx={{ width: '100%' }} />
+            <Box className='' sx={{ textAlign: 'left' }}>
+              <Typography variant="h3">{forums?.title}</Typography>
+              <Typography variant="body" fontSize={30} fontWeight={200}>{forums?.post}</Typography>
+              <Typography>Posted on {formatDate(forums?.createdAt)}</Typography>
+              {forums?.user?._id === getUser()?._id ?
+                <Typography>by You</Typography> :
+                <Typography>by {forums?.user?.name}</Typography>
+              }
+            </Box>
+          </Box>
+
           {user ? (
             <form onSubmit={handleSubmit} className="d-flex">
               <TextField
                 multiline
                 fullWidth
-                sx={{ maxWidth: '85%' }}
                 className="mx-auto"
                 type="textarea"
                 label="Add a comment"
@@ -334,7 +351,7 @@ const SingleForum = () => {
                 value={content}
                 onChange={(e) => setContent(e.target.value)}
               />
-              <Button style={{ maxHeight: 50 }} type="submit">Post Comment</Button>
+              <Button style={{ maxHeight: 70, minWidth: 150, marginLeft: 20 }} type="submit">Post Comment</Button>
             </form>
           ) : (
             <>
@@ -342,9 +359,9 @@ const SingleForum = () => {
             </>
           )}
 
-          <div className="mt-3">
+          <div className="mt-3 d-flex justify-content-center flex-column align-items-center ">
             <h5 className="card-title">Comments</h5>
-            <MDBListGroup>{renderComments(comments)}</MDBListGroup>
+            <MDBListGroup style={{ maxWidth: 900, width: '100%' }} className="d-flex justify-content-center">{renderComments(comments)}</MDBListGroup>
           </div>
         </MDBCardBody>
       </MDBCard>

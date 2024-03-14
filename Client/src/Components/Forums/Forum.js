@@ -192,7 +192,9 @@ const Forum = () => {
                   {forums.title}
                 </Typography>
                 <Typography sx={{ fontWeight: 500, fontSize: 20, color: '#35374B' }} variant="body2">
-                  {forums.user.name}
+                  {forums?.user?._id === getUser()?._id ?
+                    "by You" : forums.user.name
+                  }
                 </Typography>
                 <Typography sx={{ color: '#35374B' }}>
                   {forums.post}
