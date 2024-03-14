@@ -6,6 +6,7 @@ import {
   MDBCardBody,
   MDBCardTitle,
   MDBCardText,
+  MDBBtn ,
   MDBRow,
   MDBCol,
 } from "mdb-react-ui-kit";
@@ -75,162 +76,167 @@ const SingleProduct = () => {
   return (
     <>
       {loading ? <Loader open={loading} /> : <></>}
-      <div className="row">
-        <div className="col-lg-8">
-          <div className="card mb-4">
-            <div className="card-body">
-              <div className="row">
-                <div className="col-md-6" style={{ textAlign: "center" }}>
-                  <h2 style={{ color: "black", fontSize: "36px" }}>
-                    Personal Information
-                  </h2>
+  <div className="row justify-content-center" style={{ marginLeft: "200px" }}>
+  <div className="col-lg-8">
+    <hr/>
+    <div className="card mb-4" style={{ width: "800px" }}> {/* Adjust width as needed */}
+      <div className="card-body" style={{ height: "700px" }}> {/* Adjust height as needed */}
+        <div className="row">
+          <div className="col-md-6" style={{ textAlign: "center" }}>
+          <h2 style={{ color: "black", fontSize: "29px" }}><strong>PERSONAL INFORMATION</strong></h2>
                 </div>
               </div>
+
               <div className="row">
                 <hr />
                 <div className="col-sm-3">
-                  <p className="mb-0">NAME:</p>
+                <p className="mb-0" style={{ textAlign: "justify" }}><strong>NAME:</strong></p>
                 </div>
-                <div className="col-sm-9">
+                <div className="col-sm-9"style={{ textAlign: "justify" }}>
                   <p>{user.name}</p>
                 </div>
               </div>
               <hr />
+
               <div className="row">
                 <div className="col-sm-3">
-                  <p className="mb-0">AGE:</p>
+                <p className="mb-0" style={{ textAlign: "justify" }}><strong>BARANGAY:</strong></p>
                 </div>
-                <div className="col-sm-9">
-                  <p className="text-muted mb-0">{user.age}</p>
+                <div className="col-sm-9"style={{ textAlign: "justify" }}>
+                  <p>{user.baranggay}</p>
                 </div>
               </div>
               <hr />
 
               <div className="row">
                 <div className="col-sm-3">
-                  <p className="mb-0">GENDER:</p>
+                <p className="mb-0" style={{ textAlign: "justify" }}><strong>CITY:</strong></p>
                 </div>
-                <div className="col-sm-9">
-                  <p className="text-muted mb-0">{user.gender}</p>
+                <div className="col-sm-9"style={{ textAlign: "justify" }}>
+                  <p>{user.city}</p>
                 </div>
               </div>
               <hr />
 
               <div className="row">
                 <div className="col-sm-3">
-                  <p className="mb-0">LOCATION:</p>
+                <p className="mb-0" style={{ textAlign: "justify" }}><strong>EMAIL:</strong></p>
                 </div>
-                <div className="col-sm-9">
-                  <p className="text-muted mb-0">
-                    {user.baranggay}, {user.city}
-                  </p>
+                <div className="col-sm-9"style={{ textAlign: "justify" }}>
+                  <p>{user.email}</p>
                 </div>
               </div>
               <hr />
+
+
               <div className="row">
                 <div className="col-sm-3">
-                  <p className="mb-0">EMAIL:</p>
+                <p className="mb-0" style={{ textAlign: "justify" }}><strong>PHONE NUMBER:</strong></p>
                 </div>
-                <div className="col-sm-9">
-                  <p className="text-muted mb-0">{user.email}</p>
+                <div className="col-sm-9"style={{ textAlign: "justify" }}>
+                  <p>{user.phone}</p>
                 </div>
               </div>
               <hr />
+
               <div className="row">
                 <div className="col-sm-3">
-                  <p className="mb-0">LOCATION:</p>
+                <p className="mb-0" style={{ textAlign: "justify" }}><strong>DESCRIPTION:</strong></p>
                 </div>
-                <div className="col-sm-9">
-                  <p className="text-muted mb-0">{user.email}</p>
+                <div className="col-sm-9"style={{ textAlign: "justify" }}>
+                  <p>{user.description}</p>
                 </div>
               </div>
               <hr />
+
               <div className="row">
                 <div className="col-sm-3">
-                  <p className="mb-0">PHONE NUMBER:</p>
+                <p className="mb-0" style={{ textAlign: "justify" }}><strong>SEASONS:</strong></p>
                 </div>
-                <div className="col-sm-9">
-                  {/* Access user object */}
-                  <p className="text-muted mb-0">{user.phone}</p>
+                <div className="col-sm-9"style={{ textAlign: "justify" }}>
+                  <p>{user.season}</p>
                 </div>
               </div>
               <hr />
+
+              
+              <div className="row">
+                <div className="col-sm-3">
+                <p className="mb-0" style={{ textAlign: "justify" }}><strong>FERTILIZER:</strong></p>
+                </div>
+                <div className="col-sm-9"style={{ textAlign: "justify" }}>
+                  <p>{user.season}</p>
+                </div>
+              </div>
+              <hr />
+              
+              <div className="row">
+                <div className="col-sm-3">
+                <p className="mb-0" style={{ textAlign: "justify" }}><strong>ONION TYPE:</strong></p>
+                </div>
+                <div className="col-sm-9"style={{ textAlign: "justify" }}>
+                  <p>{user.type}</p>
+                </div>
+              </div>
+              <hr />
+
             </div>
           </div>
         </div>
 
-        <div className="col-lg-4">
+        <div className="col-lg-3" >
+          <hr/>
           <table className="table">
             <thead>
               <tr>
-                <th scope="col">Business Information</th>
+                <th scope="col">IMPORTANT DOCUMENT</th>
               </tr>
+              <hr/>
             </thead>
             <tbody>
-              <tr>
-                <th scope="col">Column 1</th>
-                <th scope="col">Column 2</th>
-              </tr>
-              <tr>
-                <td>Data 3</td>
-                <td>Data 4</td>
-              </tr>
+            <img
+      src='https://mdbootstrap.com/img/new/standard/city/041.webp'
+      className='img-thumbnail'
+      alt='...'
+    />
+    <hr/>
+     <img
+      src='https://mdbootstrap.com/img/new/standard/city/041.webp'
+      className='img-thumbnail'
+      alt='...'
+    />
             </tbody>
           </table>
         </div>
       </div>
 
-      <div className="row">
-        <div
-          style={{
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-            height: "90vh",
-            padding: "20px",
-          }}
-        >
-          <h1 style={{ color: "white" }}>All Products</h1>
-          <MDBRow className="row-cols-1 row-cols-md-5 g-4">
-            {product.map((item) => (
-              <MDBCol>
-                <MDBCard className="h-100">
-                  <MDBCardImage
-                    src={item.images[0].url}
-                    alt="..."
-                    position="top"
-                  />
-                  <MDBCardBody>
-                    <MDBCardTitle>{item.name}</MDBCardTitle>
-                    <MDBCardText>{item.description}</MDBCardText>
-                    <MDBCardText>${item.price}</MDBCardText>
-                    <Link to={`/product/update/${item._id}`}>
-                      <Button>
-                        Edit
-                      </Button>
-                    </Link>
-                    <Button
-                      onClick={() => {
-                        deleteProduct(item._id);
-                        setLoading(true);
-                      }}
-                    >
-                      Delete
-                    </Button>
-                    <Button
-                      onClick={() => {
-                        addToCart(item._id);
-                      }}
-                    >
-                      Add to Cart
-                    </Button>
-                  </MDBCardBody>
-                </MDBCard>
-              </MDBCol>
-            ))}
-          </MDBRow>
-        </div>
-      </div>
+<div className="row justify-content-center">
+  <h1 style={{ color: "white" }}><strong>All PRODUCTS</strong></h1>
+  <div style={{ marginLeft: '30px' }}>
+    
+  <MDBCard style={{ width: '300px', height: '400px' }}>
+    <MDBCardImage 
+      src='https://mdbootstrap.com/img/new/standard/nature/184.webp' 
+      position='top' 
+      alt='...' 
+      style={{height: '200px', width: '300px'}} 
+    />
+    <MDBCardBody>
+      <MDBCardTitle>Card title</MDBCardTitle>
+      <MDBCardText style={{ textAlign: 'left' }}>
+  Some quick example text to build on the card title and make up the bulk of the card's content.
+</MDBCardText>
+<Button href='##000957' style={{ marginRight: '10px', backgroundColor: '#000957', color: 'white' }}>Button</Button>
+<Button href='##000957' style={{ marginRight: '10px', backgroundColor: '#000957', color: 'white' }}>Button</Button>
+<Button href='##000957' style={{ backgroundColor: '#000957', color: 'white' }}>Button</Button>
+
+    </MDBCardBody>
+  </MDBCard>
+</div>
+
+</div>
+
+
     </>
   );
 };
