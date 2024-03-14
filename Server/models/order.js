@@ -22,18 +22,12 @@ const OrderSchema = new mongoose.Schema({
       type: String,
     },
   },
-  mod: { type: String },
+  mod: {
+    type: String,
+  },
   deliveredAt: {
     type: Date,
   },
-  seller: [
-    {
-      type: mongoose.Schema.Types.ObjectId,
-      required: true,
-      ref: "User",
-      autopopulate: true,
-    },
-  ],
   totalPrice: {
     type: Number,
     required: true,
@@ -54,7 +48,7 @@ const OrderSchema = new mongoose.Schema({
         type: Number,
         required: true,
       },
-      image: {
+      images: {
         type: String,
         required: true,
       },
@@ -66,6 +60,12 @@ const OrderSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         required: true,
         ref: "Product",
+      },
+      seller: {
+        type: mongoose.Schema.Types.ObjectId,
+        required: true,
+        ref: "User",
+        autopopulate: true,
       },
     },
   ],

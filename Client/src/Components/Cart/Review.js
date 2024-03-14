@@ -7,8 +7,9 @@ import Grid from "@mui/material/Grid";
 import { useDispatch, useSelector } from "react-redux";
 import { useState, useEffect } from "react";
 import { getToken } from "../../utils/helpers";
-import { Loading } from "../Layout/Loader";
+import { Loader } from "../Layout/Loader";
 import { Button } from "@mui/material";
+import axios from "axios";
 
 const addresses = ["1 MUI Drive", "Reactville", "Anytown", "99999", "USA"];
 
@@ -18,6 +19,7 @@ export default function Review() {
   const order = {
     orderItems: cartItems,
     shippingInfo,
+    seller: cartItems.seller,
   };
 
   const createOrder = async (order) => {
@@ -34,8 +36,7 @@ export default function Review() {
         config
       );
       setLoading(false);
-      sessionStorage.clear();
-      localStorage.clear();
+      // localStorage.clear();
     } catch (error) {
       console.log(error);
     }
@@ -73,6 +74,7 @@ export default function Review() {
         <Button
           onClick={() => {
             createOrder(order);
+            setLoading(true);
           }}
           variant="primary"
         >
