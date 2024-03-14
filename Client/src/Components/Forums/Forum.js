@@ -15,7 +15,7 @@ import DialogActions from "@mui/material/DialogActions";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 import Modal from "@mui/material/Modal";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { getUser } from "../../utils/helpers";
 import SearchTwoToneIcon from "@mui/icons-material/SearchTwoTone";
 import { Grid } from "@mui/material";
@@ -29,6 +29,7 @@ const Forum = () => {
   const [forum, setForum] = useState([]);
   const [filteredforums, setFilteredforums] = useState([]);
   const [search, setSearch] = useState("");
+  const navigate = useNavigate()
 
   const handleOpenModal = () => {
     setOpenModal(true);
@@ -174,46 +175,43 @@ const Forum = () => {
               key={forums._id}
               variant="outlined"
               sx={{
-                width: 1200,
-                marginBottom: 1,
-                minHeight: 135,
+                width: '90%',
+                maxWidth: 1000,
+                marginBottom: 3,
                 position: "relative",
                 display: "flex",
                 alignItems: "center",
+                justifyContent: 'start',
+                backgroundColor: '#98ABEE',
+                py: 5,
+                paddingBottom: 8,
               }}
             >
-              <Avatar
-                sx={{ width: 70, height: 70, marginRight: 2, marginLeft: 15 }}
-                src={forums.user.avatar.url}
-                alt={`Avatar ${forums.post}`}
-              >
-                {1}
-              </Avatar>
-              <div style={{ flex: 1 }}>
-                <Link to={`/forum/open/${forums._id}`}>
-                  <Typography variant="h3" component="div">
-                    {forums.title}
-                  </Typography>
-                </Link>
-                <Typography variant="body2">
-                  <strong>{forums.user.name}</strong>
-                  <br />
+              <div style={{ flex: 1, color: '#070F2B' }} className="d-flex flex-column gap-2">
+                <Typography onClick={() => navigate(`/forum/open/${forums._id}`)} variant="h3" sx={{ color: '#070F2B', cursor: 'pointer' }} >
+                  {forums.title}
+                </Typography>
+                <Typography sx={{ fontWeight: 500, fontSize: 20, color: '#35374B' }} variant="body2">
+                  {forums.user.name}
+                </Typography>
+                <Typography sx={{ color: '#35374B' }}>
                   {forums.post}
                 </Typography>
               </div>
               <div
                 style={{
                   position: "absolute",
-                  bottom: 5,
-                  right: 5,
+                  bottom: 12,
+                  right: 20,
+                  display: 'flex',
+                  gap: 3,
+                  alignItems: 'center'
                 }}
               >
-                <IconButton color="primary" aria-label="Comments">
-                  <CommentIcon />
-                  <Typography variant="body2" sx={{ marginLeft: 1 }}>
-                    {forums.comments.length}
-                  </Typography>
-                </IconButton>
+                <CommentIcon />
+                <Typography variant="body2" sx={{ mt: -0.5, fontWeight: 800 }}>
+                  {forums.comments.length}
+                </Typography>
               </div>
             </Card>
           ))}
