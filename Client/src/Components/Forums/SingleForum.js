@@ -20,7 +20,15 @@ import MenuItem from "@mui/material/MenuItem";
 import { useNavigate } from "react-router-dom";
 import { toast } from 'react-toastify';
 
+import Filter from 'bad-words'
+import badWords from 'filipino-badwords-list'
+import { filterText } from "../../utils/filterText";
+
 const SingleForum = () => {
+
+  const filter = new Filter({ list: badWords.array });
+
+
   const user = getUser();
   const navigate = useNavigate();
   let { id } = useParams();
@@ -240,6 +248,8 @@ const SingleForum = () => {
     }
   };
 
+
+
   const renderComments = (commentList, depth = 0) => {
     return commentList.map((comment) => (
       <MDBListGroupItem
@@ -248,7 +258,7 @@ const SingleForum = () => {
         style={{ paddingLeft: `${depth * 20}px` }}
       >
         <div className="flex-grow-1">
-          <strong>{comment.user.name}</strong> -  <pre><Typography>{comment.content} </Typography></pre>
+          <strong>{comment.user.name}</strong> -  <pre><Typography dangerouslySetInnerHTML={{ __html: filterText(comment?.content) }}></Typography></pre>
           {user ? (
             <>
               <Button
