@@ -7,7 +7,7 @@ import { addItemToCart, removeItemFromCart } from "../../actions/cartActions";
 const Cart = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const [quantity, setQuantity] = useState(0);
+  const [quantity, setQuantity] = useState(1);
   const { cartItems } = useSelector((state) => state.cart);
 
   const increaseQty = (id) => {
@@ -17,7 +17,7 @@ const Cart = () => {
   };
 
   const decreaseQty = (id) => {
-    if (quantity <= 0) return;
+    if (quantity <= 1) return;
     const qty = quantity - 1;
     setQuantity(qty);
     addToCart(id, qty)

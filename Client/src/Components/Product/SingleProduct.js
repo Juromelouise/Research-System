@@ -23,7 +23,7 @@ const SingleProduct = () => {
   const dispatch = useDispatch();
   const [product, setProduct] = useState([]);
   const [loading, setLoading] = useState(false);
-  const [quantity, setQuantity] = useState(0);
+  const [quantity, setQuantity] = useState(1);
   const location = useLocation();
   const query = new URLSearchParams(location.search);
   const id = query.get("fid");
