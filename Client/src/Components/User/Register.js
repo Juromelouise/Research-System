@@ -296,17 +296,19 @@ export default function Register() {
                       onChange={onChange}
                     />
                   </Grid>
-                  <Grid item xs={12}>
-                    <TextField
-                      required
-                      fullWidth
-                      name="season"
-                      label="Season"
-                      id="season"
-                      value={season}
-                      onChange={onChange}
-                    />
-                  </Grid>
+                  <InputLabel id="demo-simple-select-label" sx={{ mb: 1 }}>
+                    Season:
+                  </InputLabel>
+                  <Select
+                    label="season"
+                    name="season"
+                    value={season}
+                    onChange={onChange}
+                    fullWidth
+                  >
+                    <MenuItem value="Rainy Season">Rainy Season</MenuItem>
+                    <MenuItem value="Dry Season">Dry Season</MenuItem>
+                  </Select>
                   <Grid item xs={12}>
                     <TextField
                       required
@@ -318,17 +320,21 @@ export default function Register() {
                       onChange={onChange}
                     />
                   </Grid>
-                  <Grid item xs={12}>
-                    <TextField
-                      required
-                      fullWidth
-                      name="type"
-                      label="Onion Type"
-                      id="type"
-                      value={type}
-                      onChange={onChange}
-                    />
-                  </Grid>
+                  <InputLabel id="demo-simple-select-label" sx={{ mb: 1 }}>
+                    Onion Type:
+                  </InputLabel>
+                  <Select
+                    label="type"
+                    name="type"
+                    value={type}
+                    onChange={onChange}
+                    fullWidth
+                  >
+                    <MenuItem value="Red Onion">Red Onion</MenuItem>
+                    <MenuItem value="White Onion">White Onion</MenuItem>
+                    <MenuItem value="Multiplier Onion">Multiplier Onion</MenuItem>
+                    <MenuItem value="Native Onion">Native Onion</MenuItem>
+                  </Select>
                 </>
               ) : (
                 <></>

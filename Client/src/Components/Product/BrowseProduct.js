@@ -28,6 +28,7 @@ const BrowseProduct = () => {
                     }
                 }
                 const { data } = await axios.get(`${process.env.REACT_APP_API}/api/v1/products`, config);
+                console.log(data.products)
                 setProducts(data.products);
                 setFilteredProducts(data.products);
             } catch (error) {

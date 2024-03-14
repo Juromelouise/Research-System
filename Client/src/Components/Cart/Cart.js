@@ -9,6 +9,20 @@ const Cart = () => {
   const [quantity, setQuantity] = useState(1);
   const { cartItems } = useSelector((state) => state.cart);
 
+  const increaseQty = () => {
+    const count = document.querySelector(".count");
+    if (count.valueAsNumber >= product.stock) return;
+    const qty = count.valueAsNumber + 1;
+    setQuantity(qty);
+  };
+
+  const decreaseQty = () => {
+    const count = document.querySelector(".count");
+    if (count.valueAsNumber <= 1) return;
+    const qty = count.valueAsNumber - 1;
+    setQuantity(qty);
+  };
+
   const checkoutHandler = () => {
     navigate("/signin?redirect=checkout");
   };
@@ -28,7 +42,9 @@ const Cart = () => {
                 <div className="cart-item-details">
                   <h3>{item.name}</h3>
                   <p>Price: ${item.price}</p>
+                  <Button>-</Button>
                   <p>Quantity: {item.quantity}</p>
+                  <Button>+</Button>
                   <p>Total: ${item.price * item.quantity}</p>
                 </div>
               </div>
