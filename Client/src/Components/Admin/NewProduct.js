@@ -9,6 +9,8 @@ const NewProduct = () => {
   const [price, setPrice] = useState("");
   const [description, setDescription] = useState("");
   const [images, setImages] = useState([]);
+  const [attachments, setAttachments] = useState([]);
+  const [attachmentsPreview, setAttachmentsPreview] = useState([]);
   const [success, setSuccess] = useState("");
   const [imagesPreview, setImagesPreview] = useState([]);
   const [error, setError] = useState("");
@@ -23,6 +25,9 @@ const NewProduct = () => {
     formData.set("description", description);
     Array(...images).forEach((image) => {
       formData.append("images", image);
+    });
+    Array(...attachments).forEach((attachments) => {
+      formData.append("attachments", attachments);
     });
     setLoading(true);
     newProduct(formData);
@@ -61,6 +66,23 @@ const NewProduct = () => {
   }, [error, success, navigate]);
 
   const onChange = (e) => {
+    const files = Array.from(e.target.files);
+    setImagesPreview([]);
+    setImages([]);
+    files.forEach((file) => {
+      const reader = new FileReader();
+      setImages(e.target.files);
+      reader.onload = () => {
+        if (reader.readyState === 2) {
+          setImagesPreview((oldArray) => [...oldArray, reader.result]);
+        }
+      };
+
+      reader.readAsDataURL(file);
+    });
+  };
+
+  const onChangeAttachments = (e) => {
     const files = Array.from(e.target.files);
     setImagesPreview([]);
     setImages([]);
