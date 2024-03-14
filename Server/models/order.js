@@ -36,7 +36,7 @@ const OrderSchema = new mongoose.Schema({
   orderStatus: {
     type: String,
     required: true,
-    default: "Processing",
+    default: "Waiting to Confirm",
   },
   orderItems: [
     {
@@ -60,6 +60,7 @@ const OrderSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         required: true,
         ref: "Product",
+        autopopulate: true,
       },
       seller: {
         type: mongoose.Schema.Types.ObjectId,

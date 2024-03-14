@@ -1,3 +1,7 @@
+import filipinoBarwords from 'filipino-badwords-list';
+import Filter from 'bad-words';
+import { getUser } from './helpers';
+
 export const filterText = (text) => {
     try {
         const filter = new Filter({ list: filipinoBarwords.array });

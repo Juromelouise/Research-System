@@ -140,16 +140,16 @@ export default function Dashboard() {
           </List>
         </Drawer>
         <Box
-  component="main"
-  sx={{
-    backgroundImage: `C:\EUMAN\Onistem\Client\public\background.jpg`, // Background image
-    backgroundSize: 'cover', // Ensure the image covers the entire box
-    backgroundPosition: 'center', // Center the background image
-    flexGrow: 1,
-    height: "100vh",
-    overflow: "auto",
-  }}
->
+          component="main"
+          sx={{
+            backgroundImage: `../public/background.jpg`, // Background image
+            backgroundSize: "cover", // Ensure the image covers the entire box
+            backgroundPosition: "center", // Center the background image
+            flexGrow: 1,
+            height: "100vh",
+            overflow: "auto",
+          }}
+        >
           <Toolbar />
           <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
             <Grid container spacing={3}>

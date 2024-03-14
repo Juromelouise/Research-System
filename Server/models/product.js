@@ -34,26 +34,6 @@ const productSchema = new mongoose.Schema({
     type: String,
     autopopulate: true,
   },
-  reviews: [
-    {
-      user: {
-        type: mongoose.Schema.ObjectId,
-        ref: "User",
-        required: true,
-        autopopulate: true,
-      },
-      rating: {
-        type: Number,
-        required: true,
-      },
-      comment: {
-        type: mongoose.Schema.ObjectId,
-        ref: "Comment",
-        required: true,
-        autopopulate: true,
-      },
-    },
-  ],
   createdAt: {
     type: Date,
     default: Date.now,
