@@ -19,7 +19,7 @@ import { useDispatch } from "react-redux";
 import { addItemToCart } from "../../actions/cartActions";
 
 const SingleProduct = () => {
-  const user = getUser();
+  const [user, setUser] = useState([]);
   const dispatch = useDispatch();
   const [product, setProduct] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -41,6 +41,7 @@ const SingleProduct = () => {
       );
       console.log(data.product);
       setProduct(data.product);
+      setUser(data.product[0].user);
     } catch (error) {
       console.log(error);
     }
@@ -151,50 +152,57 @@ const SingleProduct = () => {
                 </div>
               </div>
               <hr />
-              <div className="row">
-                <div className="col-sm-3">
-                  <p className="mb-0" style={{ textAlign: "justify" }}>
-                    <strong>DESCRIPTION:</strong>
-                  </p>
-                </div>
-                <div className="col-sm-9" style={{ textAlign: "justify" }}>
-                  <p>{user.description}</p>
-                </div>
-              </div>
-              <hr />
-              <div className="row">
-                <div className="col-sm-3">
-                  <p className="mb-0" style={{ textAlign: "justify" }}>
-                    <strong>SEASONS:</strong>
-                  </p>
-                </div>
-                <div className="col-sm-9" style={{ textAlign: "justify" }}>
-                  <p>{user.season}</p>
-                </div>
-              </div>
-              <hr />
-              <div className="row">
-                <div className="col-sm-3">
-                  <p className="mb-0" style={{ textAlign: "justify" }}>
-                    <strong>FERTILIZER:</strong>
-                  </p>
-                </div>
-                <div className="col-sm-9" style={{ textAlign: "justify" }}>
-                  <p>{user.season}</p>
-                </div>
-              </div>
-              <hr />
-              <div className="row">
-                <div className="col-sm-3">
-                  <p className="mb-0" style={{ textAlign: "justify" }}>
-                    <strong>ONION TYPE:</strong>
-                  </p>
-                </div>
-                <div className="col-sm-9" style={{ textAlign: "justify" }}>
-                  <p>{user.type}</p>
-                </div>
-              </div>
-              <hr />
+              {user.role === "supplier" ? (
+                <>
+                  {" "}
+                  <div className="row">
+                    <div className="col-sm-3">
+                      <p className="mb-0" style={{ textAlign: "justify" }}>
+                        <strong>DESCRIPTION:</strong>
+                      </p>
+                    </div>
+                    <div className="col-sm-9" style={{ textAlign: "justify" }}>
+                      <p>{user.description}</p>
+                    </div>
+                  </div>
+                  <hr />
+                  <div className="row">
+                    <div className="col-sm-3">
+                      <p className="mb-0" style={{ textAlign: "justify" }}>
+                        <strong>SEASONS:</strong>
+                      </p>
+                    </div>
+                    <div className="col-sm-9" style={{ textAlign: "justify" }}>
+                      <p>{user.season}</p>
+                    </div>
+                  </div>
+                  <hr />
+                  <div className="row">
+                    <div className="col-sm-3">
+                      <p className="mb-0" style={{ textAlign: "justify" }}>
+                        <strong>FERTILIZER:</strong>
+                      </p>
+                    </div>
+                    <div className="col-sm-9" style={{ textAlign: "justify" }}>
+                      <p>{user.season}</p>
+                    </div>
+                  </div>
+                  <hr />
+                  <div className="row">
+                    <div className="col-sm-3">
+                      <p className="mb-0" style={{ textAlign: "justify" }}>
+                        <strong>ONION TYPE:</strong>
+                      </p>
+                    </div>
+                    <div className="col-sm-9" style={{ textAlign: "justify" }}>
+                      <p>{user.type}</p>
+                    </div>
+                  </div>
+                  <hr />
+                </>
+              ) : (
+                <></>
+              )}
             </div>
           </div>
         </div>
@@ -271,8 +279,11 @@ const SingleProduct = () => {
                       backgroundColor: "#000957",
                       color: "white",
                     }}
+                    onClick={() => {
+                      addToCart(product._id);
+                    }}
                   >
-                    Button
+                    Add to Cart
                   </Button>
                   <Button
                     href="##000957"

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
+import { Button } from "@mui/material";
 import { addItemToCart, removeItemFromCart } from "../../actions/cartActions";
 
 const Cart = () => {
@@ -9,18 +10,22 @@ const Cart = () => {
   const [quantity, setQuantity] = useState(1);
   const { cartItems } = useSelector((state) => state.cart);
 
-  const increaseQty = () => {
-    const count = document.querySelector(".count");
-    if (count.valueAsNumber >= product.stock) return;
-    const qty = count.valueAsNumber + 1;
+  const increaseQty = (id) => {
+    const qty = quantity + 1;
     setQuantity(qty);
+    addToCart(id, qty)
   };
 
-  const decreaseQty = () => {
-    const count = document.querySelector(".count");
-    if (count.valueAsNumber <= 1) return;
-    const qty = count.valueAsNumber - 1;
+  const decreaseQty = (id) => {
+    if (quantity < 1) return;
+    const qty = quantity - 1;
     setQuantity(qty);
+    addToCart(id, qty)
+  };
+
+  const addToCart = (id) => {
+    dispatch(addItemToCart(id, quantity));
+    successMsg("Item Added to Cart");
   };
 
   const checkoutHandler = () => {
@@ -28,7 +33,7 @@ const Cart = () => {
   };
 
   return (
-    <div className="cart">
+    <div className="cart" style={{ backgroundColor: "white" }}>
       <h2>Your Cart</h2>
       {cartItems.length === 0 ? (
         <h2 className="mt-5">Your Cart is Empty</h2>
@@ -42,9 +47,19 @@ const Cart = () => {
                 <div className="cart-item-details">
                   <h3>{item.name}</h3>
                   <p>Price: ${item.price}</p>
-                  <Button>-</Button>
-                  <p>Quantity: {item.quantity}</p>
-                  <Button>+</Button>
+                  <Button
+                    onClick={() => decreaseQty(item.product, item.quantity)}
+                    className="count"
+                  >
+                    -
+                  </Button>
+                  <p>Quantity: {quantity}</p>
+                  <Button
+                    onClick={() => increaseQty(item.product, item.quantity)}
+                    className="count"
+                  >
+                    +
+                  </Button>
                   <p>Total: ${item.price * item.quantity}</p>
                 </div>
               </div>
