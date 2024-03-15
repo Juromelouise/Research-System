@@ -29,7 +29,7 @@ router.post(
   "/new/product",
   isAuthenticatedUser,
   upload.array("images", 5),
-  newProductUser
+  newProduct
 );
 router.put(
   "/update/product/:id",

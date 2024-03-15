@@ -20,6 +20,7 @@ import { addItemToCart } from "../../actions/cartActions";
 
 const SingleProduct = () => {
   const [user, setUser] = useState([]);
+  const users = getUser();
   const dispatch = useDispatch();
   const [product, setProduct] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -218,13 +219,13 @@ const SingleProduct = () => {
             </thead>
             <tbody>
               <img
-                src="https://mdbootstrap.com/img/new/standard/city/041.webp"
+                src={users?.attachment[0]?.url}
                 className="img-thumbnail"
                 alt="..."
               />
               <hr />
               <img
-                src="https://mdbootstrap.com/img/new/standard/city/041.webp"
+                src={users?.attachment[1]?.url}
                 className="img-thumbnail"
                 alt="..."
               />
@@ -273,7 +274,6 @@ const SingleProduct = () => {
                     {product.description}
                   </MDBCardText>
                   <Button
-                    href="##000957"
                     style={{
                       marginRight: "10px",
                       backgroundColor: "#000957",
@@ -285,21 +285,24 @@ const SingleProduct = () => {
                   >
                     Add to Cart
                   </Button>
+                  <Link to={`/product/update/${product._id}`}>
+                    <Button
+                      style={{
+                        marginRight: "10px",
+                        backgroundColor: "#000957",
+                        color: "white",
+                      }}
+                    >
+                      Edit
+                    </Button>
+                  </Link>
                   <Button
-                    href="##000957"
-                    style={{
-                      marginRight: "10px",
-                      backgroundColor: "#000957",
-                      color: "white",
+                    style={{ backgroundColor: "#000957", color: "white" }}
+                    onClick={() => {
+                      deleteProduct(product._id);
                     }}
                   >
-                    Button
-                  </Button>
-                  <Button
-                    href="##000957"
-                    style={{ backgroundColor: "#000957", color: "white" }}
-                  >
-                    Button
+                    Delete
                   </Button>
                 </MDBCardBody>
               </MDBCard>
