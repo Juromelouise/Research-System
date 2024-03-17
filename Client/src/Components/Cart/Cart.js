@@ -13,18 +13,22 @@ const Cart = () => {
   const increaseQty = (id) => {
     const qty = quantity + 1;
     setQuantity(qty);
-    addToCart(id, qty)
+    addToCart(id, qty);
   };
 
   const decreaseQty = (id) => {
     if (quantity <= 1) return;
     const qty = quantity - 1;
     setQuantity(qty);
-    addToCart(id, qty)
+    addToCart(id, qty);
   };
 
-  const addToCart = (id) => {
-    dispatch(addItemToCart(id, quantity));
+  const addToCart = (id, qty) => {
+    dispatch(addItemToCart(id, qty));
+  };
+
+  const removeCartItemHandler = (id) => {
+    dispatch(removeItemFromCart(id));
   };
 
   const checkoutHandler = () => {
@@ -47,17 +51,24 @@ const Cart = () => {
                   <h3>{item.name}</h3>
                   <p>Price: ${item.price}</p>
                   <Button
-                    onClick={() => decreaseQty(item.product, item.quantity)}
+                    onClick={() => decreaseQty(item.product)}
                     className="count"
                   >
                     -
                   </Button>
-                  <p>Quantity: {quantity}</p>
+                  <p>Quantity: {item.quantity}</p>
                   <Button
-                    onClick={() => increaseQty(item.product, item.quantity)}
+                    onClick={() => increaseQty(item.product)}
                     className="count"
                   >
                     +
+                  </Button>
+                  <Button
+                    color="error"
+                    variant="contained"
+                    onClick={() => removeCartItemHandler(item.product)}
+                  >
+                    Remove Item
                   </Button>
                   <p>Total: ${item.price * item.quantity}</p>
                 </div>
