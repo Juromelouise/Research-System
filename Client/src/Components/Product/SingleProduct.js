@@ -10,7 +10,7 @@ import {
   MDBRow,
   MDBCol,
 } from "mdb-react-ui-kit";
-import { getToken, getUser } from "../../utils/helpers";
+import { getToken } from "../../utils/helpers";
 import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Button } from "@mui/material";

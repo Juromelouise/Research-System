@@ -38,7 +38,7 @@ export default function Login() {
   };
 
   useEffect(() => {
-    if (getUser() && redirect === "checkout") {
+    if (getUser()) {
       navigate(`/${redirect}`);
     } else {
       navigate("/signin");

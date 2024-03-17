@@ -9,7 +9,6 @@ import CardActions from "@mui/material/CardActions";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
-import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import red from "@mui/material/colors/red";
@@ -151,7 +150,7 @@ const BrowseProduct = () => {
                 <Button
                   size="small"
                   onClick={() =>
-                    navigate(`/single/user/product?fid=${product?.user?._id}`)
+                      navigate(`/signin?redirect=single/user/product?fid=${product?.user?._id}`)
                   }
                   style={{ color: "white" }}
                 >
