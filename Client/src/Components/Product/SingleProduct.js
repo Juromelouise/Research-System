@@ -20,7 +20,6 @@ import { addItemToCart } from "../../actions/cartActions";
 
 const SingleProduct = () => {
   const [user, setUser] = useState([]);
-  const users = getUser();
   const dispatch = useDispatch();
   const [product, setProduct] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -40,9 +39,11 @@ const SingleProduct = () => {
         `${process.env.REACT_APP_API}/api/v1/single/product?fid=${id}`,
         config
       );
-      console.log(data.product);
+      console.log(data.user);
       setProduct(data.product);
-      setUser(data.product[0].user);
+      setUser(data.user);
+      console.log(data.user);
+      console;
     } catch (error) {
       console.log(error);
     }
@@ -218,17 +219,21 @@ const SingleProduct = () => {
               <hr />
             </thead>
             <tbody>
-              <img
-                src={users?.attachment[0]?.url}
-                className="img-thumbnail"
-                alt="..."
-              />
-              <hr />
-              <img
-                src={users?.attachment[1]?.url}
-                className="img-thumbnail"
-                alt="..."
-              />
+              {user && user.attachment && (
+                <>
+                  <img
+                    src={user.attachment[0]?.url}
+                    className="img-thumbnail"
+                    alt="..."
+                  />
+                  <hr />
+                  <img
+                    src={user.attachment[1]?.url}
+                    className="img-thumbnail"
+                    alt="..."
+                  />
+                </>
+              )}
             </tbody>
           </table>
         </div>

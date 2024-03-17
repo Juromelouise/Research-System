@@ -7,8 +7,8 @@ const {
   uploadMultiple,
 } = require("../utils/UploadCloudinary");
 exports.newProductUser = async (req, res) => {
-  console.log(req.files)
-  console.log("B")
+  console.log(req.files);
+  console.log("B");
   const image = await uploadMultiple(req.files.images, "Onion-type");
   const attachment = await uploadMultiple(req.files.attachment, "Onion-type");
   req.body.user = req.user._id;
@@ -40,8 +40,8 @@ exports.newProductUser = async (req, res) => {
 };
 
 exports.newProduct = async (req, res) => {
-  console.log(req.files)
-  console.log("b")
+  console.log(req.files);
+  console.log("b");
   const image = await uploadMultiple(req.files, "Onion-type");
   req.body.user = req.user._id;
   req.body.images = image;
@@ -138,16 +138,22 @@ exports.UserProduct = async (req, res) => {
   try {
     if (req.query.fid !== "" && req.query.fid !== "null") {
       const product = await Product.find({ user: req.query.fid });
+      const firstProduct = product[0];
+      const user = await User.findById(firstProduct.user._id);
       res.status(200).json({
         product,
         success: true,
+        user,
       });
     } else if (req.user && req.user._id) {
       console.log(req.user._id);
       const product = await Product.find({ user: req.user._id });
+      const firstProduct = product[0];
+      const user = await User.findById(firstProduct.user._id);
       res.status(200).json({
         product,
         success: true,
+        user,
       });
     } else {
       res.status(400).json({

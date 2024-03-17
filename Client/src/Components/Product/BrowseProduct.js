@@ -6,14 +6,12 @@ import CardHeader from "@mui/material/CardHeader";
 import CardMedia from "@mui/material/CardMedia";
 import CardContent from "@mui/material/CardContent";
 import CardActions from "@mui/material/CardActions";
-import Collapse from "@mui/material/Collapse";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
-import IconButton from "@mui/material/IconButton";
 import red from "@mui/material/colors/red";
 import { MDBCol, MDBContainer, MDBRow, MDBTypography } from "mdb-react-ui-kit";
 import { useNavigate } from "react-router-dom";
@@ -23,8 +21,7 @@ const BrowseProduct = () => {
 
   const [products, setProducts] = useState([]);
   const [filteredProducts, setFilteredProducts] = useState([]);
-  const [expanded, setExpanded] = useState(null);
-  const [anchorEl, setAnchorEl] = useState(null);
+  const [anchorEl, setAnchorEl] = useState(null); // Change anchorEl state
 
   useEffect(() => {
     const getAllProducts = async () => {
@@ -50,22 +47,12 @@ const BrowseProduct = () => {
     getAllProducts();
   }, []);
 
-  const filterProductsByBaranggay = () => {
+  const filterProductsByBaranggay = (baranggay) => {
     const filtered = products.filter(
-      (product) => product.user && product.user.role === "seller"
+      (product) => product.user && product.user.baranggay === baranggay
     );
     setFilteredProducts(filtered);
-    handleClose(); // Close the menu after filtering
-  };
-
-  useEffect(() => {
-    filterProductsByBaranggay();
-  });
-
-  const chunkArray = (arr, size) => {
-    return Array.from({ length: Math.ceil(arr.length / size) }, (_, i) =>
-      arr.slice(i * size, i * size + size)
-    );
+    handleClose();
   };
 
   const handleClick = (event) => {
@@ -74,6 +61,11 @@ const BrowseProduct = () => {
 
   const handleClose = () => {
     setAnchorEl(null);
+  };
+
+  const allProducts = () => {
+    setFilteredProducts(products);
+    handleClose();
   };
 
   return (
@@ -108,18 +100,20 @@ const BrowseProduct = () => {
               onClose={handleClose}
             >
               <MenuItem
-                onClick={() => filterProductsByBaranggay("Western Bicutan")}
+                onClick={allProducts}
               >
-                Western Bicutan
+                All Baranggay
               </MenuItem>
-              <MenuItem
-                onClick={() => filterProductsByBaranggay("Upper Bicutan")}
-              >
-                Upper Bicutan
-              </MenuItem>
-              <MenuItem onClick={() => filterProductsByBaranggay("Signal")}>
-                Signal
-              </MenuItem>
+              {products.map((baranggay) => (
+                <MenuItem
+                  onClick={() =>
+                    filterProductsByBaranggay(baranggay.user.baranggay)
+                  }
+                >
+                  {" "}
+                  {baranggay.user.baranggay}
+                </MenuItem>
+              ))}
             </Menu>
           </div>
         </div>
@@ -156,7 +150,6 @@ const BrowseProduct = () => {
               <CardActions disableSpacing>
                 <Button
                   size="small"
-                  aria-expanded={expanded === product._id}
                   onClick={() =>
                     navigate(`/single/user/product?fid=${product?.user?._id}`)
                   }

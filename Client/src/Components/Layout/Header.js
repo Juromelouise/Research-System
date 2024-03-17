@@ -507,6 +507,9 @@ const ResponsiveAppBar = () => {
               <Button component={Link} to="/about" sx={{ my: 2, color: 'white', display: 'block' }}>
                 About
               </Button>
+              <Button component={Link} to="/browse/product" sx={{ my: 2, color: 'white', display: 'block' }}>
+                  Products
+                </Button>
               <Button component={Link} to="/forum" sx={{ my: 2, color: 'white', display: 'block' }}>
                 Discussions
               </Button>
