@@ -49,7 +49,7 @@ const Cart = () => {
 
                 <div className="cart-item-details">
                   <h3>{item.name}</h3>
-                  <p>Price: ${item.price}</p>
+                  <p>Price: ₱{item.price}</p>
                   <Button
                     onClick={() => decreaseQty(item.product)}
                     className="count"
@@ -70,7 +70,7 @@ const Cart = () => {
                   >
                     Remove Item
                   </Button>
-                  <p>Total: ${item.price * item.quantity}</p>
+                  <p>Total: ₱{item.price * item.quantity}</p>
                 </div>
               </div>
             ))}
@@ -78,7 +78,7 @@ const Cart = () => {
           <div className="order-summary">
             <h3>Order Summary</h3>
             <p>
-              Subtotal: $
+              Subtotal: ₱
               {cartItems.reduce(
                 (acc, item) => acc + item.price * item.quantity,
                 0

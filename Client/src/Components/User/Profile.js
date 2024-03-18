@@ -76,7 +76,7 @@ const Profile = () => {
                             <p className="mb-0" style={{ textAlign: "justify" }}><strong>BARANGAY:</strong></p>
                           </div>
                           <div className="col-sm-9">
-                            <p className="text-muted mb-0">{user.age}</p>
+                            <p className="text-muted mb-0">{user.baranggay}</p>
                           </div>
                         </div>
                         <hr/>
@@ -86,7 +86,7 @@ const Profile = () => {
                             <p className="mb-0" style={{ textAlign: "justify" }}><strong>CITY:</strong></p>
                           </div>
                           <div className="col-sm-9">
-                            <p className="text-muted mb-0">{user.gender}</p>
+                            <p className="text-muted mb-0">{user.city}</p>
                           </div>
                         </div>
                         <hr/>
