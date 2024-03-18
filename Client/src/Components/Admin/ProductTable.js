@@ -92,11 +92,11 @@ const ProductTable = () => {
         price: `$${product.price}`,
         actions: (
           <Fragment>
-            <Link to={`/product/update/${product._id}`}>
+            {/* <Link to={`/product/update/${product._id}`}>
               <Button variant="contained" color="primary" className="edit-btn">
                 Edit
               </Button>
-            </Link>
+            </Link> */}
             <Link onClick={() => deleteProductHandler(product._id)}>
               <Button
                 variant="contained"

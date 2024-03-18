@@ -96,10 +96,6 @@ const About = () => {
                   the researchers provide. It will improve communication with transparency between the onion
                   supply chain.
                 </p>
-
-                <MDBBtn outline rounded>
-                  Learn More <MDBIcon fas icon="book-open" />
-                </MDBBtn>
               </div>
             </div>
           </p>

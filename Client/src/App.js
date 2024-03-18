@@ -21,16 +21,17 @@ import Types from "./Components/About/Types";
 import Production from "./Components/About/Production";
 import Problem from "./Components/About/Problem";
 import SingleProduct from "./Components/Product/SingleProduct";
-import SingleProductSeller from "./Components/Product/SingleProductSeller";
 import UpdateProfile from "./Components/User/UpdateProfile";
 import About from "./Components/About/About";
 import AdminCreateProduct from "./Components/Admin/AdminCreateProduct";
 import BrowseProduct from "./Components/Product/BrowseProduct";
 import Cart from "./Components/Cart/Cart";
 import Checkout from "./Components/Cart/Checkout";
+import ListOrders from "./Components/Order/ListOrders";
 
-import { ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import OrderDetails from "./Components/Order/OrderDetails";
 
 function App() {
   return (
@@ -74,11 +75,6 @@ function App() {
             exact="true"
           />
           <Route
-            path="/single/seller/product"
-            element={<SingleProductSeller />}
-            exact="true"
-          />
-          <Route
             path="/single/user/product"
             element={<SingleProduct />}
             exact="true"
@@ -98,6 +94,12 @@ function App() {
             element={<productLIst />}
             exact="true"
           />
+          <Route
+            path="/order/:id"
+            element={<OrderDetails />}
+            exact="true"
+          />
+          <Route path="/my/order" element={<ListOrders />} exact="true" />
           <Route path="/cart" element={<Cart />} exact="true" />
           <Route path="/checkout" element={<Checkout />} exact="true" />
           <Route
@@ -119,7 +121,6 @@ function App() {
           pauseOnHover
           theme="dark"
         />
-
       </Router>
     </div>
   );

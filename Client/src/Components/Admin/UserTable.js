@@ -113,7 +113,7 @@ export default function UserTable() {
       email: row.email,
       action: (
         <Fragment>
-          <Link
+          {/* <Link
             onClick={() => updateRoleSeller(row._id)}
             style={{ textDecoration: "none" }}
           >
@@ -128,7 +128,7 @@ export default function UserTable() {
             <Button variant="contained" color="primary" className="edit-btn">
               Farmer
             </Button>
-          </Link>
+          </Link> */}
           <Link onClick={() => deleteUserHandler(row._id)}>
             <Button
               variant="contained"

@@ -13,3 +13,12 @@ exports.newOrder = async (req, res, next) => {
     orders,
   });
 };
+
+
+exports.myOrders = async (req, res, next) => {
+  const orders = await Order.find({ user: req.user._id })
+  res.status(200).json({
+    success: true,
+    orders,
+  });
+};

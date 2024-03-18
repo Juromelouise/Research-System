@@ -288,22 +288,22 @@
 // };
 
 // export default Header;
-import React, { useState } from 'react';
-import AppBar from '@mui/material/AppBar';
-import Box from '@mui/material/Box';
-import Toolbar from '@mui/material/Toolbar';
-import IconButton from '@mui/material/IconButton';
-import Typography from '@mui/material/Typography';
-import Menu from '@mui/material/Menu';
-import MenuIcon from '@mui/icons-material/Menu';
-import Container from '@mui/material/Container';
-import Avatar from '@mui/material/Avatar';
-import Button from '@mui/material/Button';
-import Tooltip from '@mui/material/Tooltip';
-import MenuItem from '@mui/material/MenuItem';
-import AdbIcon from '@mui/icons-material/Adb';
-import { Link, useNavigate } from 'react-router-dom';
-import axios from 'axios'
+import React, { useState } from "react";
+import AppBar from "@mui/material/AppBar";
+import Box from "@mui/material/Box";
+import Toolbar from "@mui/material/Toolbar";
+import IconButton from "@mui/material/IconButton";
+import Typography from "@mui/material/Typography";
+import Menu from "@mui/material/Menu";
+import MenuIcon from "@mui/icons-material/Menu";
+import Container from "@mui/material/Container";
+import Avatar from "@mui/material/Avatar";
+import Button from "@mui/material/Button";
+import Tooltip from "@mui/material/Tooltip";
+import MenuItem from "@mui/material/MenuItem";
+import AdbIcon from "@mui/icons-material/Adb";
+import { Link, useNavigate } from "react-router-dom";
+import axios from "axios";
 import { getUser, logout } from "../../utils/helpers";
 
 const ResponsiveAppBar = () => {
@@ -371,10 +371,15 @@ const ResponsiveAppBar = () => {
   };
 
   return (
-    <AppBar position="static" >
+    <AppBar position="static">
       <Container maxWidth="xl">
         <Toolbar disableGutters>
-          <img src="../onion-icon.webp" alt="Logo" style={{ width: '40px', height: '40px' }} sx={{ display: { xs: 'none', md: 'flex' } }} />
+          <img
+            src="../onion-icon.webp"
+            alt="Logo"
+            style={{ width: "40px", height: "40px" }}
+            sx={{ display: { xs: "none", md: "flex" } }}
+          />
           <Typography
             variant="h6"
             noWrap
@@ -382,18 +387,18 @@ const ResponsiveAppBar = () => {
             href="/"
             sx={{
               mx: 2,
-              display: { xs: 'none', md: 'flex' },
-              fontFamily: 'monospace',
+              display: { xs: "none", md: "flex" },
+              fontFamily: "monospace",
               fontWeight: 700,
-              letterSpacing: '.3rem',
-              color: 'inherit',
-              textDecoration: 'none',
+              letterSpacing: ".3rem",
+              color: "inherit",
+              textDecoration: "none",
             }}
           >
             ONISTEM
           </Typography>
 
-          <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
+          <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
             <IconButton
               size="large"
               aria-label="account of current user"
@@ -408,30 +413,30 @@ const ResponsiveAppBar = () => {
               id="menu-appbar"
               anchorEl={anchorElNav}
               anchorOrigin={{
-                vertical: 'bottom',
-                horizontal: 'left',
+                vertical: "bottom",
+                horizontal: "left",
               }}
               keepMounted
               transformOrigin={{
-                vertical: 'top',
-                horizontal: 'left',
+                vertical: "top",
+                horizontal: "left",
               }}
               open={Boolean(anchorElNav)}
               onClose={handleCloseNavMenu}
               sx={{
-                display: { xs: 'block', md: 'none' },
+                display: { xs: "block", md: "none" },
               }}
             >
-              <MenuItem component={Link} to="/" >
+              <MenuItem component={Link} to="/">
                 <Typography textAlign="center">Home</Typography>
               </MenuItem>
-              <MenuItem component={Link} to="/about" >
+              <MenuItem component={Link} to="/about">
                 <Typography textAlign="center">About</Typography>
               </MenuItem>
-              <MenuItem component={Link} to="/forum" >
+              <MenuItem component={Link} to="/forum">
                 <Typography textAlign="center">Discussions</Typography>
               </MenuItem>
-              <MenuItem component={Link} to="/cart" >
+              <MenuItem component={Link} to="/cart">
                 <Typography textAlign="center">Cart</Typography>
               </MenuItem>
             </Menu>
@@ -443,83 +448,157 @@ const ResponsiveAppBar = () => {
             href="#app-bar-with-responsive-menu"
             sx={{
               mr: 2,
-              display: { xs: 'flex', md: 'none' },
+              display: { xs: "flex", md: "none" },
               flexGrow: 1,
-              fontFamily: 'monospace',
+              fontFamily: "monospace",
               fontWeight: 700,
-              letterSpacing: '.3rem',
-              color: 'inherit',
-              textDecoration: 'none',
+              letterSpacing: ".3rem",
+              color: "inherit",
+              textDecoration: "none",
             }}
           >
             ONISTEM
           </Typography>
-          <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
+          <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
             {user.role === "supplier" ? (
               <>
-                <Button component={Link} to="/seller/info" sx={{ my: 2, color: 'white', display: 'block' }}>
+                <Button
+                  component={Link}
+                  to="/seller/info"
+                  sx={{ my: 2, color: "white", display: "block" }}
+                >
                   Sellers
                 </Button>
-                <Button component={Link} to="/forum" sx={{ my: 2, color: 'white', display: 'block' }}>
-                Discussions
-               </Button>
-                <Button component={Link} to="/product/create" sx={{ my: 2, color: 'white', display: 'block' }}>
+                <Button
+                  component={Link}
+                  to="/forum"
+                  sx={{ my: 2, color: "white", display: "block" }}
+                >
+                  Discussions
+                </Button>
+                <Button
+                  component={Link}
+                  to="/product/create"
+                  sx={{ my: 2, color: "white", display: "block" }}
+                >
                   Create Product
                 </Button>
-                <Button component={Link} to="/cart" sx={{ my: 2, color: 'white', display: 'block' }}>
+                <Button
+                  component={Link}
+                  to="/cart"
+                  sx={{ my: 2, color: "white", display: "block" }}
+                >
                   Cart
                 </Button>
               </>
             ) : user.role === "buyer" ? (
               <>
-               <Button component={Link} to="/about" sx={{ my: 2, color: 'white', display: 'block' }}>
-                About
-              </Button>
-                <Button component={Link} to="/browse/product" sx={{ my: 2, color: 'white', display: 'block' }}>
+                <Button
+                  component={Link}
+                  to="/about"
+                  sx={{ my: 2, color: "white", display: "block" }}
+                >
+                  About
+                </Button>
+                <Button
+                  component={Link}
+                  to="/browse/product"
+                  sx={{ my: 2, color: "white", display: "block" }}
+                >
                   Products
                 </Button>
-                <Button component={Link} to="/forum" sx={{ my: 2, color: 'white', display: 'block' }}>
-                Discussions
-              </Button>
-              <Button component={Link} to="/product/create" sx={{ my: 2, color: 'white', display: 'block' }}>
+                <Button
+                  component={Link}
+                  to="/forum"
+                  sx={{ my: 2, color: "white", display: "block" }}
+                >
+                  Discussions
+                </Button>
+                <Button
+                  component={Link}
+                  to="/product/create"
+                  sx={{ my: 2, color: "white", display: "block" }}
+                >
                   Create Product
                 </Button>
-                <Button component={Link} to="/cart" sx={{ my: 2, color: 'white', display: 'block' }}>
+                <Button
+                  component={Link}
+                  to="/cart"
+                  sx={{ my: 2, color: "white", display: "block" }}
+                >
                   Cart
                 </Button>
               </>
             ) : user.role === "seller" ? (
               <>
-                <Button component={Link} to="/farmer/info" sx={{ my: 2, color: 'white', display: 'block' }}>
+                <Button
+                  component={Link}
+                  to="/farmer/info"
+                  sx={{ my: 2, color: "white", display: "block" }}
+                >
                   Farmers
                 </Button>
-                <Button component={Link} to="/product/create" sx={{ my: 2, color: 'white', display: 'block' }}>
+                <Button
+                  component={Link}
+                  to="/product/create"
+                  sx={{ my: 2, color: "white", display: "block" }}
+                >
                   Create Product
                 </Button>
-                <Button component={Link} to="/forum" sx={{ my: 2, color: 'white', display: 'block' }}>
-                Discussions
-              </Button>
-                <Button component={Link} to="/cart" sx={{ my: 2, color: 'white', display: 'block' }}>
+                <Button
+                  component={Link}
+                  to="/forum"
+                  sx={{ my: 2, color: "white", display: "block" }}
+                >
+                  Discussions
+                </Button>
+                <Button
+                  component={Link}
+                  to="/cart"
+                  sx={{ my: 2, color: "white", display: "block" }}
+                >
                   Cart
                 </Button>
               </>
-            ) : <>
-              <Button component={Link} to="/" sx={{ my: 2, color: 'white', display: 'block' }}>
-                Home
-              </Button>
-              <Button component={Link} to="/about" sx={{ my: 2, color: 'white', display: 'block' }}>
-                About
-              </Button>
-              <Button component={Link} to="/browse/product" sx={{ my: 2, color: 'white', display: 'block' }}>
+            ) : (
+              <>
+                <Button
+                  component={Link}
+                  to="/"
+                  sx={{ my: 2, color: "white", display: "block" }}
+                >
+                  Home
+                </Button>
+                <Button
+                  component={Link}
+                  to="/about"
+                  sx={{ my: 2, color: "white", display: "block" }}
+                >
+                  About
+                </Button>
+                <Button
+                  component={Link}
+                  to="/browse/product"
+                  sx={{ my: 2, color: "white", display: "block" }}
+                >
                   Products
                 </Button>
-              <Button component={Link} to="/forum" sx={{ my: 2, color: 'white', display: 'block' }}>
-                Discussions
-              </Button>
-              <Button component={Link} to="/cart" sx={{ my: 2, color: 'white', display: 'block' }}>
-                Cart
-              </Button>
-            </>}
+                <Button
+                  component={Link}
+                  to="/forum"
+                  sx={{ my: 2, color: "white", display: "block" }}
+                >
+                  Discussions
+                </Button>
+                <Button
+                  component={Link}
+                  to="/cart"
+                  sx={{ my: 2, color: "white", display: "block" }}
+                >
+                  Cart
+                </Button>
+              </>
+            )}
           </Box>
 
           <Box sx={{ flexGrow: 0 }}>
@@ -538,6 +617,9 @@ const ResponsiveAppBar = () => {
                     {" "}
                     <Link to="/profile">
                       <button className="dropdown-item">Profile</button>
+                    </Link>
+                    <Link to="/my/order">
+                      <button className="dropdown-item">My Orders</button>
                     </Link>
                     {user.role === "supplier" ? (
                       <Link to="/single/user/product">
@@ -604,27 +686,26 @@ const ResponsiveAppBar = () => {
               </nav>
             )}
             <Menu
-              sx={{ mt: '45px' }}
+              sx={{ mt: "45px" }}
               id="menu-appbar"
               anchorEl={anchorElUser}
               anchorOrigin={{
-                vertical: 'top',
-                horizontal: 'right',
+                vertical: "top",
+                horizontal: "right",
               }}
               keepMounted
               transformOrigin={{
-                vertical: 'top',
-                horizontal: 'right',
+                vertical: "top",
+                horizontal: "right",
               }}
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}
-            >
-            </Menu>
+            ></Menu>
           </Box>
         </Toolbar>
       </Container>
-    </AppBar >
+    </AppBar>
   );
-}
+};
 
 export default ResponsiveAppBar;

@@ -1,9 +1,10 @@
 const express = require("express");
 const router = express.Router();
 
-const { newOrder } = require("../controllers/orderController");
+const { newOrder, myOrders } = require("../controllers/orderController");
 const { isAuthenticatedUser } = require("../middlewares/auth");
 
 router.post("/neworder", isAuthenticatedUser, newOrder);
+router.get('/orders/me', isAuthenticatedUser, myOrders);
 
 module.exports = router;

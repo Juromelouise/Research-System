@@ -1,8 +1,6 @@
 import React, { Fragment, useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
-
-import MetaData from "../Layout/Metadata";
-import Loader from "../Layout/Loader";
+import {Loader} from "../Layout/Loader";
 import axios from "axios";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -34,14 +32,15 @@ const OrderDetails = () => {
       };
 
       const { data } = await axios.get(
-        `${process.env.REACT_APP_API}/api/v1/order/${id}`,
+        `${process.env.REACT_APP_API}/order/order/${id}`,
         config
       );
       console.log(data.orders);
       setOrder(data.orders);
       setLoading(false);
     } catch (error) {
-      setError(error.response.data.message);
+      setError(error);
+      console.log(error)
     }
   };
 
@@ -62,10 +61,9 @@ const OrderDetails = () => {
 
   return (
     <Fragment>
-      <MetaData title={"Order Details"} />
 
       {loading ? (
-        <Loader />
+        <Loader open={loading}/>
       ) : (
         <Fragment>
           <div className="row justify-content-center align-items-center">

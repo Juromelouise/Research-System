@@ -6,6 +6,7 @@ const {
   destroyUploaded,
   uploadMultiple,
 } = require("../utils/UploadCloudinary");
+
 exports.newProductUser = async (req, res) => {
   console.log(req.files);
   console.log("B");
