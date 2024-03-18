@@ -31,7 +31,6 @@ const Production = () => {
       <div className="hero"></div>
       <img src="../types.png" className="img-fluid" alt="Wild Landscape" style={{maxWidth: '100%', height: '50%'}} width={1300} height={300} />
       <hr/>
-
           <div className="glide" id="glide_1"></div>
           <div className="glide__track" data-glide-el="track"></div>
           <ul className="glide__slides"></ul>
@@ -53,6 +52,7 @@ const Production = () => {
                 </ul>
                 </p>
               </div>
+              
               <div className="col-md-6 animated fadeIn">
                 <div className="owl-carousel header-carousel">
                   <div className="right">
@@ -190,8 +190,22 @@ const Production = () => {
               </div>
             </div>
           </div>
-          <hr />
 
+          <table className="table">
+            <thead>
+              <tr>
+                <th scope="col"><h1>SOME RELATED VIDEO</h1></th>
+              </tr>
+            </thead>
+          </table>
+          <div className="embed-responsive embed-responsive-16by9">
+                                            <center>
+                                                <iframe className="embed-responsive-item" src="https://www.youtube.com/embed/7XIVxp-7I5s" allowFullScreen width="750" height="450"></iframe>
+                                            </center>
+                                            <p className="citation" style={{color: 'white'}}>Copyright: YouTube. (n.d.). Www.youtube.com. Retrieved March 18, 2024 </p>
+                      <p>from https://www.youtube.com/embed/7XIVxp-7I5s</p>
+        </div>
+      <hr/>
         <List component="nav">
           <Divider sx={{ my: 1 }} />
         </List>

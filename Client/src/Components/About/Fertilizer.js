@@ -151,7 +151,23 @@ const Fertilizer = () => {
               </div>
             </div>
           </div>
-          <hr />
+          <hr/>
+
+          <table className="table">
+            <thead>
+              <tr>
+                <th scope="col"><h1>SOME RELATED VIDEO</h1></th>
+              </tr>
+            </thead>
+          </table>
+          <div className="embed-responsive embed-responsive-16by9">
+                                            <center>
+                                                <iframe className="embed-responsive-item" src="https://www.youtube.com/embed/SVkMIOPe8hA" allowFullScreen width="750" height="450"></iframe>
+                                            </center>
+                                            <p className="citation" style={{color: 'white'}}>Copyright: YouTube. (n.d.). Www.youtube.com. Retrieved March 18, 2024 </p>
+                      <p>from https://www.youtube.com/embed/SVkMIOPe8hA</p>
+        </div>
+      <hr/>
 
         <List component="nav">
           <Divider sx={{ my: 1 }} />
