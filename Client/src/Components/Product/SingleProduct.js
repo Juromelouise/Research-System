@@ -186,7 +186,7 @@ const SingleProduct = () => {
                       </p>
                     </div>
                     <div className="col-sm-9" style={{ textAlign: "justify" }}>
-                      <p>{user.season}</p>
+                      <p>{user.fertilizer}</p>
                     </div>
                   </div>
                   <hr />
@@ -227,14 +227,35 @@ const SingleProduct = () => {
                     alt="..."
                   />
                   <hr />
-                  <img
-                    src={user.attachment[1]?.url}
-                    className="img-thumbnail"
-                    alt="..."
-                  />
                 </>
               )}
             </tbody>
+
+            <thead>
+              <tr>
+                <th scope="col">SUPPLIER INFORMATION</th>
+              </tr>
+            </thead>
+            <hr/>
+            <thead>
+              <tr>
+                <th scope="col">{user.name}</th>
+              </tr>
+              <button
+            type="submit"
+            style={{
+              backgroundColor: "#5D0664",
+              color: "#fff",
+              padding: "12px",
+              borderRadius: "4px",
+              cursor: "pointer",
+            }}
+          >
+           More Info
+          </button>
+              <hr />
+            </thead>
+
           </table>
         </div>
       </div>

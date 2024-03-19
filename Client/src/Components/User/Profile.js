@@ -45,8 +45,8 @@ const Profile = () => {
                 src={user.avatar?.url}
                 alt={user.name}
                 
-              />
-            </figure>
+               />
+                </figure>
                 <h5 className="my-1">{user.name}</h5>
                 <p className="text-muted mb-1">{user.role}</p>
                 <p className="text-muted mb-4">{user.city}</p>

@@ -7,65 +7,71 @@ import {
   MDBTableHead,
   MDBTableBody,
 } from "mdb-react-ui-kit";
+import { Button } from "@mui/material";
+import { Link } from 'react-router-dom';
 
-const SellerInfo = () => {
-  const [seller, setSeller] = useState([]);
 
-  const getSeller = async () => {
+
+const FarmerInfo = () => {
+  const [farmer, setFarmer] = useState([]);
+
+
+  const getFarmer = async () => {
     try {
       const { data } = await axios.get(
-        `${process.env.REACT_APP_API}/api/v1/get/seller`
+        `${process.env.REACT_APP_API}/api/v1/get/farmer`
       );
-      setSeller(data.users);
+      setFarmer(data.users);
+      console.log(data.users);
+
     } catch (error) {
       console.log(error);
     }
-  };
+  };;
   useEffect(() => {
-    getSeller();
+    getFarmer();
   }, []);
   return (
     <MDBTable align="middle">
-  <MDBTableHead>
-    <tr>
-      <th scope="col">Name</th>
-      <th scope="col">Phone Number</th>
-      <th scope="col">Location</th>
-      <th scope="col">Position</th>
-    </tr>
-  </MDBTableHead>
-  <MDBTableBody>
-    {seller.map((sellers) => (
-      <tr>
-        <td style={{ verticalAlign: 'middle' }}>
-          <div className="d-flex align-items-center">
-            <img
-              src={sellers?.avatar.url}
-              alt={sellers.avatar.public_id}
-              style={{ width: "45px", height: "45px" }}
-              className="rounded-circle"
-            />
-            <div className="ms-1" style={{ textAlign: "center" }}>
-              <p className="fw-bold mb-1">{sellers.name}</p>
-              <p className="text-muted mb-0">{sellers.email}</p>
-            </div>
-          </div>
-        </td>
-        <td>
-          <p className="fw-normal mb-1">{sellers.phone}</p>
-        </td>
-        <td>
-          <p className="fw-normal mb-1">
-            {sellers.baranggay}, {sellers.city}
-          </p>
-        </td>
-        <td>{sellers.role}</td>
-      </tr>
-    ))}
-  </MDBTableBody>
-</MDBTable>
-
+      <MDBTableHead>
+        <tr>
+          <th scope="col">Name</th>
+          <th scope="col">Phone Number</th>
+          <th scope="col">Location</th>
+          <th scope="col">Position</th>
+          <th scope="col">More Information</th>
+        </tr>
+      </MDBTableHead>
+      <MDBTableBody>
+        {farmer.map((farmers) => (
+          <tr>
+            <td>
+              <div className="d-flex align-items-center">
+                <img
+                  src={farmers?.avatar.url}
+                  alt={farmers.avatar.public_id}
+                  style={{ width: "45px", height: "45px" }}
+                  className="rounded-circle"
+                />
+                <div className="ms-3">
+                  <p className="fw-bold mb-1">{farmers.name}</p>
+                  <p className="text-muted mb-0">{farmers.email}</p>
+                </div>
+              </div>
+            </td>
+            <td>
+              <p className="fw-normal mb-1">{farmers.phone}</p>
+            </td>
+            <td>
+              <p className="fw-normal mb-1">{farmers.baranggay}, {farmers.city}</p>
+            </td>
+            <td>{farmers.role}</td>
+            <td><Link to={`/single/user/product?fid=${farmers._id}`}><Button>Check Information</Button></Link></td>
+          </tr>
+        ))}
+      </MDBTableBody>
+    </MDBTable>
   );
 };
 
-export default SellerInfo;
+export default FarmerInfo;
