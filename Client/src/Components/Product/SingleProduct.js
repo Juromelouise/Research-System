@@ -236,11 +236,19 @@ const SingleProduct = () => {
                 <th scope="col">SUPPLIER INFORMATION</th>
               </tr>
             </thead>
-            <hr/>
+            
             <thead>
               <tr>
-                <th scope="col">{user.name}</th>
+              <div style={{display: 'flex', alignItems: 'center'}}>
+              <img src="https://mdbcdn.b-cdn.net/img/new/standard/city/047.webp" className="rounded-circle" alt="pic" style={{height: 50, width: 50, border: 'none'}} />
+                <table>
+                <tr>
+                  <th scope="col" style={{height: '50px', width: '1000px',  marginRight: '20px'}}>{user.name}</th>
+                </tr>
+                </table>
+            </div>
               </tr>
+
               <button
             type="submit"
             style={{
