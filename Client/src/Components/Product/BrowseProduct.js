@@ -20,7 +20,7 @@ const BrowseProduct = () => {
 
   const [products, setProducts] = useState([]);
   const [filteredProducts, setFilteredProducts] = useState([]);
-  const [anchorEl, setAnchorEl] = useState(null); // Change anchorEl state
+  const [anchorEl, setAnchorEl] = useState(null);
 
   useEffect(() => {
     const getAllProducts = async () => {
