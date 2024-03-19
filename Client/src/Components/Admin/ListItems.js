@@ -7,6 +7,7 @@ import DashboardIcon from "@mui/icons-material/Dashboard";
 import PeopleIcon from "@mui/icons-material/People";
 import AssignmentIcon from "@mui/icons-material/Assignment";
 import Inventory2Icon from '@mui/icons-material/Inventory2';
+import ForumIcon from '@mui/icons-material/Forum';
 
 import { Link } from "react-router-dom";
 
@@ -26,6 +27,14 @@ export const mainListItems = (
       </ListItemIcon>
       <Link to="/user/list">
       <ListItemText primary="Users" />
+      </Link>
+    </ListItemButton>
+    <ListItemButton>
+      <ListItemIcon>
+        <ForumIcon />
+      </ListItemIcon>
+      <Link to="/forum/list">
+      <ListItemText primary="Forums" />
       </Link>
     </ListItemButton>
     <ListItemButton>

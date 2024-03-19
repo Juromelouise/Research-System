@@ -17,32 +17,52 @@ import { useNavigate } from "react-router-dom";
 
 const BrowseProduct = () => {
   const navigate = useNavigate();
-
+  const user = getUser();
   const [products, setProducts] = useState([]);
   const [filteredProducts, setFilteredProducts] = useState([]);
   const [anchorEl, setAnchorEl] = useState(null);
 
-  useEffect(() => {
-    const getAllProducts = async () => {
-      try {
-        const config = {
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${getToken()}`,
-          },
-        };
-        const { data } = await axios.get(
-          `${process.env.REACT_APP_API}/api/v1/products`,
-          config
+  const getAllProducts = async () => {
+    try {
+      const config = {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${getToken()}`,
+        },
+      };
+      const { data } = await axios.get(
+        `${process.env.REACT_APP_API}/api/v1/products`,
+        config
+      );
+      if (user.role === "buyer") {
+        setProducts(
+          data.products.filter(
+            (product) => product.user && product.user.role === "seller"
+          )
         );
-        console.log(data);
-        console.log(data.products);
-        setProducts(data.products);
-        setFilteredProducts(data.products);
-      } catch (error) {
-        console.log("Error fetching products:", error);
+        setFilteredProducts(
+          data.products.filter(
+            (product) => product.user && product.user.role === "seller"
+          )
+        );
+      } else if (user.role === "seller") {
+        setProducts(
+          data.products.filter(
+            (product) => product.user && product.user.role === "supplier"
+          )
+        );
+        setFilteredProducts(
+          data.products.filter(
+            (product) => product.user && product.user.role === "supplier"
+          )
+        );
       }
-    };
+    } catch (error) {
+      console.log("Error fetching products:", error);
+    }
+  };
+
+  useEffect(() => {
     getAllProducts();
   }, []);
 
@@ -53,6 +73,30 @@ const BrowseProduct = () => {
     setFilteredProducts(filtered);
     handleClose();
   };
+
+  const filterProductsBuyer = async () => {
+    console.log(products);
+    const filtered = products.filter(
+      (product) => product.user && product.user.role === "seller"
+    );
+    setFilteredProducts(filtered);
+  };
+
+  const filterProductsSeller = async () => {
+    console.log(products);
+    const filtered = products.filter(
+      (product) => product.user && product.user.role === "supplier"
+    );
+    setFilteredProducts(filtered);
+  };
+
+  useEffect(() => {
+    if (user.role === "buyer") {
+      filterProductsBuyer();
+    } else if (user.role === "seller") {
+      filterProductsSeller();
+    }
+  }, []);
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -71,7 +115,7 @@ const BrowseProduct = () => {
     <MDBContainer>
       <MDBRow style={{ marginBottom: "20px", color: "white" }}>
         <MDBTypography variant="h3" className="mt-3">
-          Sellers Onion
+          Market Place
         </MDBTypography>
 
         <div
@@ -98,11 +142,7 @@ const BrowseProduct = () => {
               open={Boolean(anchorEl)}
               onClose={handleClose}
             >
-              <MenuItem
-                onClick={allProducts}
-              >
-                All Baranggay
-              </MenuItem>
+              <MenuItem onClick={allProducts}>All Baranggay</MenuItem>
               {products.map((baranggay) => (
                 <MenuItem
                   onClick={() =>
@@ -118,48 +158,54 @@ const BrowseProduct = () => {
         </div>
       </MDBRow>
       <MDBRow>
-        {filteredProducts?.map((product) => (
-          <MDBCol sx={12} sm={6} md={6} lg={4} xl={4} className="mb-3">
-            <Card key={product._id} sx={{ maxWidth: 600, bgcolor: "#01579b" }}>
-              <CardHeader
-                avatar={
-                  <Avatar
-                    src={product?.user?.avatar.url}
-                    sx={{ bgcolor: red[500] }}
-                  >
-                    {product.user?.name ? product.user.name.charAt(0) : ""}
-                  </Avatar>
-                }
-                title={product.name}
-                subheader={product.user?.name || "Anonymous"}
-              />
-              <CardMedia
-                component="img"
-                height="194"
-                image={
-                  product?.images[0]?.url || "/images/onion-placeholder.jpg"
-                }
-                alt={product?.name + " avatar" || "User Avatar"}
-              />
-              <CardContent>
-                <Typography variant="body2" color="text.secondary">
-                  {product.description}
-                </Typography>
-              </CardContent>
-              <CardActions disableSpacing>
-                <Button
-                  size="small"
-                  onClick={() =>
-                      navigate(`/signin?redirect=single/user/product?fid=${product?.user?._id}`)
+        {filteredProducts &&
+          filteredProducts.map((product) => (
+            <MDBCol sx={12} sm={6} md={6} lg={4} xl={4} className="mb-3">
+              <Card
+                key={product._id}
+                sx={{ maxWidth: 600, bgcolor: "#01579b" }}
+              >
+                <CardHeader
+                  avatar={
+                    <Avatar
+                      src={product?.user?.avatar.url}
+                      sx={{ bgcolor: red[500] }}
+                    >
+                      {product.user?.name ? product.user.name.charAt(0) : ""}
+                    </Avatar>
                   }
-                  style={{ color: "white" }}
-                >
-                  View Seller
-                </Button>
-              </CardActions>
-            </Card>
-          </MDBCol>
-        ))}
+                  title={product.name}
+                  subheader={product.user?.name || "Anonymous"}
+                />
+                <CardMedia
+                  component="img"
+                  height="194"
+                  image={
+                    product?.images[0]?.url || "/images/onion-placeholder.jpg"
+                  }
+                  alt={product?.name + " avatar" || "User Avatar"}
+                />
+                <CardContent>
+                  <Typography variant="body2" color="text.secondary">
+                    {product.description}
+                  </Typography>
+                </CardContent>
+                <CardActions disableSpacing>
+                  <Button
+                    size="small"
+                    onClick={() =>
+                      navigate(
+                        `/signin?redirect=single/user/product?fid=${product?.user?._id}`
+                      )
+                    }
+                    style={{ color: "white" }}
+                  >
+                    View Seller
+                  </Button>
+                </CardActions>
+              </Card>
+            </MDBCol>
+          ))}
       </MDBRow>
     </MDBContainer>
   );

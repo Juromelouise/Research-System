@@ -75,3 +75,21 @@ exports.updatePost = async (req, res) => {
     console.log(error);
   }
 };
+
+exports.AdminGetPost = async (req, res) => {
+  try {
+    const forum = await Forum.findWithDeleted();
+    res.status(200).json({ forum });
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+exports.AdminSinglePost = async (req, res) => {
+  try {
+    const forum = await Forum.findWithDeleted({ _id: req.params.id });
+    res.status(200).json({ forum });
+  } catch (error) {
+    console.log(error);
+  }
+};

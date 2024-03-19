@@ -18,18 +18,16 @@ import { Box, IconButton, TextField, Typography } from "@mui/material";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import { useNavigate } from "react-router-dom";
-import { toast } from 'react-toastify';
+import { toast } from "react-toastify";
 
-import Filter from 'bad-words'
-import badWords from 'filipino-badwords-list'
+import Filter from "bad-words";
+import badWords from "filipino-badwords-list";
 import { filterText } from "../../utils/filterText";
-import ReplyIcon from '@mui/icons-material/Reply';
-import DeleteIcon from '@mui/icons-material/Delete';
+import ReplyIcon from "@mui/icons-material/Reply";
+import DeleteIcon from "@mui/icons-material/Delete";
 
 const SingleForum = () => {
-
   const filter = new Filter({ list: badWords.array });
-
 
   const user = getUser();
   const navigate = useNavigate();
@@ -95,8 +93,8 @@ const SingleForum = () => {
   const handleReplySubmit = (e) => {
     e.preventDefault();
     let iid = id;
-    if (contents === '') {
-      toast('🧅 Comment should have laman !', {
+    if (contents === "") {
+      toast("🧅 Comment should have laman !", {
         position: "top-right",
         autoClose: 5000,
         hideProgressBar: false,
@@ -106,7 +104,7 @@ const SingleForum = () => {
         progress: undefined,
         theme: "dark",
       });
-      return ''
+      return "";
     }
     if (selectedComment) {
       const formData = new FormData();
@@ -118,8 +116,8 @@ const SingleForum = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (content === '') {
-      toast('🧅 Comment should have laman !', {
+    if (content === "") {
+      toast("🧅 Comment should have laman !", {
         position: "top-right",
         autoClose: 5000,
         hideProgressBar: false,
@@ -129,7 +127,7 @@ const SingleForum = () => {
         progress: undefined,
         theme: "dark",
       });
-      return ''
+      return "";
     }
     const formData = new FormData();
     formData.append("content", content);
@@ -195,9 +193,21 @@ const SingleForum = () => {
   };
 
   const getPost = async (id) => {
+    let url;
+    if (user.role === "admin") {
+      url = `/forum/admin/single/post/${id}`;
+    } else {
+      url = `/forum/single/post/${id}`;
+    }
     try {
+      const config = {
+        headers: {
+          Authorization: `Bearer ${getToken()}`,
+        },
+      };
       const { data } = await axios.get(
-        `${process.env.REACT_APP_API}/forum/single/post/${id}`
+        `${process.env.REACT_APP_API}${url}`,
+        config
       );
       console.log(data.forum);
       setForums(data.forum);
@@ -263,8 +273,6 @@ const SingleForum = () => {
     }
   };
 
-
-
   const renderComments = (commentList, depth = 0) => {
     return commentList.map((comment) => (
       <MDBListGroupItem
@@ -273,11 +281,27 @@ const SingleForum = () => {
         style={{ paddingLeft: `${depth * 20}px` }}
       >
         <div className="flex-grow-1 d-flex gap-2 align-items-center w-100">
-          <img src={comment?.user?.avatar?.url} width={75} height={75} sx={{ objectFit: 'cover' }} />
-          <div style={{ textAlign: 'left', }} className="d-flex justify-content-start w-100">
+          <img
+            src={comment?.user?.avatar?.url}
+            width={75}
+            height={75}
+            sx={{ objectFit: "cover" }}
+          />
+          <div
+            style={{ textAlign: "left" }}
+            className="d-flex justify-content-start w-100"
+          >
             <div className="me-auto">
-              <Typography sx={{ fontWeight: 800 }}>{comment.user.name}</Typography>
-              <pre><Typography dangerouslySetInnerHTML={{ __html: filterText(comment?.content) }}></Typography></pre>
+              <Typography sx={{ fontWeight: 800 }}>
+                {comment.user.name}
+              </Typography>
+              <pre>
+                <Typography
+                  dangerouslySetInnerHTML={{
+                    __html: filterText(comment?.content),
+                  }}
+                ></Typography>
+              </pre>
             </div>
             {user ? (
               <div>
@@ -298,7 +322,9 @@ const SingleForum = () => {
                   <></>
                 )}
               </div>
-            ) : (<></>)}
+            ) : (
+              <></>
+            )}
           </div>
         </div>
         {comment.comments.length > 0 && (
@@ -312,9 +338,9 @@ const SingleForum = () => {
 
   return (
     <MDBContainer style={{ marginTop: 20 }}>
-      <MDBCard style={{ width: '90%', margin: 'auto', }} className="px-4 py-4">
+      <MDBCard style={{ width: "90%", margin: "auto" }} className="px-4 py-4">
         <MDBCardBody>
-          {forums && forums?.user._id === user._id ? (
+          {forums && forums?.user?._id === user._id ? (
             <div style={{ position: "absolute", top: 10, right: 10 }}>
               <IconButton onClick={handleOptionsClick}>
                 <MoreVertIcon />
@@ -332,23 +358,33 @@ const SingleForum = () => {
                 </MenuItem>
               </Menu>
             </div>
-          ) : (<></>)}
+          ) : (
+            <></>
+          )}
 
           {/* <h2 className="card-title">{forums?.title}</h2>
           <p className="card-text">{forums?.post}</p>
           <p className="text-muted">
             Posted on: {formatDate(forums?.createdAt)}
           </p> */}
-          <Box className='d-flex flex-column mb-3 gap-3 flex-md-row'>
-            <img src={forums?.user?.avatar?.url} width={150} height={150} sx={{ width: '100%' }} />
-            <Box className='' sx={{ textAlign: 'left' }}>
+          <Box className="d-flex flex-column mb-3 gap-3 flex-md-row">
+            <img
+              src={forums?.user?.avatar?.url}
+              width={150}
+              height={150}
+              sx={{ width: "100%" }}
+            />
+            <Box className="" sx={{ textAlign: "left" }}>
               <Typography variant="h3">{forums?.title}</Typography>
-              <Typography variant="body" fontSize={30} fontWeight={200}>{forums?.post}</Typography>
+              <Typography variant="body" fontSize={30} fontWeight={200}>
+                {forums?.post}
+              </Typography>
               <Typography>Posted on {formatDate(forums?.createdAt)}</Typography>
-              {forums?.user?._id === getUser()?._id ?
-                <Typography>by You</Typography> :
+              {forums?.user?._id === getUser()?._id ? (
+                <Typography>by You</Typography>
+              ) : (
                 <Typography>by {forums?.user?.name}</Typography>
-              }
+              )}
             </Box>
           </Box>
 
@@ -364,7 +400,12 @@ const SingleForum = () => {
                 value={content}
                 onChange={(e) => setContent(e.target.value)}
               />
-              <Button style={{ maxHeight: 70, minWidth: 150, marginLeft: 20 }} type="submit">Post Comment</Button>
+              <Button
+                style={{ maxHeight: 70, minWidth: 150, marginLeft: 20 }}
+                type="submit"
+              >
+                Post Comment
+              </Button>
             </form>
           ) : (
             <>
@@ -374,7 +415,12 @@ const SingleForum = () => {
 
           <div className="mt-3 d-flex justify-content-center flex-column align-items-center ">
             <h5 className="card-title">Comments</h5>
-            <MDBListGroup style={{ maxWidth: 900, width: '100%' }} className="d-flex justify-content-center">{renderComments(comments)}</MDBListGroup>
+            <MDBListGroup
+              style={{ maxWidth: 900, width: "100%" }}
+              className="d-flex justify-content-center"
+            >
+              {renderComments(comments)}
+            </MDBListGroup>
           </div>
         </MDBCardBody>
       </MDBCard>

@@ -5,8 +5,6 @@ import { saveShippingInfo } from "../../actions/cartActions";
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 import TextField from "@mui/material/TextField";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import Checkbox from "@mui/material/Checkbox";
 import { Box, Button } from "@mui/material";
 
 export default function AddressForm({ isNext }) {
@@ -18,11 +16,10 @@ export default function AddressForm({ isNext }) {
   const dispatch = useDispatch();
 
   React.useEffect(() => {
-    console.log(baranggay)
+    console.log(baranggay);
     dispatch(saveShippingInfo({ baranggay, city, street, postal }));
-
-  }, [isNext])
-  console.log(baranggay)
+  }, [isNext]);
+  console.log(baranggay);
   // const submitHandler = (e) => {
   //   e.preventDefault();
   //   dispatch(saveShippingInfo({ baranggay, city, street, postal }));
@@ -32,8 +29,10 @@ export default function AddressForm({ isNext }) {
       <Typography variant="h6" gutterBottom>
         Shipping address
       </Typography>
-      <Box component="form" noValidate
-      // onSubmit={submitHandler}
+      <Box
+        component="form"
+        noValidate
+        // onSubmit={submitHandler}
       >
         <Grid container spacing={3}>
           <Grid item xs={12} sm={6}>
@@ -86,12 +85,8 @@ export default function AddressForm({ isNext }) {
             />
           </Grid>
           <Grid item xs={12}>
-            <FormControlLabel
-              control={
-                <Checkbox color="secondary" name="saveAddress" value="yes" />
-              }
-              label="Use this address for payment details"
-            />
+            <Button disabled="true" variant="contained">If pick up, disregard this shipping address.
+            </Button>
           </Grid>
           {/* <Button type="submit">Ok</Button> */}
         </Grid>

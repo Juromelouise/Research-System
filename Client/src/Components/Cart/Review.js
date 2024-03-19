@@ -22,6 +22,8 @@ export default function Review() {
     seller: cartItems.seller,
   };
 
+  console.log(shippingInfo);
+
   // const createOrder = async (order) => {
   //   try {
   //     const config = {
@@ -74,7 +76,16 @@ export default function Review() {
           <Typography variant="h6" gutterBottom sx={{ mt: 2 }}>
             Shipping
           </Typography>
-          <Typography gutterBottom>{addresses.join(", ")}</Typography>
+          {shippingInfo.street !== '' || shippingInfo.baranggay !== '' || shippingInfo.city !== '' || shippingInfo.postal !== '' ? (
+            <Typography gutterBottom>
+              {shippingInfo.street}, {shippingInfo.baranggay},{" "}
+              {shippingInfo.city}, {shippingInfo.postal}
+            </Typography>
+          ) : (
+            <>
+              <Typography gutterBottom>No Shipping, Pick Up</Typography>
+            </>
+          )}
         </Grid>
       </Grid>
     </React.Fragment>

@@ -13,7 +13,6 @@ const OrderList = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
   const [myOrdersList, setMyOrdersList] = useState([]);
-  const [filetredOrder, setFiletredOrder] = useState([]);
 
   const myOrders = async () => {
     try {
@@ -30,25 +29,74 @@ const OrderList = () => {
       console.log(data.orders);
       setMyOrdersList(data.orders);
       setLoading(false);
-      filterOrders();
     } catch (error) {
       console.log(error);
       setError(error);
     }
   };
 
-  const filterOrders = async () => {
-    const filteredOrders = myOrdersList.map((orderArray) =>
-      orderArray.orderItems.map((order) =>
-        order.filter((item) => {
-          console.log("Item user ID:", item.user);
-          console.log("User ID:", user._id);
-          item.seller === user._id;
-        })
-      )
-    );
-    console.log("Filtered orders:", filteredOrders);
-    setFiletredOrder(filteredOrders);
+  const UpdateStatus = async (id) => {
+    try {
+      const config = {
+        headers: {
+          "Content-Type": "multipart/form-data",
+          Authorization: `Bearer ${getToken()}`,
+        },
+      };
+      const { data } = await axios.put(
+        `${process.env.REACT_APP_API}/order/update/order/${id}`,
+        {},
+        config
+      );
+      console.log(data.orders);
+      myOrders();
+      setLoading(false);
+    } catch (error) {
+      console.log(error);
+      setError(error);
+    }
+  };
+
+  const CancelOrder = async (id) => {
+    try {
+      const config = {
+        headers: {
+          "Content-Type": "multipart/form-data",
+          Authorization: `Bearer ${getToken()}`,
+        },
+      };
+      const { data } = await axios.put(
+        `${process.env.REACT_APP_API}/order/cancel/order/${id}`,
+        {},
+        config
+      );
+      myOrders();
+      setLoading(false);
+    } catch (error) {
+      console.log(error);
+      setError(error);
+    }
+  };
+
+  const ShippedOrder = async (id) => {
+    try {
+      const config = {
+        headers: {
+          "Content-Type": "multipart/form-data",
+          Authorization: `Bearer ${getToken()}`,
+        },
+      };
+      const { data } = await axios.put(
+        `${process.env.REACT_APP_API}/order/shipped/order/${id}`,
+        {},
+        config
+      );
+      myOrders();
+      setLoading(false);
+    } catch (error) {
+      console.log(error);
+      setError(error);
+    }
   };
 
   useEffect(() => {
@@ -78,8 +126,8 @@ const OrderList = () => {
           sort: "asc",
         },
         {
-          label: "Num of Items",
-          field: "numOfItems",
+          label: "User ID",
+          field: "uid",
           sort: "asc",
         },
         {
@@ -106,11 +154,11 @@ const OrderList = () => {
       rows: [],
     };
 
-    filetredOrder.forEach((order) => {
+    myOrdersList.forEach((order) => {
       data.rows.push({
         id: order._id,
-        numOfItems: order.orderItems.length,
-        amount: `$${order.totalPrice}`,
+        uid: order.user._id,
+        amount: `$${order.price}`,
         date: formatDate(order?.createdAt),
         status:
           order.orderStatus &&
@@ -119,13 +167,46 @@ const OrderList = () => {
           ) : (
             <p style={{ color: "red" }}>{order.orderStatus}</p>
           ),
-        actions: (
-          <Link to={`/order/${order._id}`}>
-            <Button variant="contained" color="primary">
-              Check Order
+        actions:
+          order.orderStatus && order.orderStatus === "Waiting to Confirm" ? (
+            <>
+              <Button
+                variant="contained"
+                color="primary"
+                onClick={() => {
+                  UpdateStatus(order._id);
+                  setLoading(true);
+                }}
+              >
+                Confirm
+              </Button>
+              <Button
+                variant="contained"
+                color="error"
+                onClick={() => {
+                  CancelOrder(order._id);
+                  setLoading(true);
+                }}
+              >
+                Cancel
+              </Button>
+            </>
+          ) : order.orderStatus === "Confirmed" ? (
+            <Button
+              variant="contained"
+              color="primary"
+              onClick={() => {
+                ShippedOrder(order._id);
+                setLoading(true);
+              }}
+            >
+              Ship
             </Button>
-          </Link>
-        ),
+          ) : order.orderStatus === "Canceled" ? (
+            <></>
+          ) : (
+            <></>
+          ),
       });
     });
 
@@ -134,7 +215,7 @@ const OrderList = () => {
 
   return (
     <Fragment>
-      <h1 style={{ color: "white" }}>My Orders</h1>
+      <h1 style={{ color: "white" }}>Product Orders</h1>
       {loading ? (
         <Loader open={loading} />
       ) : (

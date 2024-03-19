@@ -97,14 +97,6 @@ const userSchema = new mongoose.Schema({
       },
     },
   ],
-  seller: [
-    {
-      type: mongoose.Schema.ObjectId,
-      ref: "User",
-      required: true,
-      autopopulate: true,
-    },
-  ],
   resetPasswordToken: String,
   resetPasswordExpire: Date,
 });

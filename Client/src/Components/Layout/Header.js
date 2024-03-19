@@ -540,6 +540,13 @@ const ResponsiveAppBar = () => {
                 </Button>
                 <Button
                   component={Link}
+                  to="/browse/product"
+                  sx={{ my: 2, color: "white", display: "block" }}
+                >
+                  Products
+                </Button>
+                <Button
+                  component={Link}
                   to="/product/create"
                   sx={{ my: 2, color: "white", display: "block" }}
                 >
@@ -622,16 +629,30 @@ const ResponsiveAppBar = () => {
                       <button className="dropdown-item">My Orders</button>
                     </Link>
                     {user.role === "supplier" ? (
-                      <Link to="/single/user/product">
-                        <button className="dropdown-item">Product List</button>
-                      </Link>
+                      <>
+                        <Link to="/single/user/product">
+                          <button className="dropdown-item">
+                            Product List
+                          </button>
+                        </Link>
+                        <Link to="/orders">
+                          <button className="dropdown-item">Orders</button>
+                        </Link>
+                      </>
                     ) : (
                       <></>
                     )}
                     {user.role === "seller" ? (
-                      <Link to="/single/user/product">
-                        <button className="dropdown-item">Product List</button>
-                      </Link>
+                      <>
+                        <Link to="/single/user/product">
+                          <button className="dropdown-item">
+                            Product List
+                          </button>
+                        </Link>
+                        <Link to="/orders">
+                          <button className="dropdown-item">Orders</button>
+                        </Link>
+                      </>
                     ) : (
                       <></>
                     )}

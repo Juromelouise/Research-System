@@ -1,9 +1,7 @@
 import React, { Fragment, useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
-import {Loader} from "../Layout/Loader";
+import { Loader } from "../Layout/Loader";
 import axios from "axios";
-import { toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 
 import { getToken } from "../../utils/helpers";
 
@@ -12,14 +10,8 @@ const OrderDetails = () => {
   const [error, setError] = useState("");
   const [order, setOrder] = useState({});
 
-  const {
-    shippingInfo,
-    orderItems,
-    user,
-    mod,
-    totalPrice,
-    orderStatus,
-  } = order;
+  const { shippingInfo, orderItems, user, mod, totalPrice, orderStatus } =
+    order;
   const { id } = useParams();
 
   const getOrderDetails = async (id) => {
@@ -40,7 +32,7 @@ const OrderDetails = () => {
       setLoading(false);
     } catch (error) {
       setError(error);
-      console.log(error)
+      console.log(error);
     }
   };
 
@@ -51,9 +43,9 @@ const OrderDetails = () => {
       // toast.error(error, {
       //   position: toast.POSITION.BOTTOM_RIGHT,
       // });
-      console.log(error)
+      console.log(error);
     }
-  }, [ id]);
+  }, [id]);
 
   const shippingDetails =
     shippingInfo &&
@@ -62,91 +54,76 @@ const OrderDetails = () => {
 
   return (
     <Fragment>
-
-      {loading ? (
-        <Loader open={loading}/>
-      ) : (
-        <Fragment>
-          <div className="row justify-content-center align-items-center" style={{color: "white"}}>
-            <div className="col-12 col-lg-8 mt-5 order-details text-center">
+      {loading ? <Loader open={loading} /> : <></>}
+      <div className="container mt-5" style={{ color: "white" }}>
+        <div className="row justify-content-center">
+          <div className="col-12 col-lg-8">
+            <div className="order-details text-center">
               <h1 className="my-5">Order # {order._id}</h1>
 
-              <h4 className="mb-4">Shipping Info</h4>
-              {user && (
-                <p>
-                  <b>Name:</b> {user.name}
+              <div className="shipping-info mb-5">
+                <h4>Shipping Info</h4>
+                {user && (
+                  <p>
+                    <b>Name:</b> {user.name}
+                  </p>
+                )}
+                {shippingInfo && (
+                  <p>
+                    <b>Phone:</b> {shippingInfo.phone}
+                  </p>
+                )}
+                <p className="mb-0">
+                  <b>Address:</b> {shippingDetails}
                 </p>
-              )}
-              {shippingInfo && (
-                <p>
-                  <b>Phone:</b> {shippingInfo.phone}
+              </div>
+
+              <div className="payment-info mb-5">
+                <h4>Payment</h4>
+                <p className={isPaid ? "text-success" : "text-danger"}>
+                  <b>{isPaid ? "PAID" : "NOT PAID"}</b>
                 </p>
-              )}
-              <p className="mb-4">
-                <b>Address:</b>
-                {shippingDetails}
-              </p>
-              <p>
-                <b>Amount:</b> ₱{totalPrice}
-              </p>
+              </div>
 
-              <hr />
-
-              <h4 className="my-4">Payment</h4>
-              <p className={isPaid ? "greenColor" : "redColor"}>
-                <b>{isPaid ? "PAID" : "NOT PAID"}</b>
-              </p>
-
-              <h4 className="my-4">Order Status:</h4>
-              {order.orderStatus && (
-                <p
-                  className={
-                    String(order.orderStatus).includes("Delivered")
-                      ? "greenColor"
-                      : "redColor"
-                  }
-                >
-                  <b>{orderStatus}</b>
-                </p>
-              )}
-
-              <h4 className="my-4">Order Items:</h4>
-
-              <hr />
-              <div className="cart-item my-1">
+              <div className="order-items mb-5">
+                <h4 className="text-center mb-4">Order Items</h4>
                 {orderItems &&
-                  orderItems.map((item) => (
-                    <div key={item.product} className="row my-5">
-                      <div className="col-4 col-lg-2">
-                        <img
-                          src={item.images}
-                          alt={item.name}
-                          height="45"
-                          width="65"
-                        />
+                  orderItems.map((item, index) => (
+                    <div
+                      key={item.product}
+                      className="cart-item"
+                      style={{ marginLeft: "150px" }}
+                    >
+                      <div className="row my-4 align-items-center">
+                        <div className="col-12 col-lg-2 text-center">
+                          <img
+                            src={item.images}
+                            alt={item.name}
+                            height="45"
+                            width="65"
+                            className="img-fluid"
+                          />
+                        </div>
+                        <div className="col-12 col-lg-4">{item.name}</div>
+                        <div className="col-6 col-lg-2 mt-3 mt-lg-0">
+                          <p>₱{item.price}</p>
+                        </div>
+                        <div className="col-6 col-lg-2 mt-3 mt-lg-0">
+                          <p>{item.quantity} Piece(s)</p>
+                        </div>
+                        <div className="col-6 col-lg-2 mt-3 mt-lg-0">
+                          <p>{item.orderStatus}</p>
+                        </div>
                       </div>
-
-                      <div className="col-5 col-lg-5">
-                        <Link to={`/product/${item.product}`}>
-                          {item.name}
-                        </Link>
-                      </div>
-
-                      <div className="col-4 col-lg-2 mt-4 mt-lg-0">
-                        <p>₱{item.price}</p>
-                      </div>
-
-                      <div className="col-4 col-lg-3 mt-4 mt-lg-0">
-                        <p>{item.quantity} Piece(s)</p>
-                      </div>
+                      {index !== orderItems.length - 1 && <hr />}{" "}
+                      {/* Add horizontal line except for the last item */}
                     </div>
                   ))}
               </div>
-              <hr />
             </div>
           </div>
-        </Fragment>
-      )}
+        </div>
+      </div>
     </Fragment>
   );
 };

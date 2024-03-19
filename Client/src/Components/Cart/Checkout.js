@@ -58,7 +58,7 @@ export default function Checkout() {
       );
       setActiveStep(activeStep + 1);
       setLoading(false);
-      localStorage.clear();
+      // localStorage.clear();
     } catch (error) {
       console.log(error);
     }

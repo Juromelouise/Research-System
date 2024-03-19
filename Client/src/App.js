@@ -33,6 +33,7 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import OrderDetails from "./Components/Order/OrderDetails";
 import OrderList from "./Components/Order/OrderList";
+import ForumTable from "./Components/Admin/ForumTable";
 
 function App() {
   return (
@@ -66,6 +67,7 @@ function App() {
           />
           <Route path="/product/list" element={<ProductTable />} exact="true" />
           <Route path="/user/list" element={<UserTable />} exact="true" />
+          <Route path="/forum/list" element={<ForumTable />} exact="true" />
           <Route path="/profile" element={<Profile />} exact="true" />
           <Route path="/farmer/info" element={<FarmerInfo />} exact="true" />
           <Route path="/seller/info" element={<SellerInfo />} exact="true" />

@@ -19,7 +19,7 @@ const FarmerInfo = () => {
   const getFarmer = async () => {
     try {
       const { data } = await axios.get(
-        `${process.env.REACT_APP_API}/api/v1/get/farmer`
+        `${process.env.REACT_APP_API}/api/v1/get/seller`
       );
       setFarmer(data.users);
       console.log(data.users);

@@ -21,7 +21,7 @@ import UserTable from "./UserTable";
 import { Avatar } from "@mui/material";
 import { getUser } from "../../utils/helpers";
 import { Link } from "react-router-dom";
-import Forum from "../Forums/Forum";
+import ForumTable from "./ForumTable";
 
 const drawerWidth = 200;
 
@@ -169,6 +169,15 @@ export default function Dashboard() {
                     marginLeft: "120px"
                   }}>
                   <UserTable />
+                  </Box>
+                </Paper>
+              </Grid>
+              <Grid item xs={14}>
+                <Paper sx={{ p: 2, display: "flex", flexDirection: "column" }}>
+                  <Box sx={{
+                    marginLeft: "120px"
+                  }}>
+                  <ForumTable />
                   </Box>
                 </Paper>
               </Grid>

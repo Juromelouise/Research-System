@@ -10,18 +10,22 @@ import {
   MDBRow,
   MDBCol,
 } from "mdb-react-ui-kit";
-import { getToken } from "../../utils/helpers";
+import { getToken, getUser } from "../../utils/helpers";
 import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Button } from "@mui/material";
 import { Loader } from "../Layout/Loader";
+import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { addItemToCart } from "../../actions/cartActions";
 
 const SingleProduct = () => {
   const [user, setUser] = useState([]);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [product, setProduct] = useState([]);
+  const [supplier, setSupplier] = useState([]);
+  const [sid, setSid] = useState("");
   const [loading, setLoading] = useState(false);
   const [quantity, setQuantity] = useState(1);
   const location = useLocation();
@@ -39,16 +43,33 @@ const SingleProduct = () => {
         `${process.env.REACT_APP_API}/api/v1/single/product?fid=${id}`,
         config
       );
-      console.log(data.user);
+      const newSid = data.product[0].user._id;
+      setSid(newSid);
       setProduct(data.product);
       setUser(data.user);
-      console.log(data.user);
-      console;
     } catch (error) {
       console.log(error);
     }
   };
+  const uniqueSuppliers = new Set();
+  const getSupplier = async () => {
+    try {
+      const config = {
+        headers: {
+          Authorization: `Bearer ${getToken()}`,
+        },
+      };
 
+      const { data } = await axios.get(
+        `${process.env.REACT_APP_API}/order/supplier/${sid}`,
+        config
+      );
+      setSupplier(data.supplier);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  console.log(supplier);
   const deleteProduct = async (id) => {
     try {
       const config = {
@@ -70,6 +91,10 @@ const SingleProduct = () => {
   useEffect(() => {
     getProduct();
   }, []);
+
+  useEffect(() => {
+    getSupplier();
+  }, [sid]);
 
   const addToCart = (id) => {
     dispatch(addItemToCart(id, quantity));
@@ -231,39 +256,86 @@ const SingleProduct = () => {
               )}
             </tbody>
 
-            <thead>
-              <tr>
-                <th scope="col">SUPPLIER INFORMATION</th>
-              </tr>
-            </thead>
-            
-            <thead>
-              <tr>
-              <div style={{display: 'flex', alignItems: 'center'}}>
-              <img src="https://mdbcdn.b-cdn.net/img/new/standard/city/047.webp" className="rounded-circle" alt="pic" style={{height: 50, width: 50, border: 'none'}} />
-                <table>
-                <tr>
-                  <th scope="col" style={{height: '50px', width: '1000px',  marginRight: '20px'}}>{user.name}</th>
-                </tr>
-                </table>
-            </div>
-              </tr>
+            {user.role !== "supplier" && (
+              <>
+                <thead>
+                  <tr>
+                    <th scope="col">SUPPLIER INFORMATION</th>
+                  </tr>
+                </thead>
 
-              <button
-            type="submit"
-            style={{
-              backgroundColor: "#5D0664",
-              color: "#fff",
-              padding: "12px",
-              borderRadius: "4px",
-              cursor: "pointer",
-            }}
-          >
-           More Info
-          </button>
-              <hr />
-            </thead>
-
+                {supplier &&
+                  supplier.map((items) =>
+                    items.orderItems.map((item) => {
+                      if (!uniqueSuppliers.has(item.seller._id)) {
+                        uniqueSuppliers.add(item.seller._id);
+                        return (
+                          <thead key={item.seller._id}>
+                            {" "}
+                            {/* Ensure each element has a unique key */}
+                            <tr>
+                              <div
+                                style={{
+                                  display: "flex",
+                                  alignItems: "center",
+                                }}
+                              >
+                                <img
+                                  src={item?.seller?.avatar?.url}
+                                  className="rounded-circle"
+                                  alt="pic"
+                                  style={{
+                                    height: 50,
+                                    width: 50,
+                                    border: "none",
+                                  }}
+                                />
+                                <table>
+                                  <tbody>
+                                    {" "}
+                                    {/* Use tbody instead of tr */}
+                                    <tr>
+                                      <th
+                                        scope="col"
+                                        style={{
+                                          height: "50px",
+                                          width: "1000px",
+                                          marginRight: "20px",
+                                        }}
+                                      >
+                                        {item.seller.name}
+                                      </th>
+                                    </tr>
+                                  </tbody>
+                                </table>
+                              </div>
+                            </tr>
+                            <button
+                              onClick={() => {
+                                navigate(
+                                  `/single/user/product?fid=${item.seller._id}`
+                                );
+                                window.location.reload();
+                              }}
+                              style={{
+                                backgroundColor: "#5D0664",
+                                color: "#fff",
+                                padding: "12px",
+                                borderRadius: "4px",
+                                cursor: "pointer",
+                              }}
+                            >
+                              More Info
+                            </button>
+                            <hr />
+                          </thead>
+                        );
+                      }
+                      return null;
+                    })
+                  )}
+              </>
+            )}
           </table>
         </div>
       </div>
@@ -283,7 +355,7 @@ const SingleProduct = () => {
             style={{
               display: "flex",
               flexWrap: "wrap",
-              justifyContent: "center", // Align items horizontally in center
+              justifyContent: "center",
             }}
           >
             {product.map((product) => (
@@ -319,25 +391,31 @@ const SingleProduct = () => {
                   >
                     Add to Cart
                   </Button>
-                  <Link to={`/product/update/${product._id}`}>
-                    <Button
-                      style={{
-                        marginRight: "10px",
-                        backgroundColor: "#000957",
-                        color: "white",
-                      }}
-                    >
-                      Edit
-                    </Button>
-                  </Link>
-                  <Button
-                    style={{ backgroundColor: "#000957", color: "white" }}
-                    onClick={() => {
-                      deleteProduct(product._id);
-                    }}
-                  >
-                    Delete
-                  </Button>
+                  {getUser()._id === user._id ? (
+                    <>
+                      <Link to={`/product/update/${product._id}`}>
+                        <Button
+                          style={{
+                            marginRight: "10px",
+                            backgroundColor: "#000957",
+                            color: "white",
+                          }}
+                        >
+                          Edit
+                        </Button>
+                      </Link>
+                      <Button
+                        style={{ backgroundColor: "#000957", color: "white" }}
+                        onClick={() => {
+                          deleteProduct(product._id);
+                        }}
+                      >
+                        Delete
+                      </Button>
+                    </>
+                  ) : (
+                    <></>
+                  )}
                 </MDBCardBody>
               </MDBCard>
             ))}

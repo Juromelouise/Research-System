@@ -75,11 +75,6 @@ const ListOrders = () => {
           sort: "asc",
         },
         {
-          label: "Status",
-          field: "status",
-          sort: "asc",
-        },
-        {
           label: "Actions",
           field: "actions",
           sort: "asc",
@@ -94,13 +89,6 @@ const ListOrders = () => {
         numOfItems: order.orderItems.length,
         amount: `$${order.totalPrice}`,
         date: formatDate(order?.createdAt),
-        status:
-          order.orderStatus &&
-          String(order.orderStatus).includes("Delivered") ? (
-            <p style={{ color: "green" }}>{order.orderStatus}</p>
-          ) : (
-            <p style={{ color: "red" }}>{order.orderStatus}</p>
-          ),
         actions: (
           <Link to={`/order/${order._id}`}>
             <Button variant="contained" color="primary">

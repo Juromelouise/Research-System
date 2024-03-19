@@ -33,11 +33,6 @@ const OrderSchema = new mongoose.Schema({
     required: true,
     default: 0.0,
   },
-  orderStatus: {
-    type: String,
-    required: true,
-    default: "Waiting to Confirm",
-  },
   orderItems: [
     {
       name: {
@@ -67,6 +62,15 @@ const OrderSchema = new mongoose.Schema({
         required: true,
         ref: "User",
         autopopulate: true,
+      },
+      orderStatus: {
+        type: String,
+        required: true,
+        default: "Waiting to Confirm",
+      },
+      createdAt: {
+        type: Date,
+        default: Date.now,
       },
     },
   ],
