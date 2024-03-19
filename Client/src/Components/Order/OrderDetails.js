@@ -15,8 +15,8 @@ const OrderDetails = () => {
   const {
     shippingInfo,
     orderItems,
-    paymentInfo,
     user,
+    mod,
     totalPrice,
     orderStatus,
   } = order;
@@ -48,16 +48,17 @@ const OrderDetails = () => {
     getOrderDetails(id);
 
     if (error) {
-      toast.error(error, {
-        position: toast.POSITION.BOTTOM_RIGHT,
-      });
+      // toast.error(error, {
+      //   position: toast.POSITION.BOTTOM_RIGHT,
+      // });
+      console.log(error)
     }
-  }, [error, id]);
+  }, [ id]);
 
   const shippingDetails =
     shippingInfo &&
-    `${shippingInfo.address}, ${shippingInfo.city}, ${shippingInfo.postalCode}, ${shippingInfo.country}`;
-  const isPaid = paymentInfo && paymentInfo.status === "succeeded";
+    `${shippingInfo.baranggay}, ${shippingInfo.city}, ${shippingInfo.postal},`;
+  const isPaid = mod && mod.status === "succeeded";
 
   return (
     <Fragment>
@@ -66,7 +67,7 @@ const OrderDetails = () => {
         <Loader open={loading}/>
       ) : (
         <Fragment>
-          <div className="row justify-content-center align-items-center">
+          <div className="row justify-content-center align-items-center" style={{color: "white"}}>
             <div className="col-12 col-lg-8 mt-5 order-details text-center">
               <h1 className="my-5">Order # {order._id}</h1>
 
@@ -78,7 +79,7 @@ const OrderDetails = () => {
               )}
               {shippingInfo && (
                 <p>
-                  <b>Phone:</b> {shippingInfo.phoneNo}
+                  <b>Phone:</b> {shippingInfo.phone}
                 </p>
               )}
               <p className="mb-4">
@@ -118,7 +119,7 @@ const OrderDetails = () => {
                     <div key={item.product} className="row my-5">
                       <div className="col-4 col-lg-2">
                         <img
-                          src={item.image}
+                          src={item.images}
                           alt={item.name}
                           height="45"
                           width="65"

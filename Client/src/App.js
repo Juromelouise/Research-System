@@ -32,6 +32,7 @@ import ListOrders from "./Components/Order/ListOrders";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import OrderDetails from "./Components/Order/OrderDetails";
+import OrderList from "./Components/Order/OrderList";
 
 function App() {
   return (
@@ -100,6 +101,7 @@ function App() {
             exact="true"
           />
           <Route path="/my/order" element={<ListOrders />} exact="true" />
+          <Route path="/orders" element={<OrderList />} exact="true" />
           <Route path="/cart" element={<Cart />} exact="true" />
           <Route path="/checkout" element={<Checkout />} exact="true" />
           <Route
