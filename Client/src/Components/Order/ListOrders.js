@@ -87,7 +87,7 @@ const ListOrders = () => {
       data.rows.push({
         id: order._id,
         numOfItems: order.orderItems.length,
-        amount: `$${order.totalPrice}`,
+        amount: `₱${order.totalPrice}`,
         date: formatDate(order?.createdAt),
         actions: (
           <Link to={`/order/${order._id}`}>
