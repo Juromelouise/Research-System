@@ -34,6 +34,8 @@ import "react-toastify/dist/ReactToastify.css";
 import OrderDetails from "./Components/Order/OrderDetails";
 import OrderList from "./Components/Order/OrderList";
 import ForumTable from "./Components/Admin/ForumTable";
+import DeletedSingleForum from "./Components/Forums/DeletedSingleForum";
+import ForgotPassword from "./Components/User/ForgotPassword";
 
 function App() {
   return (
@@ -71,10 +73,16 @@ function App() {
           <Route path="/profile" element={<Profile />} exact="true" />
           <Route path="/farmer/info" element={<FarmerInfo />} exact="true" />
           <Route path="/seller/info" element={<SellerInfo />} exact="true" />
+          <Route path="/forgot/password" element={<ForgotPassword />} exact="true" />
           <Route path="/forum" element={<Forum />} exact="true" />
           <Route
             path="/forum/open/:id"
             element={<SingleForum />}
+            exact="true"
+          />
+          <Route
+            path="/delete/forum/open/:id"
+            element={<DeletedSingleForum />}
             exact="true"
           />
           <Route
@@ -97,11 +105,7 @@ function App() {
             element={<productLIst />}
             exact="true"
           />
-          <Route
-            path="/order/:id"
-            element={<OrderDetails />}
-            exact="true"
-          />
+          <Route path="/order/:id" element={<OrderDetails />} exact="true" />
           <Route path="/my/order" element={<ListOrders />} exact="true" />
           <Route path="/orders" element={<OrderList />} exact="true" />
           <Route path="/cart" element={<Cart />} exact="true" />

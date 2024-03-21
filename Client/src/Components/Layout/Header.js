@@ -464,6 +464,13 @@ const ResponsiveAppBar = () => {
               <>
                 <Button
                   component={Link}
+                  to="/about"
+                  sx={{ my: 2, color: "white", display: "block" }}
+                >
+                  About
+                </Button>
+                <Button
+                  component={Link}
                   to="/seller/info"
                   sx={{ my: 2, color: "white", display: "block" }}
                 >
@@ -531,6 +538,13 @@ const ResponsiveAppBar = () => {
               </>
             ) : user.role === "seller" ? (
               <>
+                <Button
+                  component={Link}
+                  to="/about"
+                  sx={{ my: 2, color: "white", display: "block" }}
+                >
+                  About
+                </Button>
                 <Button
                   component={Link}
                   to="/farmer/info"

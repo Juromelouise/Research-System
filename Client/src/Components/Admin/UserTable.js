@@ -5,7 +5,7 @@ import List from "@mui/material/List";
 import Divider from "@mui/material/Divider";
 import Button from "@mui/material/Button";
 import axios from "axios";
-import { getToken } from "../../utils/helpers"
+import { getToken } from "../../utils/helpers";
 
 export default function UserTable() {
   const [user, setUsers] = useState([]);
@@ -51,21 +51,10 @@ export default function UserTable() {
     getUsers();
   }, []);
 
-  const updateRoleSeller = async (id) => {
+  const updateCertified = async (id) => {
     try {
       await axios.put(
-        `${process.env.REACT_APP_API}/api/v1/update/role/seller/${id}`
-      );
-      getUsers();
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  const updateRoleFarmer = async (id) => {
-    try {
-      await axios.put(
-        `${process.env.REACT_APP_API}/api/v1/update/role/farmer/${id}`
+        `${process.env.REACT_APP_API}/api/v1/update/certified/${id}`
       );
       getUsers();
     } catch (error) {
@@ -113,22 +102,18 @@ export default function UserTable() {
       email: row.email,
       action: (
         <Fragment>
-          {/* <Link
-            onClick={() => updateRoleSeller(row._id)}
-            style={{ textDecoration: "none" }}
-          >
-            <Button variant="contained" color="primary" className="edit-btn">
-              Seller
+          {row.certified !== "Certified by Admin" ? (
+            <Button
+              variant="contained"
+              color="primary"
+              className="edit-btn"
+              onClick={() => updateCertified(row._id)}
+            >
+              Certify User
             </Button>
-          </Link>
-          <Link
-            onClick={() => updateRoleFarmer(row._id)}
-            style={{ textDecoration: "none" }}
-          >
-            <Button variant="contained" color="primary" className="edit-btn">
-              Farmer
-            </Button>
-          </Link> */}
+          ) : (
+            <></>
+          )}
           <Link onClick={() => deleteUserHandler(row._id)}>
             <Button
               variant="contained"

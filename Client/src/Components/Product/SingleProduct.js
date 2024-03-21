@@ -113,7 +113,7 @@ const SingleProduct = () => {
           <div className="card mb-4" style={{ width: "800px" }}>
             {" "}
             {/* Adjust width as needed */}
-            <div className="card-body" style={{ height: "700px" }}>
+            <div className="card-body" style={{ height: "780px" }}>
               {" "}
               {/* Adjust height as needed */}
               <div className="row">
@@ -176,6 +176,17 @@ const SingleProduct = () => {
                 </div>
                 <div className="col-sm-9" style={{ textAlign: "justify" }}>
                   <p>{user.phone}</p>
+                </div>
+              </div>
+              <hr />
+              <div className="row">
+                <div className="col-sm-3">
+                  <p className="mb-0" style={{ textAlign: "justify" }}>
+                    <strong>Ceritifed:</strong>
+                  </p>
+                </div>
+                <div className="col-sm-9" style={{ textAlign: "justify" }}>
+                  <p>{user.certified}</p>
                 </div>
               </div>
               <hr />

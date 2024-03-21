@@ -192,13 +192,7 @@ const SingleForum = () => {
     }
   };
 
-  const getPost = async (id) => {
-    let url;
-    if (user.role === "admin") {
-      url = `/forum/admin/single/post/${id}`;
-    } else {
-      url = `/forum/single/post/${id}`;
-    }
+  const getPost = async () => {
     try {
       const config = {
         headers: {
@@ -206,7 +200,7 @@ const SingleForum = () => {
         },
       };
       const { data } = await axios.get(
-        `${process.env.REACT_APP_API}${url}`,
+        `${process.env.REACT_APP_API}/forum/single/post/${id}`,
         config
       );
       console.log(data.forum);
@@ -218,7 +212,7 @@ const SingleForum = () => {
   };
 
   useEffect(() => {
-    getPost(id);
+    getPost();
   }, []);
 
   const formatDate = (dateString) => {

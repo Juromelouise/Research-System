@@ -73,6 +73,10 @@ const userSchema = new mongoose.Schema({
   type: {
     type: String,
   },
+  certified: {
+    type: String,
+    default: "Not Certified by Admin",
+  },
   createdAt: {
     type: Date,
     default: Date.now,

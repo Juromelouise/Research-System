@@ -9,7 +9,6 @@ import { Button } from "@mui/material";
 const ForumTable = () => {
   const navigate = useNavigate();
   const [forum, setForum] = useState([]);
-  const [isHovered, setIsHovered] = useState(false);
 
   const getAdminForums = async () => {
     try {
@@ -23,7 +22,7 @@ const ForumTable = () => {
         `${process.env.REACT_APP_API}/forum/admin/all/post`,
         config
       );
-      console.log(data.forum)
+      console.log(data.forum);
       setForum(data.forum);
     } catch (error) {
       console.log(error);
@@ -35,7 +34,7 @@ const ForumTable = () => {
   }, []);
 
   const nav = async (id) => {
-    navigate(`/forum/open/${id}`);
+    navigate(`/delete/forum/open/${id}`);
   };
 
   const deleteProductHandler = async (productId) => {
@@ -45,10 +44,10 @@ const ForumTable = () => {
       },
     };
     await axios.delete(
-      `${process.env.REACT_APP_API}/api/v1/delete/product/${productId}`,
+      `${process.env.REACT_APP_API}/forum/admin/delete/post/${productId}`,
       config
     );
-    getAdminProducts();
+    getAdminForums();
     console.log(`Deleting product with ID: ${productId}`);
   };
 
@@ -91,14 +90,18 @@ const ForumTable = () => {
         comment: forum.comments.length,
         actions: (
           <Fragment>
-            {/* <Link onClick={() => deleteProductHandler(forum._id)}>
+            <Button
+              variant="contained"
+              color="info"
+              onClick={() => nav(forum._id)}
+            >
+              Check Post
+            </Button>
+            <Link onClick={() => deleteProductHandler(forum._id)}>
               <Button variant="contained" color="error" className="delete-btn">
                 Delete
               </Button>
-            </Link> */}
-              <Button variant="contained" color="info" onClick={() => nav(forum._id)}>
-                Check Post
-              </Button>
+            </Link>
           </Fragment>
         ),
       });

@@ -1,7 +1,6 @@
 const Order = require("../models/order");
-const Product = require("../models/product");
 
-exports.newOrder = async (req, res, next) => {
+exports.newOrder = async (req, res) => {
   let seller = [];
   seller = req.body;
   req.body.user = req.user._id;
@@ -13,7 +12,7 @@ exports.newOrder = async (req, res, next) => {
   });
 };
 
-exports.myOrders = async (req, res, next) => {
+exports.myOrders = async (req, res) => {
   const orders = await Order.find({ user: req.user._id });
   res.status(200).json({
     success: true,
@@ -21,7 +20,7 @@ exports.myOrders = async (req, res, next) => {
   });
 };
 
-exports.getSingleOrder = async (req, res, next) => {
+exports.getSingleOrder = async (req, res) => {
   const orders = await Order.findById(req.params.id);
 
   if (!orders) {
@@ -33,7 +32,7 @@ exports.getSingleOrder = async (req, res, next) => {
   });
 };
 
-exports.allOrders = async (req, res, next) => {
+exports.allOrders = async (req, res) => {
   const items = await Order.find({ "orderItems.seller": req.user._id });
   let orders = [];
   items.forEach((order) => {
@@ -104,7 +103,6 @@ exports.CancelOrder = async (req, res) => {
 exports.ShippedOrder = async (req, res) => {
   try {
     const orderItemId = req.params.orderItemId;
-    // const { orderStatus } = req.body;
 
     const orders = await Order.findOneAndUpdate(
       { "orderItems._id": orderItemId },
@@ -125,8 +123,36 @@ exports.ShippedOrder = async (req, res) => {
   }
 };
 
+exports.DeliveredOrder = async (req, res) => {
+  try {
+    const orderItemId = req.params.orderItemId;
+
+    const orders = await Order.findOneAndUpdate(
+      { "orderItems._id": orderItemId },
+      {
+        $set: {
+          "orderItems.$.orderStatus": "Delivered",
+          "orderItems.$.createdAt": Date.now(),
+        },
+      },
+      { new: true }
+    );
+
+    if (!orders) {
+      return res
+        .status(404)
+        .json({ success: false, error: "Order or order item not found" });
+    }
+
+    res.status(200).json({ success: true, orders });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ success: false, error: "Internal Server Error" });
+  }
+};
+
 exports.getSupplier = async (req, res) => {
-  console.log(req.params.id)
+  console.log(req.params.id);
   try {
     const supplier = await Order.find({
       user: req.params.id,

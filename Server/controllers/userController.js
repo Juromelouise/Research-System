@@ -3,10 +3,10 @@ const cloudinary = require("cloudinary");
 const sendToken = require("../utils/jwtToken");
 const {
   uploadSingle,
-  destroyUploaded,
   uploadMultiple,
 } = require("../utils/UploadCloudinary");
-// const crypto = require("crypto");
+const sendEmail = require("../utils/sendEmail");
+const crypto = require("crypto");
 
 exports.registerUser = async (req, res, next) => {
   const imageDetails = await uploadSingle(req.file.path, "avatar");
@@ -27,8 +27,8 @@ exports.registerUser = async (req, res, next) => {
 
 exports.registerSupplerSeller = async (req, res) => {
   const imageDetails = await uploadSingle(req.files.avatar[0].path, "avatar");
-  console.log(req.files)
-  const attachement = await uploadMultiple(req.files.attachment ,"attachment")
+  console.log(req.files);
+  const attachement = await uploadMultiple(req.files.attachment, "attachment");
 
   req.body.avatar = imageDetails;
   req.body.attachment = attachement;
@@ -168,4 +168,66 @@ exports.allSellers = async (req, res) => {
   res.status(200).json({
     users,
   });
+};
+
+exports.updateCertified = async (req) => {
+  await User.findByIdAndUpdate(
+    req.params.id,
+    { certified: "Certified by Admin" },
+    {
+      new: true,
+    }
+  );
+};
+
+exports.forgotPassword = async (req, res, next) => {
+  const user = await User.findOne({ email: req.body.email });
+  if (!user) {
+    return res.status(404).json({ error: "User not found with this email" });
+  }
+  const resetToken = user.getResetPasswordToken();
+  await user.save({ validateBeforeSave: false });
+  const resetUrl = `${req.protocol}://localhost:3000/reset/password/${resetToken}`;
+  const message = `Your password reset token is as follow:\n\n${resetUrl}\n\nIf you have not requested this email, then ignore it.`;
+  try {
+    await sendEmail({
+      email: user.email,
+      subject: "Reset Password",
+      message,
+    });
+
+    res.status(200).json({
+      success: true,
+      message: `Email sent to: ${user.email}`,
+    });
+  } catch (error) {
+    user.resetPasswordToken = undefined;
+    user.resetPasswordExpire = undefined;
+    await user.save({ validateBeforeSave: false });
+    return res.status(500).json({ error: error.message });
+  }
+};
+
+exports.resetPassword = async (req, res, next) => {
+  const resetPasswordToken = crypto
+    .createHash("sha256")
+    .update(req.params.token)
+    .digest("hex");
+  const user = await User.findOne({
+    resetPasswordToken,
+    resetPasswordExpire: { $gt: Date.now() },
+  });
+  if (!user) {
+    return res
+      .status(400)
+      .json({ message: "Password reset token is invalid or has been expired" });
+  }
+  if (req.body.password !== req.body.confirmPassword) {
+    return res.status(400).json({ message: "Password does not match" });
+  }
+  user.password = req.body.password;
+  user.resetPasswordToken = undefined;
+  user.resetPasswordExpire = undefined;
+  await user.save();
+  sendToken(user, 200, res);
 };

@@ -4,6 +4,7 @@ import { Loader } from "../Layout/Loader";
 import axios from "axios";
 
 import { getToken } from "../../utils/helpers";
+import { Button } from "@mui/material";
 
 const OrderDetails = () => {
   const [loading, setLoading] = useState(true);
@@ -36,13 +37,29 @@ const OrderDetails = () => {
     }
   };
 
+  const setDelivered = async (id, iid) => {
+    try {
+      const config = {
+        headers: {
+          Authorization: `Bearer ${getToken()}`,
+        },
+      };
+
+      axios.put(
+        `${process.env.REACT_APP_API}/order/delivered/order/${id}`,
+        {},
+        config
+      );
+      getOrderDetails(iid)
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   useEffect(() => {
     getOrderDetails(id);
 
     if (error) {
-      // toast.error(error, {
-      //   position: toast.POSITION.BOTTOM_RIGHT,
-      // });
       console.log(error);
     }
   }, [id]);
@@ -114,9 +131,15 @@ const OrderDetails = () => {
                         <div className="col-6 col-lg-2 mt-3 mt-lg-0">
                           <p>{item.orderStatus}</p>
                         </div>
+                        {item.orderStatus === "Shipped/Ready To Pick up" ? (
+                          <Button onClick={() => setDelivered(item._id, id)}>
+                            Delivered
+                          </Button>
+                        ) : (
+                          <></>
+                        )}
                       </div>
                       {index !== orderItems.length - 1 && <hr />}{" "}
-                      {/* Add horizontal line except for the last item */}
                     </div>
                   ))}
               </div>
