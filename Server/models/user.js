@@ -89,10 +89,6 @@ const userSchema = new mongoose.Schema({
         required: true,
         autopopulate: true,
       },
-      rating: {
-        type: Number,
-        required: true,
-      },
       comment: {
         type: mongoose.Schema.ObjectId,
         ref: "Comment",

@@ -36,6 +36,7 @@ import OrderList from "./Components/Order/OrderList";
 import ForumTable from "./Components/Admin/ForumTable";
 import DeletedSingleForum from "./Components/Forums/DeletedSingleForum";
 import ForgotPassword from "./Components/User/ForgotPassword";
+import NewPassword from "./Components/User/NewPassword";
 
 function App() {
   return (
@@ -74,6 +75,7 @@ function App() {
           <Route path="/farmer/info" element={<FarmerInfo />} exact="true" />
           <Route path="/seller/info" element={<SellerInfo />} exact="true" />
           <Route path="/forgot/password" element={<ForgotPassword />} exact="true" />
+          <Route path="/reset/password/:token" element={<NewPassword />} exact="true" />
           <Route path="/forum" element={<Forum />} exact="true" />
           <Route
             path="/forum/open/:id"

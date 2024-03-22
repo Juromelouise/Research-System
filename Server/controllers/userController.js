@@ -1,10 +1,8 @@
 const User = require("../models/user");
+const Comment = require("../models/comment");
 const cloudinary = require("cloudinary");
 const sendToken = require("../utils/jwtToken");
-const {
-  uploadSingle,
-  uploadMultiple,
-} = require("../utils/UploadCloudinary");
+const { uploadSingle, uploadMultiple } = require("../utils/UploadCloudinary");
 const sendEmail = require("../utils/sendEmail");
 const crypto = require("crypto");
 
@@ -54,12 +52,12 @@ exports.loginUser = async (req, res, next) => {
   const user = await User.findOne({ email }).select("+password");
 
   if (!user) {
-    return res.status(401).json({ message: "Invalid Email or Password" });
+    return res.status(401).json({ error: "Invalid Email or Password" });
   }
   const isPasswordMatched = await user.comparePassword(password);
 
   if (!isPasswordMatched) {
-    return res.status(401).json({ message: "Invalid Email or Password" });
+    return res.status(401).json({ error: "Invalid Email or Password" });
   }
 
   sendToken(user, 200, res);
@@ -181,15 +179,37 @@ exports.updateCertified = async (req) => {
 };
 
 exports.forgotPassword = async (req, res, next) => {
-  const user = await User.findOne({ email: req.body.email });
-  if (!user) {
-    return res.status(404).json({ error: "User not found with this email" });
-  }
-  const resetToken = user.getResetPasswordToken();
-  await user.save({ validateBeforeSave: false });
-  const resetUrl = `${req.protocol}://localhost:3000/reset/password/${resetToken}`;
-  const message = `Your password reset token is as follow:\n\n${resetUrl}\n\nIf you have not requested this email, then ignore it.`;
   try {
+    const user = await User.findOne({ email: req.body.email });
+
+    if (!user) {
+      console.log("Invalid email provided");
+      return res.status(400).json({ error: "User not found with this email" });
+    }
+
+    const resetToken = user.getResetPasswordToken();
+    await user.save({ validateBeforeSave: false });
+    const resetUrl = `${req.protocol}://localhost:3000/reset/password/${resetToken}`;
+    const message = `
+      <div
+        style={{
+          fontFamily: "Arial, sans-serif",
+          color: "#333",
+          fontSize: "16px",
+        }}
+      >
+        <p style={{ marginBottom: "10px" }}>
+          Your password reset token is as follows:
+        </p>
+        <p
+          style={{ marginBottom: "10px", fontWeight: "bold", color: "#007bff" }}
+        >
+          ${resetUrl}
+        </p>
+        <p style={{ marginBottom: "10px" }}>
+          If you have not requested this email, please ignore it.
+        </p>
+      </div>`;
     await sendEmail({
       email: user.email,
       subject: "Reset Password",
@@ -201,10 +221,13 @@ exports.forgotPassword = async (req, res, next) => {
       message: `Email sent to: ${user.email}`,
     });
   } catch (error) {
+    console.error("Error sending reset password email:", error);
     user.resetPasswordToken = undefined;
     user.resetPasswordExpire = undefined;
     await user.save({ validateBeforeSave: false });
-    return res.status(500).json({ error: error.message });
+    return res
+      .status(500)
+      .json({ error: "Error sending reset password email" });
   }
 };
 
@@ -220,14 +243,41 @@ exports.resetPassword = async (req, res, next) => {
   if (!user) {
     return res
       .status(400)
-      .json({ message: "Password reset token is invalid or has been expired" });
+      .json({ error: "Password reset token is invalid or has been expired" });
   }
   if (req.body.password !== req.body.confirmPassword) {
-    return res.status(400).json({ message: "Password does not match" });
+    return res.status(400).json({ error: "Password does not match" });
   }
   user.password = req.body.password;
   user.resetPasswordToken = undefined;
   user.resetPasswordExpire = undefined;
   await user.save();
   sendToken(user, 200, res);
+};
+
+exports.ReviewUser = async (req, res) => {
+  try {
+    // console.log(req.body)
+    req.body.user = req.user._id;
+    const comment = await Comment.create(req.body);
+    const user = await User.findByIdAndUpdate(
+      req.params.id,
+      {
+        $push: {
+          reviews: {
+            user: req.user._id,
+            comment: comment._id,
+          },
+        },
+      },
+      { new: true }
+    );
+
+    res.status(200).json({
+      user,
+      message: "Review Created",
+    });
+  } catch (error) {
+    console.log(error);
+  }
 };

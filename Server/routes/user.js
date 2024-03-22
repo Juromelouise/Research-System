@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 const upload = require("../utils/multer");
 
-const {registerUser, loginUser, logout, getUserProfile, getAllUsers, updateRoleSeller, updateRoleFarmer, allFarmers, allSellers, deleteUser, updateProfile, registerSupplerSeller, updateCertified, forgotPassword, resetPassword} = require('../controllers/userController');
+const {registerUser, loginUser, logout, getUserProfile, getAllUsers, updateRoleSeller, updateRoleFarmer, allFarmers, allSellers, deleteUser, updateProfile, registerSupplerSeller, updateCertified, forgotPassword, resetPassword, ReviewUser} = require('../controllers/userController');
 const { isAuthenticatedUser } = require("../middlewares/auth");
 
 
@@ -24,5 +24,6 @@ router.delete("/delete/user/:id", isAuthenticatedUser, deleteUser)
 router.put("/user/update",isAuthenticatedUser, upload.single("avatar"), updateProfile)
 router.post("/password/forgot", forgotPassword);
 router.put("/password/reset/:token", resetPassword);
+router.post("/review/user/:id", isAuthenticatedUser, ReviewUser)
 
 module.exports = router;

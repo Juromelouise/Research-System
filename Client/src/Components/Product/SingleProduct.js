@@ -6,17 +6,25 @@ import {
   MDBCardBody,
   MDBCardTitle,
   MDBCardText,
-  MDBBtn,
-  MDBRow,
-  MDBCol,
 } from "mdb-react-ui-kit";
 import { getToken, getUser } from "../../utils/helpers";
 import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { Button } from "@mui/material";
+import { Button, IconButton } from "@mui/material";
 import { Loader } from "../Layout/Loader";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
+import AddIcon from "@mui/icons-material/Add";
+import { Typography } from "@mui/material";
+import {
+  Dialog,
+  DialogTitle,
+  Box,
+  DialogContent,
+  TextField,
+} from "@mui/material";
+import DialogActions from "@mui/material/DialogActions";
+import { toast } from "react-toastify";
 import { addItemToCart } from "../../actions/cartActions";
 
 const SingleProduct = () => {
@@ -25,12 +33,22 @@ const SingleProduct = () => {
   const navigate = useNavigate();
   const [product, setProduct] = useState([]);
   const [supplier, setSupplier] = useState([]);
+  const [openModal, setOpenModal] = useState(false);
+  const [comment, setComment] = useState("");
   const [sid, setSid] = useState("");
   const [loading, setLoading] = useState(false);
   const [quantity, setQuantity] = useState(1);
   const location = useLocation();
   const query = new URLSearchParams(location.search);
   const id = query.get("fid");
+
+  const handleOpenModal = () => {
+    setOpenModal(true);
+  };
+
+  const handleCloseModal = () => {
+    setOpenModal(false);
+  };
 
   const getProduct = async () => {
     try {
@@ -47,10 +65,12 @@ const SingleProduct = () => {
       setSid(newSid);
       setProduct(data.product);
       setUser(data.user);
+      setLoading(false);
     } catch (error) {
       console.log(error);
     }
   };
+
   const uniqueSuppliers = new Set();
   const getSupplier = async () => {
     try {
@@ -69,7 +89,54 @@ const SingleProduct = () => {
       console.log(error);
     }
   };
-  console.log(supplier);
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    if (comment === "") {
+      toast(`Put a Review`, {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+      });
+      return null;
+    }
+    const formData = new FormData();
+    formData.set("content", comment);
+    setLoading(true);
+    handleCloseModal()
+    review(user._id, formData);
+  };
+
+  const review = async (id, formData) => {
+    try {
+      const config = { headers: { 
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${getToken()}` } };
+      await axios.post(
+        `${process.env.REACT_APP_API}/api/v1/review/user/${id}`,
+        formData,
+        config
+      );
+      toast(`Review has been Posted`, {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+      });
+      getProduct();
+      setLoading(false);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   const deleteProduct = async (id) => {
     try {
       const config = {
@@ -89,6 +156,7 @@ const SingleProduct = () => {
   };
 
   useEffect(() => {
+    setLoading(true);
     getProduct();
   }, []);
 
@@ -430,6 +498,63 @@ const SingleProduct = () => {
                 </MDBCardBody>
               </MDBCard>
             ))}
+
+            {/*For Button Modal */}
+            <IconButton
+              color="white"
+              aria-label="Open Modal"
+              onClick={handleOpenModal}
+              sx={{
+                position: "fixed",
+                bottom: 20,
+                right: 20,
+                backgroundColor: "info.main",
+                "&:hover": {
+                  backgroundColor: "primary.main",
+                },
+                zIndex: 9999,
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                padding: "10px 20px",
+                borderRadius: 4,
+                boxShadow: "0px 4px 6px rgba(0, 0, 0, 0.1)",
+              }}
+            >
+              <AddIcon />
+              <Typography sx={{ marginLeft: 1 }}>Post a Review</Typography>
+            </IconButton>
+
+            {/* For Reviews */}
+            <Dialog
+              open={openModal}
+              onClose={handleCloseModal}
+              maxWidth="md"
+              fullWidth
+            >
+              <DialogTitle>Reviews</DialogTitle>
+              <Box component="form" noValidate onSubmit={handleSubmit}>
+                {/* <Box component="form"> */}
+                <DialogContent>
+                  <TextField
+                    label="Review"
+                    fullWidth
+                    margin="normal"
+                    variant="outlined"
+                    value={comment}
+                    onChange={(e) => setComment(e.target.value)}
+                  />
+                </DialogContent>
+                <DialogActions>
+                  <Button onClick={handleCloseModal} color="primary">
+                    Cancel
+                  </Button>
+                  <Button type="submit" color="primary">
+                    Post
+                  </Button>
+                </DialogActions>
+              </Box>
+            </Dialog>
           </div>
         </div>
       </div>

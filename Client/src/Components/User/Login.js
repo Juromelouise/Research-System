@@ -4,17 +4,18 @@ import { Link, useLocation } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { authenticate } from "../../utils/helpers";
 import { getUser } from "../../utils/helpers";
+import { toast } from "react-toastify";
 import axios from "axios";
 
 export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
   const navigate = useNavigate();
 
   const location = useLocation();
   const query = new URLSearchParams(location.search);
   const redirect = query.get("redirect");
-  console.log(redirect);
 
   const login = async (email, password) => {
     try {
@@ -30,10 +31,19 @@ export default function Login() {
         config
       );
       console.log(data);
-      alert("Login");
+      toast(`🧅 Login`, {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+      });
       authenticate(data, () => navigate("/"));
     } catch (error) {
-      console.log(error);
+      setError(error.response.data.error);
+      console.log(error.response.data.error);
     }
   };
 
@@ -43,7 +53,19 @@ export default function Login() {
     } else {
       navigate("/signin");
     }
-  }, [navigate, redirect]);
+    if (error) {
+      toast(`🧅 ${error}`, {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+      });
+    }
+  }, [navigate, redirect, error]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -117,16 +139,17 @@ export default function Login() {
           <div className="mt-4">
             <div className="d-flex justify-content-center links">
               <Link to="/signup" variant="body2" style={{ color: "black" }}>
-                Don't have an account?{" "}
-                <a href="#" className="ml-2" style={{ color: "black" }}>
-                  Sign Up
-                </a>
+                Don't have an account? Sign Up
               </Link>
             </div>
             <div className="d-flex justify-content-center links">
-              <a href="#" style={{ color: "black" }}>
+              <Link
+                to="/forgot/password"
+                variant="body2"
+                style={{ color: "black" }}
+              >
                 Forgot your password?
-              </a>
+              </Link>
             </div>
           </div>
         </div>
