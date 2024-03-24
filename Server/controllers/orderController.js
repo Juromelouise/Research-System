@@ -163,3 +163,21 @@ exports.getSupplier = async (req, res) => {
     console.log(error);
   }
 };
+
+exports.CheckOrder = async (req, res) => {
+  try {
+    const orders = await Order.find({
+      user: req.user._id,
+      "orderItems.seller": req.params.id,
+    });
+
+    if (orders.length > 0) {
+      res.status(200).json({ success: true });
+    } else {
+      res.status(200).json({ success: false });
+    }
+  } catch (error) {
+    console.error("Error checking orders:", error);
+    return { success: false, error: "Error checking orders" };
+  }
+};

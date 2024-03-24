@@ -22,6 +22,7 @@ import { Avatar } from "@mui/material";
 import { getUser } from "../../utils/helpers";
 import { Link } from "react-router-dom";
 import ForumTable from "./ForumTable";
+import HighDemand from "../Charts/HighDemand";
 
 const drawerWidth = 200;
 
@@ -178,6 +179,15 @@ export default function Dashboard() {
                     marginLeft: "120px"
                   }}>
                   <ForumTable />
+                  </Box>
+                </Paper>
+              </Grid>
+              <Grid item xs={5}>
+                <Paper sx={{ p: 2, display: "flex", flexDirection: "column" }}>
+                  <Box sx={{
+                    marginLeft: "10px"
+                  }}>
+                  <HighDemand />
                   </Box>
                 </Paper>
               </Grid>

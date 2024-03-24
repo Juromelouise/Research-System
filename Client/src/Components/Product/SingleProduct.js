@@ -6,6 +6,7 @@ import {
   MDBCardBody,
   MDBCardTitle,
   MDBCardText,
+  MDBInput,
 } from "mdb-react-ui-kit";
 import { getToken, getUser } from "../../utils/helpers";
 import { useState, useEffect } from "react";
@@ -22,24 +23,34 @@ import {
   Box,
   DialogContent,
   TextField,
+  Menu,
+  MenuItem,
 } from "@mui/material";
 import DialogActions from "@mui/material/DialogActions";
+import { Modal } from "react-bootstrap";
+import MoreVertIcon from "@mui/icons-material/MoreVert";
 import { toast } from "react-toastify";
 import { addItemToCart } from "../../actions/cartActions";
 
 const SingleProduct = () => {
   const [user, setUser] = useState([]);
+  const [anchorEl, setAnchorEl] = useState(null);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [product, setProduct] = useState([]);
   const [supplier, setSupplier] = useState([]);
+  const [reviews, setReviews] = useState([]);
   const [openModal, setOpenModal] = useState(false);
   const [comment, setComment] = useState("");
+  const [content, setContent] = useState("");
+  const [contentID, setContentID] = useState("");
   const [sid, setSid] = useState("");
+  const [order, setOrder] = useState(false);
   const [loading, setLoading] = useState(false);
   const [quantity, setQuantity] = useState(1);
   const location = useLocation();
   const query = new URLSearchParams(location.search);
+  const [showReplyModal, setShowReplyModal] = useState(false);
   const id = query.get("fid");
 
   const handleOpenModal = () => {
@@ -48,6 +59,23 @@ const SingleProduct = () => {
 
   const handleCloseModal = () => {
     setOpenModal(false);
+  };
+
+  const handleShowReplyModal = () => {
+    setShowReplyModal(true);
+  };
+
+  const handleCloseReplyModal = () => {
+    setShowReplyModal(false);
+  };
+
+  const handleOptionsClick = (event, revi) => {
+    setAnchorEl(event.currentTarget);
+    setContent(revi.comment.content);
+    setContentID(revi.comment._id);
+  };
+  const handleOptionsClose = () => {
+    setAnchorEl(null);
   };
 
   const getProduct = async () => {
@@ -65,9 +93,61 @@ const SingleProduct = () => {
       setSid(newSid);
       setProduct(data.product);
       setUser(data.user);
+      const filteredReviews = data.user.reviews.filter(
+        (review) => review.comment !== null
+      );
+
+      setReviews(filteredReviews);
+      console.log(filteredReviews);
+
       setLoading(false);
     } catch (error) {
       console.log(error);
+    }
+  };
+
+  const getOrders = async () => {
+    try {
+      const config = {
+        headers: {
+          Authorization: `Bearer ${getToken()}`,
+        },
+      };
+      const { data } = await axios.get(
+        `${process.env.REACT_APP_API}/order/check/${id}`,
+        config
+      );
+      setOrder(data.success);
+      console.log(data.success);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const deleteReview = async (id) => {
+    try {
+      const config = {
+        headers: {
+          Authorization: `Bearer ${getToken()}`,
+        },
+      };
+      await axios.delete(
+        `${process.env.REACT_APP_API}/comment/delete/comment/${id}`,
+        config
+      );
+      toast(`Review has been deleted`, {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+      });
+      getProduct();
+      setLoading(false);
+    } catch (err) {
+      console.log(err);
     }
   };
 
@@ -107,15 +187,71 @@ const SingleProduct = () => {
     const formData = new FormData();
     formData.set("content", comment);
     setLoading(true);
-    handleCloseModal()
+    handleCloseModal();
     review(user._id, formData);
+  };
+
+  const handleSubmit2 = async (e) => {
+    e.preventDefault();
+    if (content === "") {
+      toast(`Must have a input`, {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+      });
+      return null;
+    }
+    const formData = new FormData();
+    formData.set("content", content);
+    setLoading(true);
+    handleCloseReplyModal();
+    updateReview(contentID, formData);
+  };
+
+  const updateReview = async (id, comment) => {
+    try {
+      const config = {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${getToken()}`,
+        },
+      };
+      await axios.put(
+        `${process.env.REACT_APP_API}/comment/content/update/${id}`,
+        comment,
+        config
+      );
+      toast(`Review has been updated`, {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+      });
+      getProduct();
+      setLoading(false);
+      setTimeout(() => {
+        window.location.reload();
+      }, 1000);
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   const review = async (id, formData) => {
     try {
-      const config = { headers: { 
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${getToken()}` } };
+      const config = {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${getToken()}`,
+        },
+      };
       await axios.post(
         `${process.env.REACT_APP_API}/api/v1/review/user/${id}`,
         formData,
@@ -158,6 +294,7 @@ const SingleProduct = () => {
   useEffect(() => {
     setLoading(true);
     getProduct();
+    getOrders();
   }, []);
 
   useEffect(() => {
@@ -498,32 +635,35 @@ const SingleProduct = () => {
                 </MDBCardBody>
               </MDBCard>
             ))}
-
             {/*For Button Modal */}
-            <IconButton
-              color="white"
-              aria-label="Open Modal"
-              onClick={handleOpenModal}
-              sx={{
-                position: "fixed",
-                bottom: 20,
-                right: 20,
-                backgroundColor: "info.main",
-                "&:hover": {
-                  backgroundColor: "primary.main",
-                },
-                zIndex: 9999,
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                padding: "10px 20px",
-                borderRadius: 4,
-                boxShadow: "0px 4px 6px rgba(0, 0, 0, 0.1)",
-              }}
-            >
-              <AddIcon />
-              <Typography sx={{ marginLeft: 1 }}>Post a Review</Typography>
-            </IconButton>
+            {order && order ? (
+              <IconButton
+                color="white"
+                aria-label="Open Modal"
+                onClick={handleOpenModal}
+                sx={{
+                  position: "fixed",
+                  bottom: 20,
+                  right: 20,
+                  backgroundColor: "info.main",
+                  "&:hover": {
+                    backgroundColor: "primary.main",
+                  },
+                  zIndex: 9999,
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  padding: "10px 20px",
+                  borderRadius: 4,
+                  boxShadow: "0px 4px 6px rgba(0, 0, 0, 0.1)",
+                }}
+              >
+                <AddIcon />
+                <Typography sx={{ marginLeft: 1 }}>Post a Review</Typography>
+              </IconButton>
+            ) : (
+              <></>
+            )}
 
             {/* For Reviews */}
             <Dialog
@@ -534,6 +674,8 @@ const SingleProduct = () => {
             >
               <DialogTitle>Reviews</DialogTitle>
               <Box component="form" noValidate onSubmit={handleSubmit}>
+                {/*Update and Delete reviews */}
+
                 {/* <Box component="form"> */}
                 <DialogContent>
                   <TextField
@@ -558,6 +700,89 @@ const SingleProduct = () => {
           </div>
         </div>
       </div>
+
+      {/* Reviews Section */}
+      <div className="row justify-content-center">
+        <h1 style={{ color: "white" }}>
+          <strong>All Reviews</strong>
+        </h1>
+        <div className="col-lg-8">
+          {reviews.map((review) => (
+            <div className="card mb-4" key={review._id}>
+              <div className="card-body" style={{ position: "relative" }}>
+                <div className="row">
+                  <div className="col-md-3">
+                    <img
+                      src={review.user?.avatar.url}
+                      className="rounded-circle"
+                      alt="User Avatar"
+                      style={{ width: "100px", height: "100px" }}
+                    />
+                  </div>
+                  <div className="col-md-9">
+                    <h3>Posted by: {review.user.name}</h3>
+                    <p>{review.comment.content}</p>
+                  </div>
+                  {/* More icon positioned on the upper right corner */}
+                  {review?.user?._id === getUser()._id ? (
+                    <div
+                      style={{
+                        position: "absolute",
+                        top: 0,
+                        right: -480,
+                        padding: "4px",
+                        zIndex: 1,
+                      }}
+                    >
+                      <IconButton
+                        onClick={(e) => handleOptionsClick(e, review)}
+                      >
+                        <MoreVertIcon />
+                      </IconButton>
+                      <Menu
+                        anchorEl={anchorEl}
+                        open={Boolean(anchorEl)}
+                        onClose={handleOptionsClose}
+                      >
+                        <MenuItem onClick={() => handleShowReplyModal()}>
+                          Update Post
+                        </MenuItem>
+                        <MenuItem
+                          onClick={() => {
+                            deleteReview(contentID);
+                            setLoading(true);
+                          }}
+                        >
+                          Delete Post
+                        </MenuItem>
+                      </Menu>
+                    </div>
+                  ) : (
+                    <></>
+                  )}
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+      <Modal show={showReplyModal} onHide={handleCloseReplyModal}>
+        <Modal.Header closeButton>
+          <Modal.Title>Edit Review</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <form onSubmit={handleSubmit2}>
+            <MDBInput
+              className="mx-auto"
+              style={{ width: 300, height: 100 }}
+              type="textarea"
+              value={content}
+              onChange={(e) => setContent(e.target.value)}
+            />
+            <Button type="submit">Edit</Button>
+          </form>
+        </Modal.Body>
+      </Modal>
     </>
   );
 };

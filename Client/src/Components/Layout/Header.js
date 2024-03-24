@@ -490,13 +490,6 @@ const ResponsiveAppBar = () => {
                 >
                   Create Product
                 </Button>
-                <Button
-                  component={Link}
-                  to="/cart"
-                  sx={{ my: 2, color: "white", display: "block" }}
-                >
-                  Cart
-                </Button>
               </>
             ) : user.role === "buyer" ? (
               <>

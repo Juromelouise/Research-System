@@ -433,7 +433,7 @@ const SingleForum = () => {
               value={contents}
               onChange={(e) => setContents(e.target.value)}
             />
-            <MDBBtn type="submit">Reply</MDBBtn>
+            <Button type="submit">Reply</Button>
           </form>
         </Modal.Body>
       </Modal>
@@ -469,7 +469,7 @@ const SingleForum = () => {
               />
             </div>
 
-            <MDBBtn type="submit">Update Post and Title</MDBBtn>
+            <Button type="submit">Update Post and Title</Button>
           </form>
         </Modal.Body>
       </Modal>

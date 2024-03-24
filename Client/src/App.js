@@ -37,10 +37,12 @@ import ForumTable from "./Components/Admin/ForumTable";
 import DeletedSingleForum from "./Components/Forums/DeletedSingleForum";
 import ForgotPassword from "./Components/User/ForgotPassword";
 import NewPassword from "./Components/User/NewPassword";
+import HighDemand from "./Components/Charts/HighDemand";
+import TotalSaleUser from "./Components/Charts/TotalSaleUser";
 
 function App() {
   return (
-    <div className="App">
+    <div className="App" style={{overflowX: "hidden"}}>
       <Router>
         <Header />
         <Routes>
@@ -77,6 +79,8 @@ function App() {
           <Route path="/forgot/password" element={<ForgotPassword />} exact="true" />
           <Route path="/reset/password/:token" element={<NewPassword />} exact="true" />
           <Route path="/forum" element={<Forum />} exact="true" />
+          <Route path="/high/demand" element={<HighDemand />} exact="true" />
+          <Route path="/total/sale/user" element={<TotalSaleUser />} exact="true" />
           <Route
             path="/forum/open/:id"
             element={<SingleForum />}

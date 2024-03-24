@@ -8,6 +8,7 @@ const forum = require("./routes/forum");
 const products = require("./routes/product");
 const comment = require("./routes/comment");
 const order = require("./routes/order");
+const chart = require("./routes/analytics");
 
 app.use(
   cors({
@@ -24,5 +25,6 @@ app.use("/api/v1", products);
 app.use("/forum", forum);
 app.use("/comment", comment);
 app.use("/order", order);
+app.use("/chart", chart);
 
 module.exports = app;

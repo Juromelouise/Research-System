@@ -3,6 +3,7 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const crypto = require("crypto");
 const validator = require("validator");
+const Populate = require("mongoose-autopopulate");
 
 const userSchema = new mongoose.Schema({
   name: {
@@ -129,5 +130,7 @@ userSchema.methods.getResetPasswordToken = function () {
   this.resetPasswordExpire = Date.now() + 30 * 60 * 1000;
   return resetToken;
 };
+
+userSchema.plugin(Populate);
 
 module.exports = mongoose.model("User", userSchema);
