@@ -89,20 +89,23 @@ const SingleProduct = () => {
         `${process.env.REACT_APP_API}/api/v1/single/product?fid=${id}`,
         config
       );
-      const newSid = data.product[0].user._id;
-      setSid(newSid);
-      setProduct(data.product);
-      setUser(data.user);
-      const filteredReviews = data.user.reviews.filter(
-        (review) => review.comment !== null
-      );
-
-      setReviews(filteredReviews);
-      console.log(filteredReviews);
-
+      if (data.product.length > 0) {
+        const newSid = data.product[0].user._id;
+        setSid(newSid);
+        setProduct(data.product);
+        console.log(data.product);
+        setUser(data.user);
+        const filteredReviews = data.user.reviews.filter(
+          (review) => review.comment !== null
+        );
+        setReviews(filteredReviews);
+        console.log(filteredReviews);
+      } else {
+        setUser(data.user);
+      }
       setLoading(false);
     } catch (error) {
-      console.log(error);
+      console.log(error.response);
     }
   };
 
@@ -284,6 +287,15 @@ const SingleProduct = () => {
         `${process.env.REACT_APP_API}/api/v1/delete/product/${id}`,
         config
       );
+      toast(`Product has been deleted`, {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+      });
       setLoading(false);
       getProduct();
     } catch (error) {
@@ -303,7 +315,15 @@ const SingleProduct = () => {
 
   const addToCart = (id) => {
     dispatch(addItemToCart(id, quantity));
-    alert("Item Added to Card");
+    toast(`Product has been added to Cart`, {
+      position: "top-right",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      draggable: true,
+      progress: undefined,
+      theme: "dark",
+    });
   };
 
   return (
@@ -595,18 +615,22 @@ const SingleProduct = () => {
                   <MDBCardText style={{ textAlign: "left" }}>
                     {product.description}
                   </MDBCardText>
-                  <Button
-                    style={{
-                      marginRight: "10px",
-                      backgroundColor: "#000957",
-                      color: "white",
-                    }}
-                    onClick={() => {
-                      addToCart(product._id);
-                    }}
-                  >
-                    Add to Cart
-                  </Button>
+                  {getUser()._id !== user._id && getUser().role !== "supplier" && getUser().role !== "admin" ? (
+                    <Button
+                      style={{
+                        marginRight: "10px",
+                        backgroundColor: "#000957",
+                        color: "white",
+                      }}
+                      onClick={() => {
+                        addToCart(product._id);
+                      }}
+                    >
+                      Add to Cart
+                    </Button>
+                  ) : (
+                    <></>
+                  )}
                   {getUser()._id === user._id ? (
                     <>
                       <Link to={`/product/update/${product._id}`}>

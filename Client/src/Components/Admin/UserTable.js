@@ -90,7 +90,7 @@ export default function UserTable() {
       },
     ],
     rows: user.map((row) => ({
-      name: row.name,
+      name: <Link to={`/single/user/product?fid=${row._id}`}>{row.name}</Link>,
       avatar: row.avatar && (
         <img
           src={row.avatar.url}
@@ -138,7 +138,7 @@ export default function UserTable() {
         {/* Main content */}
         <div className="col-12 col-md-10">
           <p className="star" style={{ color: "#fff" }}>
-            <h1> ALL USERS</h1>
+            <h1 style={{ color: "black" }}> ALL USERS</h1>
           </p>
 
           <div className="custom-mdb-table">

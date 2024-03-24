@@ -23,6 +23,8 @@ import { getUser } from "../../utils/helpers";
 import { Link } from "react-router-dom";
 import ForumTable from "./ForumTable";
 import HighDemand from "../Charts/HighDemand";
+import TotalSaleUser from "../Charts/TotalSaleUser";
+import AverageOrderUser from "../Charts/AverageOrderUser";
 
 const drawerWidth = 200;
 
@@ -87,7 +89,7 @@ export default function Dashboard() {
           <Toolbar
             sx={{
               pr: "24px",
-              height: "111px",
+              height: "69px",
               backgroundColor: "#1F0337",
             }}
           >
@@ -157,37 +159,63 @@ export default function Dashboard() {
             <Grid container spacing={1}>
               <Grid item xs={14}>
                 <Paper sx={{ p: 2, display: "flex", flexDirection: "column" }}>
-                  <Box sx={{
-                    marginLeft: "120px"
-                  }}>
-                  <ProductTable />
+                  <Box
+                    sx={{
+                      marginLeft: "120px",
+                    }}
+                  >
+                    <ProductTable />
                   </Box>
                 </Paper>
               </Grid>
               <Grid item xs={14}>
                 <Paper sx={{ p: 2, display: "flex", flexDirection: "column" }}>
-                <Box sx={{
-                    marginLeft: "120px"
-                  }}>
-                  <UserTable />
+                  <Box
+                    sx={{
+                      marginLeft: "120px",
+                    }}
+                  >
+                    <UserTable />
                   </Box>
                 </Paper>
               </Grid>
               <Grid item xs={14}>
                 <Paper sx={{ p: 2, display: "flex", flexDirection: "column" }}>
-                  <Box sx={{
-                    marginLeft: "120px"
-                  }}>
-                  <ForumTable />
+                  <Box
+                    sx={{
+                      marginLeft: "120px",
+                    }}
+                  >
+                    <ForumTable />
+                  </Box>
+                </Paper>
+              </Grid>
+              <Grid item xs={7} sx={{ ml: 30 }}>
+                <Paper sx={{ p: 2, display: "flex", flexDirection: "column" }}>
+                  <Box
+                    sx={{
+                      marginLeft: "10px",
+                    }}
+                  >
+                    <AverageOrderUser />
                   </Box>
                 </Paper>
               </Grid>
               <Grid item xs={5}>
                 <Paper sx={{ p: 2, display: "flex", flexDirection: "column" }}>
-                  <Box sx={{
-                    marginLeft: "10px"
-                  }}>
-                  <HighDemand />
+                  <Box
+                    sx={{
+                      marginLeft: "10px",
+                    }}
+                  >
+                    <HighDemand />
+                  </Box>
+                </Paper>
+              </Grid>
+              <Grid item xs={7}>
+                <Paper sx={{ p: 2, display: "flex", flexDirection: "column" }}>
+                  <Box sx={{ marginLeft: "10px" }}>
+                    <TotalSaleUser />
                   </Box>
                 </Paper>
               </Grid>

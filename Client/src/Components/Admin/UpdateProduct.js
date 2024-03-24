@@ -3,6 +3,7 @@ import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
 import { getToken } from "../../utils/helpers";
 import { Loader } from "../Layout/Loader";
+import { toast } from "react-toastify";
 
 const UpdateProduct = () => {
   const [product, setProduct] = useState("");
@@ -48,6 +49,9 @@ const UpdateProduct = () => {
   };
 
   const updateProduct = async (id, productData) => {
+    for (const pair of productData.entries()) {
+      console.log(pair[0], pair[1]);
+    }
     try {
       const config = {
         headers: {
@@ -60,8 +64,17 @@ const UpdateProduct = () => {
         productData,
         config
       );
+      toast(`✔ Product Updated`, {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+      });
       setLoading(false);
-      navigate("/dashboard");
+      navigate("/single/user/product");
     } catch (error) {
       console.log(error);
     }
@@ -141,7 +154,7 @@ const UpdateProduct = () => {
           <label
             style={{ marginBottom: "8px", fontSize: "15px", color: "black" }}
           >
-            PRICE:
+            PRICE PER KILO:
           </label>
           <input
             type="number"

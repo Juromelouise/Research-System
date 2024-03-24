@@ -126,7 +126,7 @@ const OrderList = () => {
           sort: "asc",
         },
         {
-          label: "User ID",
+          label: "User name",
           field: "uid",
           sort: "asc",
         },
@@ -157,7 +157,7 @@ const OrderList = () => {
     myOrdersList.forEach((order) => {
       data.rows.push({
         id: order._id,
-        uid: order.user._id,
+        uid: <Link to={`/single/user/product?fid=${order.user._id}`}>{order.user.name}</Link>,
         amount: `$${order.price}`,
         date: formatDate(order?.createdAt),
         status:

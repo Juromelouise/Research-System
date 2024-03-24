@@ -61,6 +61,7 @@ exports.newProduct = async (req, res) => {
 
 exports.updateProduct = async (req, res, next) => {
   console.log(req.params.id);
+  console.log(req.files);
   let products = await Product.findById(req.params.id);
   for (let i in products.images) {
     await destroyUploaded(products.images[i].public_id);
@@ -139,23 +140,41 @@ exports.UserProduct = async (req, res) => {
   try {
     if (req.query.fid !== "" && req.query.fid !== "null") {
       const product = await Product.find({ user: req.query.fid });
-      const firstProduct = product[0];
-      const user = await User.findById(firstProduct.user._id);
-      res.status(200).json({
-        product,
-        success: true,
-        user,
-      });
+      console.log(product.length);
+      if (product.length === 0) {
+        const user = await User.findById({ _id: req.query.fid });
+        res.status(200).json({
+          product: [],
+          success: true,
+          user,
+        });
+      } else {
+        const firstProduct = product[0];
+        const user = await User.findById(firstProduct.user._id);
+        res.status(200).json({
+          product,
+          success: true,
+          user,
+        });
+      }
     } else if (req.user && req.user._id) {
-      console.log(req.user._id);
       const product = await Product.find({ user: req.user._id });
-      const firstProduct = product[0];
-      const user = await User.findById(firstProduct.user._id);
-      res.status(200).json({
-        product,
-        success: true,
-        user,
-      });
+      if (product.length === 0) {
+        const user = await User.findById({ _id: req.user.id });
+        res.status(200).json({
+          product: [],
+          success: true,
+          user,
+        });
+      } else {
+        const firstProduct = product[0];
+        const user = await User.findById(firstProduct.user._id);
+        res.status(200).json({
+          product,
+          success: true,
+          user,
+        });
+      }
     } else {
       res.status(400).json({
         success: false,
@@ -164,6 +183,7 @@ exports.UserProduct = async (req, res) => {
     }
   } catch (error) {
     console.log(error);
+    return res.status(400).json({ error: error });
   }
 };
 

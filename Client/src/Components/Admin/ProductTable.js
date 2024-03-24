@@ -89,7 +89,7 @@ const ProductTable = () => {
             style={{ width: "50px", height: "50px" }}
           />
         ),
-        price: `$${product.price}`,
+        price: `₱${product.price}`,
         actions: (
           <Fragment>
             {/* <Link to={`/product/update/${product._id}`}>
@@ -120,7 +120,7 @@ const ProductTable = () => {
         <div className="col-12 col-md-10">
           <Fragment>
             <p className="star" style={{ color: "#fff" }}>
-              <h1> PRODUCTS</h1>
+              <h1 style={{ color: "black" }}> PRODUCTS</h1>
             </p>
             <div className="custom-mdb-table">
               <MDBDataTable

@@ -116,7 +116,7 @@ const ForumTable = () => {
         <div className="col-12 col-md-10">
           <Fragment>
             <p className="star" style={{ color: "#fff" }}>
-              <h1> PRODUCTS</h1>
+              <h1 style={{ color: "black" }}> Discussions</h1>
             </p>
             <div className="custom-mdb-table">
               <MDBDataTable

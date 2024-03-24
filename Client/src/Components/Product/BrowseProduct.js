@@ -34,6 +34,16 @@ const BrowseProduct = () => {
         `${process.env.REACT_APP_API}/api/v1/products`,
         config
       );
+      setProducts(
+        data.products.filter(
+          (product) => product.user && product.user.role === "seller"
+        )
+      );
+      setFilteredProducts(
+        data.products.filter(
+          (product) => product.user && product.user.role === "seller"
+        )
+      );
       if (user.role === "buyer") {
         setProducts(
           data.products.filter(

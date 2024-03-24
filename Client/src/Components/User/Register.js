@@ -15,6 +15,7 @@ import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import Select from "@mui/material/Select";
 import axios from "axios";
+import { toast } from "react-toastify";
 import { Loader } from "../Layout/Loader";
 
 const defaultTheme = createTheme();
@@ -127,8 +128,16 @@ export default function Register() {
           config
         );
         setIsAuthenticated(true);
-        alert("User Created Succesfully");
-        setLoading(false);
+        toast(`✔ User Created Successfully`, {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          draggable: true,
+          progress: undefined,
+          theme: "dark",
+        });
+        setLoading(false); 
         navigate("/signin");
       } else {
         const config = {
@@ -142,7 +151,15 @@ export default function Register() {
           config
         );
         setIsAuthenticated(true);
-        alert("User Created Succesfully");
+        toast(`✔ User Created Successfully`, {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          draggable: true,
+          progress: undefined,
+          theme: "dark",
+        });
         navigate("/signin");
       }
     } catch (error) {
@@ -204,6 +221,7 @@ export default function Register() {
                   value={role}
                   onChange={onChange}
                   fullWidth
+                  required
                 >
                   <MenuItem value="buyer">Buyer</MenuItem>
                   <MenuItem value="seller">Seller</MenuItem>
@@ -321,7 +339,7 @@ export default function Register() {
                     />
                   </Grid>
                   <InputLabel id="demo-simple-select-label" sx={{ mb: 1 }}>
-                    Onion Type:
+                    Onion Type usually you Harvest:
                   </InputLabel>
                   <Select
                     label="type"
@@ -349,7 +367,7 @@ export default function Register() {
                       InputLabelProps={{
                         shrink: true,
                       }}
-                      label="Input Valid ID"
+                      label="Input Business Permit/ID"
                       type="file"
                       id="attachment"
                       inputProps={{
@@ -366,6 +384,10 @@ export default function Register() {
                 <TextField
                   required
                   fullWidth
+                  InputLabelProps={{
+                    shrink: true,
+                  }}
+                  label="Profile Picture"
                   name="avatar"
                   type="file"
                   id="avatar"

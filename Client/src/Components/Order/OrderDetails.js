@@ -11,8 +11,7 @@ const OrderDetails = () => {
   const [error, setError] = useState("");
   const [order, setOrder] = useState({});
 
-  const { shippingInfo, orderItems, user, mod, totalPrice, orderStatus } =
-    order;
+  const { shippingInfo, orderItems, user, totalPrice, orderStatus } = order;
   const { id } = useParams();
 
   const getOrderDetails = async (id) => {
@@ -50,7 +49,7 @@ const OrderDetails = () => {
         {},
         config
       );
-      getOrderDetails(iid)
+      getOrderDetails(iid);
     } catch (error) {
       console.log(error);
     }
@@ -67,8 +66,6 @@ const OrderDetails = () => {
   const shippingDetails =
     shippingInfo &&
     `${shippingInfo.baranggay}, ${shippingInfo.city}, ${shippingInfo.postal},`;
-  const isPaid = mod && mod.status === "succeeded";
-
   return (
     <Fragment>
       {loading ? <Loader open={loading} /> : <></>}
@@ -97,9 +94,15 @@ const OrderDetails = () => {
 
               <div className="payment-info mb-5">
                 <h4>Payment</h4>
-                <p className={isPaid ? "text-success" : "text-danger"}>
-                  <b>{isPaid ? "PAID" : "NOT PAID"}</b>
-                </p>
+                {shippingInfo !== undefined && shippingInfo ? (
+                  <p className="text-success">
+                    <b>Cash on Delivery</b>
+                  </p>
+                ) : (
+                  <p className="text-success">
+                    <b>Pick up</b>
+                  </p>
+                )}
               </div>
 
               <div className="order-items mb-5">
@@ -121,12 +124,14 @@ const OrderDetails = () => {
                             className="img-fluid"
                           />
                         </div>
-                        <div className="col-12 col-lg-4">{item.name}</div>
+                        <Link to={`/single/user/product?fid=${item.seller._id}`} className="col-12 col-lg-4">
+                        <div >{item.name}</div>
+                        </Link>
                         <div className="col-6 col-lg-2 mt-3 mt-lg-0">
                           <p>₱{item.price}</p>
                         </div>
                         <div className="col-6 col-lg-2 mt-3 mt-lg-0">
-                          <p>{item.quantity} Piece(s)</p>
+                          <p>{item.quantity} Kg</p>
                         </div>
                         <div className="col-6 col-lg-2 mt-3 mt-lg-0">
                           <p>{item.orderStatus}</p>

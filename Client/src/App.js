@@ -39,6 +39,7 @@ import ForgotPassword from "./Components/User/ForgotPassword";
 import NewPassword from "./Components/User/NewPassword";
 import HighDemand from "./Components/Charts/HighDemand";
 import TotalSaleUser from "./Components/Charts/TotalSaleUser";
+import AverageOrderUser from "./Components/Charts/AverageOrderUser";
 
 function App() {
   return (
@@ -81,6 +82,7 @@ function App() {
           <Route path="/forum" element={<Forum />} exact="true" />
           <Route path="/high/demand" element={<HighDemand />} exact="true" />
           <Route path="/total/sale/user" element={<TotalSaleUser />} exact="true" />
+          <Route path="/average/order/user" element={<AverageOrderUser />} exact="true" />
           <Route
             path="/forum/open/:id"
             element={<SingleForum />}

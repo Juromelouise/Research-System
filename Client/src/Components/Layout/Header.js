@@ -305,6 +305,7 @@ import AdbIcon from "@mui/icons-material/Adb";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { getUser, logout } from "../../utils/helpers";
+import { toast } from "react-toastify";
 
 const ResponsiveAppBar = () => {
   const [anchorElNav, setAnchorElNav] = useState(null);
@@ -317,7 +318,15 @@ const ResponsiveAppBar = () => {
     // console.log('aasdasd')
     try {
       await axios.get(`${process.env.REACT_APP_API}/api/v1/logout`);
-      alert("User Logout");
+      toast(`🧅 Logged Out`, {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+      });
       logout(() => navigate("/"));
     } catch (error) {
       console.log(error);
@@ -590,13 +599,17 @@ const ResponsiveAppBar = () => {
                 >
                   About
                 </Button>
-                <Button
-                  component={Link}
-                  to="/browse/product"
-                  sx={{ my: 2, color: "white", display: "block" }}
-                >
-                  Products
-                </Button>
+                {user.role !== "admin" ? (
+                  <Button
+                    component={Link}
+                    to="/browse/product"
+                    sx={{ my: 2, color: "white", display: "block" }}
+                  >
+                    Products
+                  </Button>
+                ) : (
+                  <></>
+                )}
                 <Button
                   component={Link}
                   to="/forum"
@@ -604,13 +617,17 @@ const ResponsiveAppBar = () => {
                 >
                   Discussions
                 </Button>
-                <Button
-                  component={Link}
-                  to="/cart"
-                  sx={{ my: 2, color: "white", display: "block" }}
-                >
-                  Cart
-                </Button>
+                {user.role !== "admin" ? (
+                  <Button
+                    component={Link}
+                    to="/cart"
+                    sx={{ my: 2, color: "white", display: "block" }}
+                  >
+                    Cart
+                  </Button>
+                ) : (
+                  <></>
+                )}
               </>
             )}
           </Box>
@@ -632,9 +649,13 @@ const ResponsiveAppBar = () => {
                     <Link to="/profile">
                       <button className="dropdown-item">Profile</button>
                     </Link>
-                    <Link to="/my/order">
-                      <button className="dropdown-item">My Orders</button>
-                    </Link>
+                    {user.role !== "supplier" && user.role !== "admin" ? (
+                      <Link to="/my/order">
+                        <button className="dropdown-item">My Orders</button>
+                      </Link>
+                    ) : (
+                      <></>
+                    )}
                     {user.role === "supplier" ? (
                       <>
                         <Link to="/single/user/product">

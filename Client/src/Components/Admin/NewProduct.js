@@ -3,6 +3,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { getToken, getUser } from "../../utils/helpers";
 import { Loader } from "../Layout/Loader";
+import { toast } from "react-toastify";
 
 const NewProduct = () => {
   const user = getUser();
@@ -16,6 +17,7 @@ const NewProduct = () => {
   const [imagesPreview, setImagesPreview] = useState([]);
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
+
   let navigate = useNavigate();
 
   const handleSubmit = (e) => {
@@ -54,7 +56,15 @@ const NewProduct = () => {
 
       const { data } = await axios.post(url, formData, config);
 
-      alert("Product Created Succesfully");
+      toast(`✔ Product Created Successfully`, {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+      });
       setSuccess(data.success);
       setLoading(false);
     } catch (error) {
@@ -158,7 +168,7 @@ const NewProduct = () => {
           <label
             style={{ marginBottom: "8px", fontSize: "15px", color: "black" }}
           >
-            PRICE:
+            PRICE PER KILO:
           </label>
           <input
             type="number"
@@ -233,7 +243,7 @@ const NewProduct = () => {
                   color: "black",
                 }}
               >
-                Valid ID:
+                BUSINESS PERMIT/ID:
               </label>
               <input
                 type="file"

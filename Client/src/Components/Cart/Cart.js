@@ -151,7 +151,7 @@ const Cart = () => {
                                   <RemoveIcon />
                                 </Button>
 
-                                <MDBInput defaultValue={1} min={0} className="text-center" readonly value={item.quantity} />
+                                <MDBInput defaultValue={1} min={0} className="text-center" readonly value={item.quantity} />Kg
 
                                 <Button onClick={() => increaseQty(item.product, item.quantity)} variant="contained" className="rounded">
                                   <AddIcon />
