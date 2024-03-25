@@ -169,6 +169,7 @@ exports.CheckOrder = async (req, res) => {
     const orders = await Order.find({
       user: req.user._id,
       "orderItems.seller": req.params.id,
+      "orderItems.orderStatus": "Delivered",
     });
 
     if (orders.length > 0) {
